@@ -1,73 +1,87 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace KMNI.Models
 {
+  /*********
+  * SOURCE: ROYAL NETHERLANDS METEOROLOGICAL INSTITUTE (KNMI)
+  * Comment: These time series are inhomogeneous because of station relocations and changes in observation 
+  * techniques. As a result, these series are not suitable for trend analysis. For climate change studies 
+  * we refer to the homogenized series of monthly temperatures of 
+  * De Bilt <http://www.knmi.nl/kennis-en-datacentrum/achtergrond/gehomogeniseerde-reeks-maandtemperaturen-de-bilt> 
+  * or the Central Netherlands Temperature <http://www.knmi.nl/kennis-en-datacentrum/achtergrond/centraal-nederland-temperatuur-cnt>.
+  *********/
+
+  [Table("KNMI_Report")]
   public class DailyReport
   {
 
-    // SOURCE: ROYAL NETHERLANDS METEOROLOGICAL INSTITUTE (KNMI)
-    // Comment: These time series are inhomogeneous because of station relocations and changes in observation 
-    // techniques. As a result, these series are not suitable for trend analysis. For climate change studies 
-    // we refer to the homogenized series of monthly temperatures of 
-    // De Bilt <http://www.knmi.nl/kennis-en-datacentrum/achtergrond/gehomogeniseerde-reeks-maandtemperaturen-de-bilt> 
-    // or the Central Netherlands Temperature <http://www.knmi.nl/kennis-en-datacentrum/achtergrond/centraal-nederland-temperatuur-cnt>.
-    // 
+    [Key]
+    public int Id { get; set; }
+
+    // STN      = Station number
+    [Required]
+    public int Stn { get; set; }
+
     // YYYYMMDD = Date (YYYY = year MM = month DD = day)
+    [Required]
+    [DataType(DataType.Date)]
     public DateTime Date { get; set; }
 
     // DDVEC    = Vector mean wind direction in degrees (360=north, 90=east, 180=south, 270=west, 0=calm/variable)
     public int? DDVec { get; set; }
 
-    // FHVEC    = Vector mean wind speed (in 0.1 m/s)
+    // FHVEC    = Vector mean wind speed (in m/s)
     public double? FHVec { get; set; }
 
-    // FG       = Daily mean wind speed (in 0.1 m/s)
+    // FG       = Daily mean wind speed (in m/s)
     public double? FG { get; set; }
 
-    // FHX      = Maximum hourly mean wind speed (in 0.1 m/s)
+    // FHX      = Maximum hourly mean wind speed (in m/s)
     public double? FHX { get; set; }
 
     // FHXH     = Hourly division in which FHX was measured
     public int? FHXH { get; set; }
 
-    // FHN      = Minimum hourly mean wind speed (in 0.1 m/s)
+    // FHN      = Minimum hourly mean wind speed (in m/s)
     public double? FHN { get; set; }
 
     // FHNH     = Hourly division in which FHN was measured
     public int? FHNH { get; set; }
 
-    // FXX      = Maximum wind gust (in 0.1 m/s)
+    // FXX      = Maximum wind gust (in m/s)
     public double? FXX { get; set; }
 
     // FXXH     = Hourly division in which FXX was measured
     public int? FXXH { get; set; }
 
-    // TG       = Daily mean temperature in (0.1 degrees Celsius)
+    // TG       = Daily mean temperature in (in degrees Celsius)
     public double? TG { get; set; }
 
-    // TN       = Minimum temperature (in 0.1 degrees Celsius)
+    // TN       = Minimum temperature (in degrees Celsius)
     public double? TN { get; set; }
 
     // TNH      = Hourly division in which TN was measured
     public int? TNH { get; set; }
 
-    // TX       = Maximum temperature (in 0.1 degrees Celsius)
+    // TX       = Maximum temperature (in degrees Celsius)
     public double? TX { get; set; }
 
     // TXH      = Hourly division in which TX was measured
     public int? TXH { get; set; }
 
-    // T10N     = Minimum temperature at 10 cm above surface (in 0.1 degrees Celsius)
+    // T10N     = Minimum temperature at 10 cm above surface (in degrees Celsius)
     public double? T10N { get; set; }
 
     // T10NH    = 6-hourly division in which T10N was measured; 6=0-6 UT, 12=6-12 UT, 18=12-18 UT, 24=18-24 UT
     public int? T10NH { get; set; }
 
-    // SQ       = Sunshine duration (in 0.1 hour) calculated from global radiation (-1 for <0.05 hour)
+    // SQ       = Sunshine duration (in hour) calculated from global radiation (-1 for <0.05 hour)
     public double? SQ { get; set; }
 
     // SP       = Percentage of maximum potential sunshine duration
@@ -76,28 +90,28 @@ namespace KMNI.Models
     // Q        = Global radiation (in J/cm2)
     public int? Q { get; set; }
 
-    // DR       = Precipitation duration (in 0.1 hour)
+    // DR       = Precipitation duration (in hour)
     public double? DR { get; set; }
 
-    // RH       = Daily precipitation amount (in 0.1 mm) (-1 for <0.05 mm)
+    // RH       = Daily precipitation amount (in mm) (-1 for <0.05 mm)
     public double? RH { get; set; }
 
-    // RHX      = Maximum hourly precipitation amount (in 0.1 mm) (-1 for <0.05 mm)
+    // RHX      = Maximum hourly precipitation amount (in mm) (-1 for <0.05 mm)
     public double? RHX { get; set; }
 
     // RHXH     = Hourly division in which RHX was measured
     public int? RHXH { get; set; }
 
-    // PG       = Daily mean sea level pressure (in 0.1 hPa) calculated from 24 hourly values
+    // PG       = Daily mean sea level pressure (in hPa) calculated from 24 hourly values
     public double? PG { get; set; }
 
-    // PX       = Maximum hourly sea level pressure (in 0.1 hPa)
+    // PX       = Maximum hourly sea level pressure (in hPa)
     public double? PX { get; set; }
 
     // PXH      = Hourly division in which PX was measured
     public int? PXH { get; set; }
 
-    // PN       = Minimum hourly sea level pressure (in 0.1 hPa)
+    // PN       = Minimum hourly sea level pressure (in hPa)
     public double? PN { get; set; }
 
     // PNH      = Hourly division in which PN was measured
@@ -133,7 +147,7 @@ namespace KMNI.Models
     // UNH      = Hourly division in which UN was measured
     public int? UNH { get; set; }
 
-    // EV24     = Potential evapotranspiration (Makkink) (in 0.1 mm)
+    // EV24     = Potential evapotranspiration (Makkink) (in mm)
     public double? EV24 { get; set; }
 
   }
