@@ -12,6 +12,8 @@ namespace Import_DailyReports
 {
   class Program
   {
+    static readonly public DateTime FirstDate = DateTime.Parse("1968-01-01");
+
     static Dictionary<int, List<DailyReport>> Reports { get; set; } = new Dictionary<int, List<DailyReport>>();
 
     static void Main(string[] args)
@@ -85,49 +87,53 @@ namespace Import_DailyReports
       string[] data = line.Split(',');
 
       int Stn = int.Parse(data[0]);
-      string date = data[1];
+      if (TranslateDate(data[1]) < FirstDate)
+      {
+        return;
+      }
       DailyReport daily = new DailyReport();
 
       #region Import
-      if (!string.IsNullOrWhiteSpace(data[2])) { daily.DDVec = int.Parse(data[2]); }
-      if (!string.IsNullOrWhiteSpace(data[3])) { daily.FHVec = int.Parse(data[3]); }
-      if (!string.IsNullOrWhiteSpace(data[4])) { daily.FG = int.Parse(data[4]); }
-      if (!string.IsNullOrWhiteSpace(data[5])) { daily.FHX = int.Parse(data[5]); }
-      if (!string.IsNullOrWhiteSpace(data[6])) { daily.FHXH = int.Parse(data[6]); }
-      if (!string.IsNullOrWhiteSpace(data[7])) { daily.FHN = int.Parse(data[7]); }
-      if (!string.IsNullOrWhiteSpace(data[8])) { daily.FHNH = int.Parse(data[8]); }
-      if (!string.IsNullOrWhiteSpace(data[9])) { daily.FXX = int.Parse(data[9]); }
-      if (!string.IsNullOrWhiteSpace(data[10])) { daily.FXXH = int.Parse(data[10]); }
-      if (!string.IsNullOrWhiteSpace(data[11])) { daily.TG = int.Parse(data[11]); }
-      if (!string.IsNullOrWhiteSpace(data[12])) { daily.TN = int.Parse(data[12]); }
-      if (!string.IsNullOrWhiteSpace(data[13])) { daily.TNH = int.Parse(data[13]); }
-      if (!string.IsNullOrWhiteSpace(data[14])) { daily.TX = int.Parse(data[14]); }
-      if (!string.IsNullOrWhiteSpace(data[15])) { daily.TXH = int.Parse(data[15]); }
-      if (!string.IsNullOrWhiteSpace(data[16])) { daily.T10N = int.Parse(data[16]); }
-      if (!string.IsNullOrWhiteSpace(data[17])) { daily.T10NH = int.Parse(data[17]); }
-      if (!string.IsNullOrWhiteSpace(data[18])) { daily.SQ = int.Parse(data[18]); }
-      if (!string.IsNullOrWhiteSpace(data[19])) { daily.SP = int.Parse(data[19]); }
-      if (!string.IsNullOrWhiteSpace(data[20])) { daily.Q = int.Parse(data[20]); }
-      if (!string.IsNullOrWhiteSpace(data[21])) { daily.DR = int.Parse(data[21]); }
-      if (!string.IsNullOrWhiteSpace(data[22])) { daily.RH = int.Parse(data[22]); }
-      if (!string.IsNullOrWhiteSpace(data[23])) { daily.RHX = int.Parse(data[23]); }
-      if (!string.IsNullOrWhiteSpace(data[24])) { daily.RHXH = int.Parse(data[24]); }
-      if (!string.IsNullOrWhiteSpace(data[25])) { daily.PG = int.Parse(data[25]); }
-      if (!string.IsNullOrWhiteSpace(data[26])) { daily.PX = int.Parse(data[26]); }
-      if (!string.IsNullOrWhiteSpace(data[27])) { daily.PXH = int.Parse(data[27]); }
-      if (!string.IsNullOrWhiteSpace(data[28])) { daily.PN = int.Parse(data[28]); }
-      if (!string.IsNullOrWhiteSpace(data[29])) { daily.PNH = int.Parse(data[29]); }
-      if (!string.IsNullOrWhiteSpace(data[30])) { daily.VVN = int.Parse(data[30]); }
-      if (!string.IsNullOrWhiteSpace(data[31])) { daily.VVNH = int.Parse(data[31]); }
-      if (!string.IsNullOrWhiteSpace(data[32])) { daily.VVX = int.Parse(data[32]); }
-      if (!string.IsNullOrWhiteSpace(data[33])) { daily.VVXH = int.Parse(data[33]); }
-      if (!string.IsNullOrWhiteSpace(data[34])) { daily.NG = int.Parse(data[34]); }
-      if (!string.IsNullOrWhiteSpace(data[35])) { daily.UG = int.Parse(data[35]); }
-      if (!string.IsNullOrWhiteSpace(data[36])) { daily.UX = int.Parse(data[36]); }
-      if (!string.IsNullOrWhiteSpace(data[37])) { daily.UXH = int.Parse(data[37]); }
-      if (!string.IsNullOrWhiteSpace(data[38])) { daily.UN = int.Parse(data[38]); }
-      if (!string.IsNullOrWhiteSpace(data[39])) { daily.UNH = int.Parse(data[39]); }
-      if (!string.IsNullOrWhiteSpace(data[40])) { daily.EV24 = int.Parse(data[40]); }
+      daily.Date = TranslateDate(data[1]);
+      daily.DDVec = TranslateInt(data[2]);
+      daily.FHVec = TranslateDouble(data[3]);
+      daily.FG = TranslateDouble(data[4]); 
+      daily.FHX = TranslateDouble(data[5]); 
+      daily.FHXH = TranslateInt(data[6]); 
+      daily.FHN = TranslateDouble(data[7]); 
+      daily.FHNH = TranslateInt(data[8]);
+      daily.FXX = TranslateDouble(data[9]); 
+      daily.FXXH = TranslateInt(data[10]);
+      daily.TG = TranslateDouble(data[11]); 
+      daily.TN = TranslateDouble(data[12]); 
+      daily.TNH = TranslateInt(data[13]);
+      daily.TX = TranslateDouble(data[14]); 
+      daily.TXH = TranslateInt(data[15]);
+      daily.T10N = TranslateDouble(data[16]);
+      daily.T10NH = TranslateInt(data[17]);
+      daily.SQ = TranslateDouble(data[18]);
+      daily.SP = TranslateInt(data[19]);
+      daily.Q = TranslateInt(data[20]); 
+      daily.DR = TranslateDouble(data[21]);
+      daily.RH = TranslateDouble(data[22]);
+      daily.RHX = TranslateDouble(data[23]);
+      daily.RHXH = TranslateInt(data[24]);
+      daily.PG = TranslateDouble(data[25]); 
+      daily.PX = TranslateDouble(data[26]); 
+      daily.PXH = TranslateInt(data[27]);
+      daily.PN = TranslateDouble(data[28]); 
+      daily.PNH = TranslateInt(data[29]);
+      daily.VVN = TranslateInt(data[30]);
+      daily.VVNH = TranslateInt(data[31]);
+      daily.VVX = TranslateInt(data[32]); 
+      daily.VVXH = TranslateInt(data[33]);
+      daily.NG = TranslateInt(data[34]); 
+      daily.UG = TranslateInt(data[35]); 
+      daily.UX = TranslateInt(data[36]); 
+      daily.UXH = TranslateInt(data[37]);
+      daily.UN = TranslateInt(data[38]); 
+      daily.UNH = TranslateInt(data[39]);
+      daily.EV24 = TranslateDouble(data[40]);
       #endregion
 
       if (!Reports.ContainsKey(Stn))
@@ -137,6 +143,37 @@ namespace Import_DailyReports
 
       Reports[Stn].Add(daily);
 
+    }
+
+    private static DateTime TranslateDate(string str)
+    {
+      // Format: YYYYMMDD => yyyy-MM-dd
+      str = str.Insert(6, "-").Insert(4, "-");
+      return DateTime.Parse(str);
+    }
+
+    private static int? TranslateInt(string str)
+    {
+      int? data = null;
+
+      if (!string.IsNullOrWhiteSpace(str))
+      {
+        data = int.Parse(str);
+      }
+
+      return data;
+    }
+
+    private static double? TranslateDouble(string str)
+    {
+      double? data = null;
+
+      if (!string.IsNullOrWhiteSpace(str))
+      {
+        data = double.Parse(str) / 10;
+      }
+
+      return data;
     }
 
     /// <summary>
