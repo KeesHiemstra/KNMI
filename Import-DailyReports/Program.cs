@@ -1,28 +1,27 @@
 ﻿using KMNI.Extensions;
 using KMNI.Models;
+using KNMI_Common.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 
 namespace Import_DailyReports
 {
   class Program
   {
-    static readonly public DateTime FirstDate = DateTime.Parse("1968-01-01");
-
-    static Dictionary<int, List<DailyReport>> Reports { get; set; } = new Dictionary<int, List<DailyReport>>();
+    static public WeatherDbContext Db { get; set; }
+    static int RecordCount = 0;
+    static int SavedCount = 0;
 
     static void Main(string[] args)
     {
 
       string DownloadsPath = $"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}\\Downloads";
       ReadReportFiles(DownloadsPath);
-
-      SaveReports();
 
       Console.Write("\nPress any key...");
       Console.ReadKey();
@@ -38,11 +37,15 @@ namespace Import_DailyReports
 
       IEnumerable<string> files = Directory.EnumerateFiles(downloads, "etmgeg_*.txt", SearchOption.TopDirectoryOnly);
 
-      foreach (string file in files)
+      string connection = "Trusted_Connection=True;Data Source=(Local);Database=Weather;MultipleActiveResultSets=true";
+      using (Db = new WeatherDbContext(connection))
       {
-        ReadReportFile(file);
-      }
+        foreach (string file in files)
+        {
+          ReadReportFile(file);
+        }
 
+      }
     }
 
     /// <summary>
@@ -51,6 +54,10 @@ namespace Import_DailyReports
     /// <param name="reportFile"></param>
     private static void ReadReportFile(string reportFile)
     {
+
+      Console.WriteLine($"Processing: {reportFile}");
+      RecordCount = 0;
+      Console.WriteLine($"Counts: {RecordCount} records, {SavedCount} saved");
 
       // Strip the header
       using (StreamReader stream = File.OpenText(reportFile))
@@ -66,6 +73,7 @@ namespace Import_DailyReports
             if (!string.IsNullOrWhiteSpace(line))
             {
               ProcessLine(line);
+              
             }
           }
           else
@@ -86,14 +94,10 @@ namespace Import_DailyReports
 
       string[] data = line.Split(',');
 
-      int Stn = int.Parse(data[0]);
-      if (TranslateDate(data[1]) < FirstDate)
-      {
-        return;
-      }
       DailyReport daily = new DailyReport();
 
       #region Import
+      daily.Stn = int.Parse(data[0]);
       daily.Date = TranslateDate(data[1]);
       daily.DDVec = TranslateInt(data[2]);
       daily.FHVec = TranslateDouble(data[3]);
@@ -136,13 +140,25 @@ namespace Import_DailyReports
       daily.EV24 = TranslateDouble(data[40]);
       #endregion
 
-      if (!Reports.ContainsKey(Stn))
+      RecordCount++;
+
+      var record = Db.Reports
+        .AsNoTracking()
+        .Where(x => (x.Stn == daily.Stn && x.Date == daily.Date))
+        .Count();
+
+      if (record == 0)
       {
-        Reports.Add(Stn, new List<DailyReport>());
+        Db.Reports.Add(daily);
+        Db.SaveChanges();
+        SavedCount++;
       }
 
-      Reports[Stn].Add(daily);
-
+      if ((RecordCount % 10000 == 0 && SavedCount == 0) || (RecordCount % 100 == 0 && SavedCount > 0))
+      {
+        Console.WriteLine($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")} Counts: {RecordCount} records, {SavedCount} saved ({daily.Date})");
+        Thread.Sleep(550);
+      }
     }
 
     private static DateTime TranslateDate(string str)
@@ -174,23 +190,6 @@ namespace Import_DailyReports
       }
 
       return data;
-    }
-
-    /// <summary>
-    /// Save process data in json file.
-    /// </summary>
-    private static void SaveReports()
-    {
-      foreach (var report in Reports)
-      {
-        string JsonPath = $"%OneDrive%\\Data\\KNMI\\Daily_{report.Key.ToString()}.json";
-        string json = JsonConvert.SerializeObject(report.Value, Formatting.Indented);
-        using (StreamWriter stream = new StreamWriter(JsonPath.TranslatePath()))
-        {
-          stream.Write(json);
-        }
-
-      }
     }
 
   }

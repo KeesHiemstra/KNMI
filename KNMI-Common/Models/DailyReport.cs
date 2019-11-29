@@ -17,7 +17,7 @@ namespace KMNI.Models
   * or the Central Netherlands Temperature <http://www.knmi.nl/kennis-en-datacentrum/achtergrond/centraal-nederland-temperatuur-cnt>.
   *********/
 
-  [Table("KNMI_Report")]
+  [Table("KNMI_Daily")]
   public class DailyReport
   {
 
