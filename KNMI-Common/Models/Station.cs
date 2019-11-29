@@ -7,6 +7,9 @@ namespace KMNI.Models
   public class Station
   {
     [Key]
+    public int Id { get; set; }
+
+    [Required]
     public int StationCode { get; set; }
 
     [Required]
