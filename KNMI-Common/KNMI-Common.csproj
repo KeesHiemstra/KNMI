@@ -52,9 +52,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\PathExtensions.cs" />
+    <Compile Include="Extensions\WeatherExtension.cs" />
     <Compile Include="Models\DailyReport.cs" />
+    <Compile Include="Models\OpenWeather.cs" />
     <Compile Include="Models\Station.cs" />
     <Compile Include="Models\WeatherDbContext.cs" />
+    <Compile Include="OpenWeatherService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
