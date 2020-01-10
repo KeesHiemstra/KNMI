@@ -1,5 +1,11 @@
-﻿Version 0.0.0.3
-* Bug: The UpdateDate was not updated after the download. Had recreated the Db.
+﻿Version 0.0.0.3 (2020-01-10)
+* Bug fix: The UpdateDate was not updated after the download. Had recreated the Db.
++ Logging.
 
-Version 0.0.0.2
+Version 0.0.0.2 (2020-01-09)
 + Implemented DailyKNMI to download data.
+? It responded strange about the UpdateDate. The date was not updated, or it break.
+
+Version 0.0.0.1 (2020-01-09)
++ Initiated the KNMIDaily (ViewModel).
+- Removed the global Daily-list. It couldn't get the complete database.
