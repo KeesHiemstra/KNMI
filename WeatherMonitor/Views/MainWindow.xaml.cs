@@ -27,6 +27,7 @@ namespace WeatherMonitor
     public MainWindow()
     {
 
+      Log.Write($"Application {System.Reflection.Assembly.GetExecutingAssembly().GetName().Name} started");
       MainVM = new MainViewModel(this);
 
       InitializeComponent();

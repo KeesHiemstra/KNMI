@@ -76,7 +76,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ViewModels\DailyReport.cs" />
+    <Compile Include="ViewModels\DailyKNMI.cs" />
+    <Compile Include="ViewModels\Log.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

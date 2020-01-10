@@ -22,7 +22,7 @@ namespace WeatherMonitor.ViewModels
 
     #region [ Properties ]
 
-    public DailyReport Daily { get; set; }
+    public DailyKNMI Daily { get; set; }
 
     #endregion
 
@@ -32,7 +32,7 @@ namespace WeatherMonitor.ViewModels
     {
 
       MainView = mainView;
-      Daily = new DailyReport();
+      Daily = new DailyKNMI();
 
     }
 
