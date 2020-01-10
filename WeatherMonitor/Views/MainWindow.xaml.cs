@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WeatherMonitor.ViewModels;
 
 namespace WeatherMonitor
 {
@@ -20,9 +21,18 @@ namespace WeatherMonitor
   /// </summary>
   public partial class MainWindow : Window
   {
+
+    public MainViewModel MainVM { get; set; }
+
     public MainWindow()
     {
+
+      MainVM = new MainViewModel(this);
+
       InitializeComponent();
+
+      DataContext = MainVM;
+
     }
   }
 }
