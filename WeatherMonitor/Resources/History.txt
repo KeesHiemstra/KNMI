@@ -1,1 +1,5 @@
-﻿
+﻿Version 0.0.0.3
+* Bug: The UpdateDate was not updated after the download. Had recreated the Db.
+
+Version 0.0.0.2
++ Implemented DailyKNMI to download data.
