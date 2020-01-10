@@ -20,7 +20,7 @@ namespace WeatherMonitor.ViewModels
 
     #region [ Fields ]
 
-    static WeatherDbContext Db;
+    public static WeatherDbContext Db { get; set; }
     private DateTime updateDate;
 
     #endregion
@@ -28,7 +28,7 @@ namespace WeatherMonitor.ViewModels
     #region [ Properties ]
 
     public DateTime UpdateDate
-    { 
+    {
       get => updateDate;
       set
       {
@@ -47,7 +47,7 @@ namespace WeatherMonitor.ViewModels
     public DailyKNMI()
     {
 
-      Log.Write("Initialize DailyKNMI"); 
+      Log.Write("Initialize DailyKNMI");
       Db = new WeatherDbContext(dbConnection);
       InitialData();
 
@@ -78,16 +78,12 @@ namespace WeatherMonitor.ViewModels
 
       using (Db)
       {
-        UpdateDate = await GetUpdateDate();
-        Log.Write($"UpdateDate: {UpdateDate}");
+        ExecuteUpdateDate();
         if (UpdateDate < DateTime.Now.Date.AddDays(-1))
         {
           Log.Write("Start download");
           DownloadedKNMIStations = GetDownloadedKNMIStations();
           await UpdateKNMIData(DownloadedKNMIStations, UpdateDate.AddDays(1));
-
-          UpdateDate = await GetUpdateDate();
-          Log.Write($"UpdateDate after download: {UpdateDate}");
 
           Log.Write("Finished download");
         }
@@ -95,19 +91,45 @@ namespace WeatherMonitor.ViewModels
 
     }
 
+    private void ExecuteUpdateDate()
+    {
+      if (Db == null)
+      {
+        Log.Write("Db is disposed");
+      }
+      UpdateDate = GetUpdateDate();
+      Log.Write($"UpdateDate: {UpdateDate.ToString("yyyy-MM-dd")}");
+
+    }
+
     /// <summary>
     /// Get the latest downloaded KNMI data.
     /// </summary>
     /// <returns></returns>
-    private async Task<DateTime> GetUpdateDate()
+    private DateTime GetUpdateDate()
     {
 
-      var record = Db.Reports
-        .OrderByDescending(x => x.Date)
-        .Select(x => x.Date)
-        .FirstOrDefault();
+      try
+      {
+        var record = Db.Reports
+          .OrderByDescending(x => x.Date)
+          .Select(x => x.Date)
+          .FirstOrDefault();
 
-      return record;
+        return record;
+      }
+      catch (Exception ex)
+      {
+        Log.Write($"Exception GetUpdateDate: {ex.Message}");
+        Db = new WeatherDbContext(dbConnection);
+        Log.Write("Restarted Db");
+        var record = Db.Reports
+          .OrderByDescending(x => x.Date)
+          .Select(x => x.Date)
+          .FirstOrDefault();
+
+        return record;
+      }
 
     }
 
@@ -156,6 +178,7 @@ namespace WeatherMonitor.ViewModels
       {
         await ProcessData(data, header);
       }
+      ExecuteUpdateDate();
       Log.Write("Finished UpdateKNMIData");
 
     }
