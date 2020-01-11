@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using WeatherMonitor.Extensions;
 
 namespace WeatherMonitor.ViewModels
 {
@@ -93,10 +94,7 @@ namespace WeatherMonitor.ViewModels
 
     private void ExecuteUpdateDate()
     {
-      if (Db == null)
-      {
-        Log.Write("Db is disposed");
-      }
+
       UpdateDate = GetUpdateDate();
       Log.Write($"UpdateDate: {UpdateDate.ToString("yyyy-MM-dd")}");
 
@@ -108,6 +106,13 @@ namespace WeatherMonitor.ViewModels
     /// <returns></returns>
     private DateTime GetUpdateDate()
     {
+
+      if (Db.IsDisposed())
+      {
+        Log.Write("Db was disposed");
+        Db = new WeatherDbContext(dbConnection);
+        Log.Write("Restarted Db");
+      }
 
       try
       {
@@ -121,14 +126,7 @@ namespace WeatherMonitor.ViewModels
       catch (Exception ex)
       {
         Log.Write($"Exception GetUpdateDate: {ex.Message}");
-        Db = new WeatherDbContext(dbConnection);
-        Log.Write("Restarted Db");
-        var record = Db.Reports
-          .OrderByDescending(x => x.Date)
-          .Select(x => x.Date)
-          .FirstOrDefault();
-
-        return record;
+        return DateTime.MinValue;
       }
 
     }

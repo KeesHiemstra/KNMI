@@ -1,4 +1,8 @@
-﻿Version 0.0.0.3 (2020-01-10)
+﻿Version 0.0.0.4 (2020-01-11)
++ Implemented DbContext.IsDisposed() extension.
+* Moved the models location.
+
+Version 0.0.0.3 (2020-01-10)
 * Bug fix: The UpdateDate was not updated after the download. Had recreated the Db.
 + Logging.
 

@@ -76,6 +76,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Extensions\ContextExtensions.cs" />
+    <Compile Include="Models\DailyReport.cs" />
+    <Compile Include="Models\Station.cs" />
+    <Compile Include="Models\WeatherDbContext.cs" />
     <Compile Include="ViewModels\DailyKNMI.cs" />
     <Compile Include="ViewModels\Log.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
@@ -110,12 +114,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\KNMI-Common\KNMI-Common.csproj">
-      <Project>{527D8C72-4186-4FC9-B428-4E362ECD5B22}</Project>
-      <Name>KNMI-Common</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\History.txt" />
