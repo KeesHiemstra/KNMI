@@ -24,6 +24,8 @@ namespace WeatherMonitor.ViewModels
 
     public DailyKNMI Daily { get; set; }
 
+    public decimal TotalSunshine { get; set; }
+
     #endregion
 
     #region [ Construction ]
@@ -33,6 +35,8 @@ namespace WeatherMonitor.ViewModels
 
       MainView = mainView;
       Daily = new DailyKNMI();
+
+      GetTotalSunshineAsync();
 
     }
 
@@ -53,6 +57,16 @@ namespace WeatherMonitor.ViewModels
 
     #endregion
 
+
+    private void GetTotalSunshineAsync()
+    {
+      var range = Daily.GetDailyRange(348, new DateTime(2019,01,01), new DateTime(2019, 12, 31));
+
+      foreach (var record in range)
+      {
+        TotalSunshine += record.SQ.Value;
+      }
+    }
 
   }
 }

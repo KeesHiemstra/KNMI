@@ -100,6 +100,7 @@ namespace WeatherMonitor.ViewModels
 
     }
 
+    #region GetUpdateDate()
     /// <summary>
     /// Get the latest downloaded KNMI data.
     /// </summary>
@@ -130,6 +131,39 @@ namespace WeatherMonitor.ViewModels
       }
 
     }
+    #endregion
+
+    #region GetDailyRange
+
+    public List<DailyReport> GetDailyRange(int station, DateTime startDate, DateTime endDate)
+    {
+
+      if (Db.IsDisposed())
+      {
+        Log.Write("Db was disposed");
+        Db = new WeatherDbContext(dbConnection);
+        Log.Write("Restarted Db");
+      }
+
+      List<DailyReport> range = new List<DailyReport>();
+
+      try
+      {
+         range = Db.Reports
+          .AsNoTracking()
+          .Where(x => (x.Stn == station && x.Date >= startDate && x.Date <= endDate))
+          .ToList();
+      }
+      catch (Exception ex)
+      {
+        Log.Write($"Exception GetDailyRange::record: {ex.Message}");
+      }
+
+      return range;
+
+    }
+
+    #endregion
 
     #region Update KNMI data
 
@@ -142,6 +176,7 @@ namespace WeatherMonitor.ViewModels
     {
 
       var record = Db.Reports
+        .AsNoTracking()
         .Select(x => x.Stn)
         .Distinct()
         .ToArray();
@@ -293,15 +328,15 @@ namespace WeatherMonitor.ViewModels
             break;
           //FHVEC    = Vector mean wind speed (in 0.1 m/s).
           case "fhvec":
-            newRecord.FHVec = TranslateDouble(fields[i]);
+            newRecord.FHVec = Translatedecimal(fields[i]);
             break;
           //FG       = Daily mean wind speed (in 0.1 m/s).
           case "fg":
-            newRecord.FG = TranslateDouble(fields[i]);
+            newRecord.FG = Translatedecimal(fields[i]);
             break;
           //FHX      = Maximum hourly mean wind speed (in 0.1 m/s).
           case "fhx":
-            newRecord.FHX = TranslateDouble(fields[i]);
+            newRecord.FHX = Translatedecimal(fields[i]);
             break;
           //FHXH     = Hourly division in which FHX was measured.
           case "fhxh":
@@ -309,7 +344,7 @@ namespace WeatherMonitor.ViewModels
             break;
           //FHN      = Minimum hourly mean wind speed (in 0.1 m/s).
           case "fhn":
-            newRecord.FHN = TranslateDouble(fields[i]);
+            newRecord.FHN = Translatedecimal(fields[i]);
             break;
           //FHNH     = Hourly division in which FHN was measured.
           case "fhnh":
@@ -317,7 +352,7 @@ namespace WeatherMonitor.ViewModels
             break;
           //FXX      = Maximum wind gust (in 0.1 m/s).
           case "fxx":
-            newRecord.FXX = TranslateDouble(fields[i]);
+            newRecord.FXX = Translatedecimal(fields[i]);
             break;
           //FXXH     = Hourly division in which FXX was measured.
           case "fxxh":
@@ -325,11 +360,11 @@ namespace WeatherMonitor.ViewModels
             break;
           //TG       = Daily mean temperature in (0.1 degrees Celsius).
           case "tg":
-            newRecord.TG = TranslateDouble(fields[i]);
+            newRecord.TG = Translatedecimal(fields[i]);
             break;
           //TN       = Minimum temperature (in 0.1 degrees Celsius).
           case "tn":
-            newRecord.TN = TranslateDouble(fields[i]);
+            newRecord.TN = Translatedecimal(fields[i]);
             break;
           //TNH      = Hourly division in which TN was measured.
           case "tnh":
@@ -337,7 +372,7 @@ namespace WeatherMonitor.ViewModels
             break;
           //TX       = Maximum temperature (in 0.1 degrees Celsius).
           case "tx":
-            newRecord.TX = TranslateDouble(fields[i]);
+            newRecord.TX = Translatedecimal(fields[i]);
             break;
           //TXH      = Hourly division in which TX was measured.
           case "txh":
@@ -345,7 +380,7 @@ namespace WeatherMonitor.ViewModels
             break;
           //T10N     = Minimum temperature at 10 cm above surface (in 0.1 degrees Celsius).
           case "t10n":
-            newRecord.T10N = TranslateDouble(fields[i]);
+            newRecord.T10N = Translatedecimal(fields[i]);
             break;
           //T10NH    = 6-hourly division in which T10N was measured. 6=0-6 UT, 12=6-12 UT, 18=12-18 UT, 24=18-24 UT
           case "t10nh":
@@ -353,7 +388,7 @@ namespace WeatherMonitor.ViewModels
             break;
           //SQ       = Sunshine duration (in 0.1 hour) calculated from global radiation (-1 for <0.05 hour).
           case "sq":
-            newRecord.SQ = TranslateDouble(fields[i]);
+            newRecord.SQ = TranslateDecimal(fields[i]);
             break;
           //SP       = Percentage of maximum potential sunshine duration.
           case "sp":
@@ -365,15 +400,15 @@ namespace WeatherMonitor.ViewModels
             break;
           //DR       = Precipitation duration (in 0.1 hour).
           case "dr":
-            newRecord.DR = TranslateDouble(fields[i]);
+            newRecord.DR = Translatedecimal(fields[i]);
             break;
           //RH       = Daily precipitation amount (in 0.1 mm) (-1 for <0.05 mm).
           case "rh":
-            newRecord.RH = TranslateDouble(fields[i]);
+            newRecord.RH = Translatedecimal(fields[i]);
             break;
           //RHX      = Maximum hourly precipitation amount (in 0.1 mm) (-1 for <0.05 mm).
           case "rhx":
-            newRecord.RHX = TranslateDouble(fields[i]);
+            newRecord.RHX = Translatedecimal(fields[i]);
             break;
           //RHXH     = Hourly division in which RHX was measured.
           case "rhxh":
@@ -381,11 +416,11 @@ namespace WeatherMonitor.ViewModels
             break;
           //PG       = Daily mean sea level pressure (in 0.1 hPa) calculated from 24 hourly values.
           case "pg":
-            newRecord.PG = TranslateDouble(fields[i]);
+            newRecord.PG = Translatedecimal(fields[i]);
             break;
           //PX       = Maximum hourly sea level pressure (in 0.1 hPa).
           case "px":
-            newRecord.PX = TranslateDouble(fields[i]);
+            newRecord.PX = Translatedecimal(fields[i]);
             break;
           //PXH      = Hourly division in which PX was measured.
           case "pxh":
@@ -393,7 +428,7 @@ namespace WeatherMonitor.ViewModels
             break;
           //PN       = Minimum hourly sea level pressure (in 0.1 hPa).
           case "pn":
-            newRecord.PN = TranslateDouble(fields[i]);
+            newRecord.PN = Translatedecimal(fields[i]);
             break;
           //PNH      = Hourly division in which PN was measured.
           case "pnh":
@@ -441,7 +476,7 @@ namespace WeatherMonitor.ViewModels
             break;
           //EV24     = Potential evapotranspiration (Makkink) (in 0.1 mm).
           case "ev24":
-            newRecord.EV24 = TranslateDouble(fields[i]);
+            newRecord.EV24 = Translatedecimal(fields[i]);
             break;
           default:
             break;
@@ -500,18 +535,37 @@ namespace WeatherMonitor.ViewModels
     }
 
     /// <summary>
-    /// Translate to double and divide to 10. It might be null.
+    /// Translate to decimal and divide to 10. It might be null.
     /// </summary>
     /// <param name="str"></param>
     /// <returns></returns>
-    private static double? TranslateDouble(string str)
+    private static decimal? TranslateDecimal(string str)
     {
 
-      double? data = null;
+      decimal? data = null;
 
       if (!string.IsNullOrWhiteSpace(str))
       {
-        data = double.Parse(str) / 10;
+        data = decimal.Parse(str) / 10;
+      }
+
+      return data;
+
+    }
+
+    /// <summary>
+    /// Translate to decimal and divide to 10. It might be null.
+    /// </summary>
+    /// <param name="str"></param>
+    /// <returns></returns>
+    private static decimal? Translatedecimal(string str)
+    {
+
+      decimal? data = null;
+
+      if (!string.IsNullOrWhiteSpace(str))
+      {
+        data = decimal.Parse(str) / 10;
       }
 
       return data;

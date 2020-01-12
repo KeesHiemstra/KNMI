@@ -37,52 +37,52 @@ namespace KMNI.Models
     public int? DDVec { get; set; }
 
     // FHVEC    = Vector mean wind speed (in m/s)
-    public double? FHVec { get; set; }
+    public decimal? FHVec { get; set; }
 
     // FG       = Daily mean wind speed (in m/s)
-    public double? FG { get; set; }
+    public decimal? FG { get; set; }
 
     // FHX      = Maximum hourly mean wind speed (in m/s)
-    public double? FHX { get; set; }
+    public decimal? FHX { get; set; }
 
     // FHXH     = Hourly division in which FHX was measured
     public int? FHXH { get; set; }
 
     // FHN      = Minimum hourly mean wind speed (in m/s)
-    public double? FHN { get; set; }
+    public decimal? FHN { get; set; }
 
     // FHNH     = Hourly division in which FHN was measured
     public int? FHNH { get; set; }
 
     // FXX      = Maximum wind gust (in m/s)
-    public double? FXX { get; set; }
+    public decimal? FXX { get; set; }
 
     // FXXH     = Hourly division in which FXX was measured
     public int? FXXH { get; set; }
 
     // TG       = Daily mean temperature in (in degrees Celsius)
-    public double? TG { get; set; }
+    public decimal? TG { get; set; }
 
     // TN       = Minimum temperature (in degrees Celsius)
-    public double? TN { get; set; }
+    public decimal? TN { get; set; }
 
     // TNH      = Hourly division in which TN was measured
     public int? TNH { get; set; }
 
     // TX       = Maximum temperature (in degrees Celsius)
-    public double? TX { get; set; }
+    public decimal? TX { get; set; }
 
     // TXH      = Hourly division in which TX was measured
     public int? TXH { get; set; }
 
     // T10N     = Minimum temperature at 10 cm above surface (in degrees Celsius)
-    public double? T10N { get; set; }
+    public decimal? T10N { get; set; }
 
     // T10NH    = 6-hourly division in which T10N was measured; 6=0-6 UT, 12=6-12 UT, 18=12-18 UT, 24=18-24 UT
     public int? T10NH { get; set; }
 
     // SQ       = Sunshine duration (in hour) calculated from global radiation (-1 for <0.05 hour)
-    public double? SQ { get; set; }
+    public decimal? SQ { get; set; }
 
     // SP       = Percentage of maximum potential sunshine duration
     public int? SP { get; set; }
@@ -91,28 +91,28 @@ namespace KMNI.Models
     public int? Q { get; set; }
 
     // DR       = Precipitation duration (in hour)
-    public double? DR { get; set; }
+    public decimal? DR { get; set; }
 
     // RH       = Daily precipitation amount (in mm) (-1 for <0.05 mm)
-    public double? RH { get; set; }
+    public decimal? RH { get; set; }
 
     // RHX      = Maximum hourly precipitation amount (in mm) (-1 for <0.05 mm)
-    public double? RHX { get; set; }
+    public decimal? RHX { get; set; }
 
     // RHXH     = Hourly division in which RHX was measured
     public int? RHXH { get; set; }
 
     // PG       = Daily mean sea level pressure (in hPa) calculated from 24 hourly values
-    public double? PG { get; set; }
+    public decimal? PG { get; set; }
 
     // PX       = Maximum hourly sea level pressure (in hPa)
-    public double? PX { get; set; }
+    public decimal? PX { get; set; }
 
     // PXH      = Hourly division in which PX was measured
     public int? PXH { get; set; }
 
     // PN       = Minimum hourly sea level pressure (in hPa)
-    public double? PN { get; set; }
+    public decimal? PN { get; set; }
 
     // PNH      = Hourly division in which PN was measured
     public int? PNH { get; set; }
@@ -148,7 +148,7 @@ namespace KMNI.Models
     public int? UNH { get; set; }
 
     // EV24     = Potential evapotranspiration (Makkink) (in mm)
-    public double? EV24 { get; set; }
+    public decimal? EV24 { get; set; }
 
   }
 }
