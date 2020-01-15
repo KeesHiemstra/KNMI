@@ -76,11 +76,12 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Extensions\ContextExtensions.cs" />
+    <Compile Include="Extensions\DbContextExtensions.cs" />
     <Compile Include="Models\DailyReport.cs" />
     <Compile Include="Models\Station.cs" />
     <Compile Include="Models\WeatherDbContext.cs" />
     <Compile Include="ViewModels\DailyKNMI.cs" />
+    <Compile Include="ViewModels\DailyKNMIUpdate.cs" />
     <Compile Include="ViewModels\DaylightHours.cs" />
     <Compile Include="ViewModels\GeographicLocation.cs" />
     <Compile Include="ViewModels\Log.cs" />

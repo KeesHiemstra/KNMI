@@ -1,16 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace WeatherMonitor.Extensions
+namespace CHi.Extensions
 {
-  public static class ContextExtensions
+  public static class DbContextExtensions
   {
 
+    /// <summary>
+    /// Show the private method IsDisposed of 'System.Data.Entity.Internal.InternalContext'.
+    /// </summary>
+    /// <param name="dbContext"></param>
+    /// <returns></returns>
     public static bool IsDisposed(this DbContext dbContext)
     {
 

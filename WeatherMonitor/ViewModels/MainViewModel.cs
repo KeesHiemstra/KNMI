@@ -36,7 +36,7 @@ namespace WeatherMonitor.ViewModels
       MainView = mainView;
       Daily = new DailyKNMI();
 
-      GetTotalSunshineAsync();
+      //GetTotalSunshineAsync();
 
     }
 

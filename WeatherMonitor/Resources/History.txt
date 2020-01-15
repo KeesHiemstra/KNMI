@@ -1,4 +1,7 @@
-﻿Version 0.0.0.5 (2020-01-12)
+﻿Version 0.0.0.6 (2020-01-15)
+* Moved the UpdateKNMIData() to external function.
+
+Version 0.0.0.5 (2020-01-12)
 + Experiment to calculate the total sun time.
 * Changed DailyReport double to decimal to avoid error with the WeatherDbContext.
 + DaylightHours and GeographicLocation sources.

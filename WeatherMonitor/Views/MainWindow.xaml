@@ -43,8 +43,6 @@
 
     <StackPanel Grid.Row="1">
       <StackPanel Orientation="Horizontal">
-        <TextBlock Text="Sunshine duration (in hour): "/>
-        <TextBlock Text="{Binding TotalSunshine}"/>
       </StackPanel>
     </StackPanel>
     
