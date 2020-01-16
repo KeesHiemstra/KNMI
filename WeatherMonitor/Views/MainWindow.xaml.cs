@@ -35,5 +35,10 @@ namespace WeatherMonitor
       DataContext = MainVM;
 
     }
+
+    private void Window_Loaded(object sender, RoutedEventArgs e)
+    {
+      MainVM.MainLoaded();
+    }
   }
 }

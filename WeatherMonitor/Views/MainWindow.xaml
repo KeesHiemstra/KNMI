@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WeatherMonitor"
         mc:Ignorable="d"
+        Loaded="Window_Loaded"
         Title="Weather monitor" 
         Height="450" 
         Width="800">
@@ -42,7 +43,9 @@
     </StatusBar>
 
     <StackPanel Grid.Row="1">
-      <StackPanel Orientation="Horizontal">
+      <StackPanel Name="ResultStackPanel" 
+                  Orientation="Vertical">
+        
       </StackPanel>
     </StackPanel>
     
