@@ -121,6 +121,12 @@
   <ItemGroup>
     <Resource Include="Resources\History.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\KNMI-Common\KNMI-Common.csproj">
+      <Project>{527D8C72-4186-4FC9-B428-4E362ECD5B22}</Project>
+      <Name>KNMI-Common</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

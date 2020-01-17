@@ -1,10 +1,13 @@
-﻿using KMNI.Models;
+﻿using KMNI.Extensions;
+using KMNI.Models;
 using KNMI_Common.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -61,8 +64,17 @@ namespace WeatherMonitor.ViewModels
     internal void MainLoaded()
     {
       //GetTotalSunshineAsync();
-      MainView.ResultStackPanel.Children.Add(GetTemperaturesNumbers());
-      MainView.ResultStackPanel.Children.Add(GetTemperaturesGraphics(DateTime.Now.Date, 14));
+      //MainView.ResultStackPanel.Children.Add(GetTemperaturesNumbers());
+      //MainView.ResultStackPanel.Children.Add(GetTemperaturesGraphics(DateTime.Now.Date, 14));
+
+      string json = JsonConvert.SerializeObject(Daily.GetDailyRange(356, new DateTime(2019, 01, 01), DateTime.Now.Date)
+        .Select(x => (x.Date, x.TN, x.TG, x.TX))
+        .ToList(), Formatting.Indented);
+      using (StreamWriter stream = new StreamWriter("%OneDrive%\\Tmp\\Data2019.json".TranslatePath()))
+      {
+        stream.Write(json);
+      }
+
     }
 
     private void GetTotalSunshineAsync()
