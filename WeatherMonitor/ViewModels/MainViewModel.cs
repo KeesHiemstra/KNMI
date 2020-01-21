@@ -67,10 +67,17 @@ namespace WeatherMonitor.ViewModels
       //MainView.ResultStackPanel.Children.Add(GetTemperaturesNumbers());
       //MainView.ResultStackPanel.Children.Add(GetTemperaturesGraphics(DateTime.Now.Date, 14));
 
-      string json = JsonConvert.SerializeObject(Daily.GetDailyRange(356, new DateTime(2019, 01, 01), DateTime.Now.Date)
-        .Select(x => (x.Date, x.TN, x.TG, x.TX))
+      //.Select(x => (X.Date, x.TN, x.TG, x.TX)) resulted as Item1, Item2, ...
+      string json = JsonConvert.SerializeObject(Daily.GetDailyRange(356, DateTime.Now.Date.AddDays(-29), DateTime.Now.Date.AddDays(14))
+        .Select(x => new 
+        { 
+          Date = x.Date, 
+          TN = x.TN, 
+          TG = x.TG, 
+          TX = x.TX 
+        })
         .ToList(), Formatting.Indented);
-      using (StreamWriter stream = new StreamWriter("%OneDrive%\\Tmp\\Data2019.json".TranslatePath()))
+      using (StreamWriter stream = new StreamWriter("%OneDrive%\\Tmp\\Data.json".TranslatePath()))
       {
         stream.Write(json);
       }
