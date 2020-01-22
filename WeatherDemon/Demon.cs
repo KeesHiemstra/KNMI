@@ -14,9 +14,9 @@ namespace WeatherDemon
   {
     private readonly string DemonAppJsonFile = "%OneDrive%\\Etc\\DemonOpenWeather.json".TranslatePath();
 #if DEBUG
-    private readonly string DemonDayWetherJsonFile = "C:\\Temp\\DayWeather.json".TranslatePath();
+    private readonly string DemonDayWetherJsonFile = "%OneDrive%\\Tmp\\DailyWeather\\DayWeather.json".TranslatePath();
     private readonly string DemonBackupWetherJsonFile =
-      $"C:\\Temp\\DayWeather_{DateTime.Now.Date.ToString("yyyy-MM-dd")}.json".TranslatePath();
+      $"%OneDrive%\\Tmp\\DailyWeather\\DayWeather_{DateTime.Now.Date.ToString("yyyy-MM-dd")}.json".TranslatePath();
 #else
     private readonly string DemonDayWetherJsonFile = "%OneDrive%\\Data\\DailyWeather\\DayWeather.json".TranslatePath();
     private readonly string DemonBackupWetherJsonFile = 
