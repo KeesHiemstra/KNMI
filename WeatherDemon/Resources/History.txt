@@ -1,4 +1,7 @@
-﻿Version 1.0.0.1 (2020-01-22)
+﻿Version 1.0.0.2 (2020-01-22)
+* Limited the DayWeather to 24 hours.
+
+Version 1.0.0.1 (2020-01-22)
 * Added IDisposable on Demon so the pool is not growing.
 * Used external json for OpenWeather data.
 * Added Log.

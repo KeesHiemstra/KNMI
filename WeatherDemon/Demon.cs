@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Threading.Tasks;
 using WeatherDemon.Models;
 
 namespace WeatherDemon
@@ -13,9 +14,9 @@ namespace WeatherDemon
   {
     private readonly string DemonAppJsonFile = "%OneDrive%\\Etc\\DemonOpenWeather.json".TranslatePath();
 #if DEBUG
-    private readonly string DemonDayWetherJsonFile = "C:\\Tmp\\DayWeather.json".TranslatePath();
+    private readonly string DemonDayWetherJsonFile = "C:\\Temp\\DayWeather.json".TranslatePath();
     private readonly string DemonBackupWetherJsonFile =
-      $"C:\\Tmp\\DayWeather_{DateTime.Now.Date.ToString("yyyy-MM-dd")}.json".TranslatePath();
+      $"C:\\Temp\\DayWeather_{DateTime.Now.Date.ToString("yyyy-MM-dd")}.json".TranslatePath();
 #else
     private readonly string DemonDayWetherJsonFile = "%OneDrive%\\Data\\DailyWeather\\DayWeather.json".TranslatePath();
     private readonly string DemonBackupWetherJsonFile = 
@@ -28,13 +29,21 @@ namespace WeatherDemon
 
     public Demon()
     {
+
+      Run();
+      Dispose();
+      
+    }
+
+    private async void Run()
+    {
+
       LoadDemonOpenWeatherJson();
       LoadDayWeather();
 
-      GetDayWeather();
+      await GetDayWeather();
       BackupDayWeather();
-      Dispose();
-      
+
     }
 
     private void LoadDemonOpenWeatherJson()
@@ -66,7 +75,7 @@ namespace WeatherDemon
 
     }
 
-    private async void GetDayWeather()
+    private async Task GetDayWeather()
     {
 
       string url = $"http://api.openweathermap.org/data/2.5/weather?" +
@@ -104,7 +113,7 @@ namespace WeatherDemon
 
       DayWeathers.Add(DayWeather);
       string json = JsonConvert.SerializeObject(DayWeathers.
-        Where(x => x.Time > DateTime.Now.AddMinutes(24 * 60)), Formatting.Indented);
+        Where(x => x.Time > DateTime.Now.AddMinutes(-24 * 60)), Formatting.Indented);
       using (StreamWriter stream = new StreamWriter(DemonDayWetherJsonFile))
       {
         stream.Write(json);
