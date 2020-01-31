@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace KMNI.Models
+namespace KNMI.Models
 {
   [Table("KNMI_Station")]
   public class Station

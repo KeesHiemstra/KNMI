@@ -1,12 +1,11 @@
-﻿using KMNI.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KNMI_Common.Models
+namespace KNMI.Models
 {
   public class WeatherDbContext : DbContext
   {

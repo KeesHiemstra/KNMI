@@ -1,11 +1,8 @@
-﻿using KMNI.Models;
-using KNMI_Common.Models;
+﻿using KNMI.Models;
 using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace WeatherMonitor.ViewModels

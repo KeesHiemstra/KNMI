@@ -1,6 +1,5 @@
 ﻿using CHi.Extensions;
-using KMNI.Models;
-using KNMI_Common.Models;
+using KNMI.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
