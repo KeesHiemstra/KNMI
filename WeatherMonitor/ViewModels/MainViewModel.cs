@@ -61,16 +61,30 @@ namespace WeatherMonitor.ViewModels
       //MainView.ResultStackPanel.Children.Add(GetTemperaturesGraphics(DateTime.Now.Date, 14));
 
       //.Select(x => (X.Date, x.TN, x.TG, x.TX)) resulted as Item1, Item2, ...
-      string json = JsonConvert.SerializeObject(Daily.GetDailyRange(356, DateTime.Now.Date.AddDays(-29), DateTime.Now.Date.AddDays(14))
-        .Select(x => new 
-        { 
-          Date = x.Date, 
-          TN = x.TN, 
-          TG = x.TG, 
-          TX = x.TX 
+      string json = JsonConvert.SerializeObject(Daily.GetDailyRange(356, DateTime.Now.Date.AddDays(-36), DateTime.Now.Date.AddDays(14))
+        .Select(x => new
+        {
+          Date = x.Date,
+          TN = x.TN,
+          TG = x.TG,
+          TX = x.TX
         })
         .ToList(), Formatting.Indented);
       using (StreamWriter stream = new StreamWriter("%OneDrive%\\Tmp\\Data.json".TranslatePath()))
+      {
+        stream.Write(json);
+      }
+
+      json = JsonConvert.SerializeObject(Daily.GetDailyRange(356, new DateTime(2019, 1, 1), DateTime.Now.Date.AddDays(14))
+        .Select(x => new
+        {
+          Date = x.Date,
+          TN = x.TN,
+          TG = x.TG,
+          TX = x.TX
+        })
+        .ToList(), Formatting.Indented);
+      using (StreamWriter stream = new StreamWriter("%OneDrive%\\Tmp\\Data2019.json".TranslatePath()))
       {
         stream.Write(json);
       }
@@ -79,7 +93,7 @@ namespace WeatherMonitor.ViewModels
 
     private void GetTotalSunshineAsync()
     {
-      var range = Daily.GetDailyRange(348, new DateTime(2019,01,01), new DateTime(2019, 12, 31));
+      var range = Daily.GetDailyRange(348, new DateTime(2019, 01, 01), new DateTime(2019, 12, 31));
 
       foreach (var record in range)
       {
@@ -105,7 +119,7 @@ namespace WeatherMonitor.ViewModels
         Margin = new System.Windows.Thickness(5),
         Padding = new System.Windows.Thickness(5),
         BorderThickness = new System.Windows.Thickness(1),
-        BorderBrush = new SolidColorBrush(Color.FromArgb(128,255,0,0))
+        BorderBrush = new SolidColorBrush(Color.FromArgb(128, 255, 0, 0))
       };
       TextBlock Title = new TextBlock()
       {
@@ -113,7 +127,7 @@ namespace WeatherMonitor.ViewModels
       };
       TemperatureStackPanel.Children.Add(Title);
 
-      StackPanel DatesStackPanel = new StackPanel() 
+      StackPanel DatesStackPanel = new StackPanel()
       {
         Orientation = Orientation.Horizontal
       };
