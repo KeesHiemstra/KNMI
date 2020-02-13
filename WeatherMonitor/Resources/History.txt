@@ -1,4 +1,7 @@
-﻿Version 0.0.0.7 (2020-01-21)
+﻿Version 0.0.0.8 (2020-02-13)
+* Removed the reference KNMI-Common.
+
+Version 0.0.0.7 (2020-01-21)
 * Used the json with the proper names.
 * Save the previous 28 days in a json can used for development a visual temperature progress.
 
