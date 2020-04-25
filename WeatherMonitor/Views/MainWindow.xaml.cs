@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using CHi.Extensions;
+using System.Windows;
 using WeatherMonitor.ViewModels;
 
 namespace WeatherMonitor
@@ -15,6 +16,7 @@ namespace WeatherMonitor
     {
 
       Log.Write($"Application {System.Reflection.Assembly.GetExecutingAssembly().GetName().Name} started");
+
       MainVM = new MainViewModel(this);
 
       InitializeComponent();
