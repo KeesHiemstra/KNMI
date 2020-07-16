@@ -48,7 +48,6 @@ namespace WeatherDemon
 
     private void LoadDemonOpenWeatherJson()
     {
- 
       
       if (File.Exists(DemonAppJsonFile))
       {
