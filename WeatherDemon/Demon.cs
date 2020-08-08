@@ -104,6 +104,9 @@ namespace WeatherDemon
       DayWeather.Humidity = openWeather.main.humidity;
       DayWeather.Visibility = openWeather.visibility;
       DayWeather.WindSpeed = openWeather.wind.speed.ToKmPerHour();
+      DayWeather.WindDirection = openWeather.wind.deg;
+      DayWeather.Covering = openWeather.clouds.all;
+      DayWeather.Condition = openWeather.weather[0].id;
 
     }
 
@@ -120,9 +123,7 @@ namespace WeatherDemon
 
     }
 
-    public void Dispose()
-    {
-    }
+    public void Dispose() { }
 
     private void BackupDayWeather()
     {

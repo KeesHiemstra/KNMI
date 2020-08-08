@@ -10,5 +10,8 @@ namespace WeatherDemon.Models
     public int Humidity { get; set; }
     public int Visibility { get; set; }
     public decimal WindSpeed { get; set; }
+    public int WindDirection { get; set; }
+    public int Covering { get; set; }
+    public int Condition { get; set; }
   }
 }

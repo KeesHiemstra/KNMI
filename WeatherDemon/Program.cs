@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using System.Threading;
 
 namespace WeatherDemon
@@ -10,11 +11,11 @@ namespace WeatherDemon
     public static void Main()
     {
       Program program = new Program();
-      Log.Write("WeatherDemon is started");
+      Log.Write($"WeatherDemon-v{Assembly.GetExecutingAssembly().GetName().Version} is started");
 #if DEBUG
       program.StartTimer(2 * 60 * 1000);
 #else
-      program.StartTimer(20 * 60 * 1000);
+      program.StartTimer(10 * 60 * 1000);
 #endif
 
       Console.WriteLine("Press enter to end the demon...");
