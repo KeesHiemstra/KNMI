@@ -82,6 +82,7 @@
     <Compile Include="Extensions\ServiceExtensions.cs" />
     <Compile Include="Models\DailyReport.cs" />
     <Compile Include="Models\Station.cs" />
+    <Compile Include="Models\VisualTime.cs" />
     <Compile Include="Models\WeatherDbContext.cs" />
     <Compile Include="ViewModels\DailyKNMI.cs" />
     <Compile Include="ViewModels\DailyKNMIUpdate.cs" />

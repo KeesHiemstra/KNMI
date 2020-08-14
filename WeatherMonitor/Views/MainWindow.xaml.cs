@@ -1,13 +1,16 @@
 ﻿using CHi.Extensions;
+
 using System.Windows;
+
+using WeatherMonitor.Models;
 using WeatherMonitor.ViewModels;
 
 namespace WeatherMonitor
 {
-  /// <summary>
-  /// Interaction logic for MainWindow.xaml
-  /// </summary>
-  public partial class MainWindow : Window
+	/// <summary>
+	/// Interaction logic for MainWindow.xaml
+	/// </summary>
+	public partial class MainWindow : Window
   {
 
     public MainViewModel MainVM { get; set; }

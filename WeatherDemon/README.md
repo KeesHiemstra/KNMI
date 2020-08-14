@@ -29,7 +29,7 @@ limit.
 
 ### Weather condition codes
 
-**Group 200-299 / Thunderstorm**
+#### Group 200-299 / Thunderstorm
 
 Id | Main | Description
 ---|---|---
@@ -44,7 +44,7 @@ Id | Main | Description
 231 | Thunderstorm | thunderstorm with drizzle
 232 | Thunderstorm | thunderstorm with heavy drizzle
 
-**Group 300-399 / Drizzle**
+#### Group 300-399 / Drizzle
 
 Id | Main | Description
 ---|---|---
@@ -58,7 +58,7 @@ Id | Main | Description
 314 | Drizzle | heavy shower rain and drizzle
 321 | Drizzle | shower drizzle
 
-**Group 500-599 / Rain**
+#### Group 500-599 / Rain
 
 Id | Main | Description
 ---|---|---
@@ -73,7 +73,7 @@ Id | Main | Description
 522 | Rain | heavy intensity shower rain
 531 | Rain | ragged shower rain
 
-**Group 600-699 / Snow**
+#### Group 600-699 / Snow
 
 Id | Main | Description
 ---|---|---
@@ -89,7 +89,7 @@ Id | Main | Description
 621 | Snow | Shower snow
 622 | Snow | Heavy shower snow
 
-**Group 700-799 / Atmosphere**
+#### Group 700-799 / Atmosphere
 
 Id | Main | Description
 ---|---|---
@@ -104,7 +104,7 @@ Id | Main | Description
 771 | Squall | squalls
 781 | Tornado | tornado
 
-**Group 800-899 / Clear or clouds**
+#### Group 800-899 / Clear or clouds
 
 Id | Main | Description
 ---|---|---
@@ -116,6 +116,7 @@ Id | Main | Description
 
 
 ## Example for DemonOpenWeather.json
+
 ```javascript
 {
   "Latitude": <Latitude>,

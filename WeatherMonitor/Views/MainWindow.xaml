@@ -10,6 +10,10 @@
         Height="450" 
         Width="800">
   <Grid>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition/>
+      <ColumnDefinition Width="8*"/>
+    </Grid.ColumnDefinitions>
     <Grid.RowDefinitions>
       <!-- Menu -->
       <RowDefinition Height="Auto"/>
@@ -26,28 +30,35 @@
     </Grid.RowDefinitions>
 
     <Menu Name="MainMenu"
-          Grid.Row="0">
+          Grid.Row="0" Grid.ColumnSpan="2">
       <MenuItem Header="_File">
         <MenuItem Header="E_xit"/>
       </MenuItem>
     </Menu>
-    
-    <StatusBar Grid.Row="9">
+
+
+    <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,0,379" Grid.RowSpan="8">
+      <StackPanel Name="ResultStackPanel" 
+                  Orientation="Vertical">
+
+      </StackPanel>
+    </StackPanel>
+
+    <StatusBar Grid.Row="9"
+               Grid.ColumnSpan="2">
+      <StatusBarItem Content="{Binding Now.DisplayDate}"
+                     ToolTip="ISO date"/>
+      <Separator/>
+      
       <StatusBarItem Name="DailyReportUpdateDateStatusBarItem">
         <StackPanel Orientation="Horizontal">
           <TextBlock Text="Last daily date: "/>
           <TextBlock Text="{Binding Daily.UpdateDate, StringFormat=yyyy-MM-dd}"/>
         </StackPanel>
       </StatusBarItem>
-      <StatusBarItem/>
-    </StatusBar>
 
-    <StackPanel Grid.Row="1">
-      <StackPanel Name="ResultStackPanel" 
-                  Orientation="Vertical">
-        
-      </StackPanel>
-    </StackPanel>
-    
+      <StatusBarItem Content="{Binding Now.DisplayTime}"
+                     HorizontalAlignment="Right"/>
+    </StatusBar>
   </Grid>
 </Window>

@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Media;
+using WeatherMonitor.Models;
 
 namespace WeatherMonitor.ViewModels
 {
@@ -21,6 +22,7 @@ namespace WeatherMonitor.ViewModels
     #region [ Properties ]
 
     public DailyKNMI Daily { get; set; }
+    public VisualTime Now { get; } = new VisualTime();
 
     public decimal TotalSunshine { get; set; }
 
