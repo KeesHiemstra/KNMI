@@ -1,7 +1,13 @@
-﻿using System;
+﻿using CHi.Extensions;
+
+using Newtonsoft.Json;
+
+using System;
 using System.ComponentModel;
-using System.Diagnostics;
+using System.IO;
 using System.Timers;
+
+using Trinet.Core;
 
 namespace WeatherMonitor.Models
 {
@@ -18,12 +24,14 @@ namespace WeatherMonitor.Models
 		#region [ Fields ]
 
 		private DateTime currentTime;
+		private DateTime today;
+		private DateTime sunriseTime;
+		private DateTime sunsetTime;
 
 		#endregion
 
 		#region [ Properties ]
 
-		//public DateTime CurrentTime { get; private set; }
 		public DateTime CurrentTime
 		{
 			get => currentTime;
@@ -33,6 +41,11 @@ namespace WeatherMonitor.Models
 				if (currentTime != value)
 				{
 					currentTime = value;
+
+					if (currentTime.Date >= Today)
+					{
+						Today = DateTime.Now.Date;
+					}
 					// Changed the property to update all properties.
 					//NotifyPropertyChanged("CurrentTime");
 					NotifyPropertyChanged("");
@@ -40,9 +53,49 @@ namespace WeatherMonitor.Models
 			}
 		}
 
+		public DateTime Today
+		{
+			get => today.Date;
+			private set
+			{
+				if (today != value)
+				{
+					today = value.Date;
+					NotifyPropertyChanged("Today");
+					CalculateDayLight();
+				}
+			}
+		}
+
+		public DateTime SunriseTime 
+		{ 
+			get => sunriseTime;
+			private set 
+			{
+				if (sunriseTime != value)
+				{
+					sunriseTime = value;
+					NotifyPropertyChanged("SunriseTime");
+				}
+			}
+		}
+		public DateTime SunsetTime 
+		{ 
+			get => sunsetTime;
+			private set
+			{
+				if (sunsetTime != value)
+				{
+					sunsetTime = value;
+					NotifyPropertyChanged("SunsetTime");
+				}
+			}
+		}
+
 		public string DisplayDate { get => CurrentTime.ToString("yyyy-MM-dd"); }
 		public string DisplayTime { get => CurrentTime.ToString("HH:mm"); }
 		public string DisplayTimeEx { get => CurrentTime.ToString("HH:mm:ss"); }
+		public bool IsDaylight { get => CurrentTime >= SunriseTime && CurrentTime <= SunsetTime; }
 
 		#endregion
 
@@ -50,6 +103,8 @@ namespace WeatherMonitor.Models
 
 		public VisualTime()
 		{
+			Today = DateTime.Now.Date;
+
 			CreateTimer();
 		}
 
@@ -100,6 +155,28 @@ namespace WeatherMonitor.Models
 		private void CurrentTimer_Elapsed(object sender, ElapsedEventArgs e)
 		{
 			CurrentTime = DateTime.Now;
+		}
+
+		/// <summary>
+		/// Calculate the SunriseTime and SunsetTime.
+		/// </summary>
+		private void CalculateDayLight()
+		{
+			//Read the stored Open Weather location json
+			GeographicLocation location;
+			string jsonPath = "%OneDrive%\\Etc\\DemonOpenWeather.json".TranslatePath();
+			using (StreamReader stream = File.OpenText(jsonPath))
+			{
+				string json = stream.ReadToEnd();
+				location = JsonConvert.DeserializeObject<GeographicLocation>(json);
+			}
+
+			DateTime date = Today.Date.AddHours(2);
+
+			//Calculate the daylight times
+			DaylightHours daylight = DaylightHours.Calculate(date, location);
+			SunriseTime = daylight.SunriseUtc.Value.LocalDateTime.ToLocalTime();
+			SunsetTime = daylight.SunsetUtc.Value.LocalDateTime.ToLocalTime();
 		}
 	}
 }

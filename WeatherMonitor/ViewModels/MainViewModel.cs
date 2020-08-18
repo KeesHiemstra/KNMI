@@ -24,6 +24,9 @@ namespace WeatherMonitor.ViewModels
     public DailyKNMI Daily { get; set; }
     public VisualTime Now { get; } = new VisualTime();
 
+    public DayWeathers CurrentWeathers { get; set; } = new DayWeathers();
+    public DayWeathers PreviousWeathers { get; set; } = 
+      new DayWeathers(DateTime.Now.Date.AddDays(-1));
     public decimal TotalSunshine { get; set; }
 
     #endregion

@@ -1,4 +1,9 @@
-﻿Version 0.0.0.9 (2020-04-25)
+﻿Version 0.0.0.10 (2020-08-18)
+* Added DaylightHours and VisualTime handled to start the calculation.
+* Added update using VisualTime; The StatusBar is update by NotifyPropertyChanged.
+* Bug fix: The StatusBar was not updated.
+
+Version 0.0.0.9 (2020-04-25)
 * Bug fix: Added Extensions\ServiceExtensions and test if the SQL server running. Show a MessageBox if is not running.
 
 Version 0.0.0.8 (2020-02-13)

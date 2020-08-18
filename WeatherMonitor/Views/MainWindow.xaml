@@ -57,6 +57,17 @@
         </StackPanel>
       </StatusBarItem>
 
+      <Separator/>
+
+      <StatusBarItem>
+        <StackPanel Orientation="Horizontal">
+          <TextBlock Text="Sun up: "/>
+          <TextBlock Text="{Binding Now.SunriseTime, StringFormat=HH:mm}"/>
+          <TextBlock Text=" / down: "/>
+          <TextBlock Text="{Binding Now.SunsetTime, StringFormat=HH:mm}"/>
+        </StackPanel>
+      </StatusBarItem>
+
       <StatusBarItem Content="{Binding Now.DisplayTime}"
                      HorizontalAlignment="Right"/>
     </StatusBar>

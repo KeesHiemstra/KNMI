@@ -12,14 +12,17 @@ namespace WeatherDemon
 {
   public class Demon : IDisposable
   {
-    private readonly string DemonAppJsonFile = "%OneDrive%\\Etc\\DemonOpenWeather.json".TranslatePath();
+    private readonly string DemonAppJsonFile = 
+      "%OneDrive%\\Etc\\DemonOpenWeather.json".TranslatePath();
 #if DEBUG
-    private readonly string DemonDayWetherJsonFile = "%OneDrive%\\Tmp\\DailyWeather\\DayWeather.json".TranslatePath();
-    private readonly string DemonBackupWetherJsonFile =
-      $"%OneDrive%\\Tmp\\DailyWeather\\DayWeather_{DateTime.Now.Date.ToString("yyyy-MM-dd")}.json".TranslatePath();
+    private readonly string DemonDayWeatherJsonFile = 
+      "%OneDrive%\\Tmp\\DailyWeather\\DayWeather.json".TranslatePath();
+    private readonly string DemonBackupWeatherJsonFile =
+      $"%OneDrive%\\Tmp\\DailyWeather\\DayWeather_{DateTime.Now.Date:yyyy-MM-dd}.json".TranslatePath();
 #else
-    private readonly string DemonDayWetherJsonFile = "%OneDrive%\\Data\\DailyWeather\\DayWeather.json".TranslatePath();
-    private readonly string DemonBackupWetherJsonFile = 
+    private readonly string DemonDayWeatherJsonFile = 
+      "%OneDrive%\\Data\\DailyWeather\\DayWeather.json".TranslatePath();
+    private readonly string DemonBackupWeatherJsonFile = 
       $"%OneDrive%\\Data\\DailyWeather\\DayWeather_{DateTime.Now.Date.ToString("yyyy-MM-dd")}.json".TranslatePath();
 #endif
     private DemonApp DemonApp = new DemonApp();
@@ -63,9 +66,9 @@ namespace WeatherDemon
     private void LoadDayWeather()
     {
 
-      if (File.Exists(DemonDayWetherJsonFile))
+      if (File.Exists(DemonDayWeatherJsonFile))
       {
-        using (StreamReader stream = File.OpenText(DemonDayWetherJsonFile))
+        using (StreamReader stream = File.OpenText(DemonDayWeatherJsonFile))
         {
           string json = stream.ReadToEnd();
           DayWeathers = JsonConvert.DeserializeObject<List<DayWeather>>(json);
@@ -116,7 +119,7 @@ namespace WeatherDemon
       DayWeathers.Add(DayWeather);
       string json = JsonConvert.SerializeObject(DayWeathers.
         Where(x => x.Time > DateTime.Now.AddMinutes(-24 * 60)), Formatting.Indented);
-      using (StreamWriter stream = new StreamWriter(DemonDayWetherJsonFile))
+      using (StreamWriter stream = new StreamWriter(DemonDayWeatherJsonFile))
       {
         stream.Write(json);
       }
@@ -128,7 +131,7 @@ namespace WeatherDemon
     private void BackupDayWeather()
     {
 
-      File.Copy(DemonDayWetherJsonFile, DemonBackupWetherJsonFile, true);
+      File.Copy(DemonDayWeatherJsonFile, DemonBackupWeatherJsonFile, true);
 
     }
 
