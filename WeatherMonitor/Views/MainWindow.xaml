@@ -11,8 +11,8 @@
         Width="800">
   <Grid>
     <Grid.ColumnDefinitions>
-      <ColumnDefinition/>
-      <ColumnDefinition Width="8*"/>
+      <ColumnDefinition Width="Auto"/>
+      <ColumnDefinition Width="*"/>
     </Grid.ColumnDefinitions>
     <Grid.RowDefinitions>
       <!-- Menu -->
@@ -36,6 +36,11 @@
       </MenuItem>
     </Menu>
 
+    <StackPanel Name="GraphStackPanel"
+                Margin="10"
+                HorizontalAlignment="Left"
+                Grid.Row="2" Grid.Column="1">
+    </StackPanel>
 
     <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,0,379" Grid.RowSpan="8">
       <StackPanel Name="ResultStackPanel" 
@@ -68,8 +73,9 @@
         </StackPanel>
       </StatusBarItem>
 
-      <StatusBarItem Content="{Binding Now.DisplayTime}"
-                     HorizontalAlignment="Right"/>
+      <StatusBarItem HorizontalAlignment="Right">
+        <TextBlock Text="{Binding Now.CurrentTime, StringFormat=HH:mm:ss}"/>
+      </StatusBarItem>
     </StatusBar>
   </Grid>
 </Window>

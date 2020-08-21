@@ -23,6 +23,7 @@ namespace WeatherMonitor.ViewModels
 
     public DailyKNMI Daily { get; set; }
     public VisualTime Now { get; } = new VisualTime();
+    public DrawChart DrawChart { get; }
 
     public DayWeathers CurrentWeathers { get; set; } = new DayWeathers();
     public DayWeathers PreviousWeathers { get; set; } = 
@@ -35,10 +36,9 @@ namespace WeatherMonitor.ViewModels
 
     public MainViewModel(MainWindow mainView)
     {
-
       MainView = mainView;
       Daily = new DailyKNMI();
-
+      DrawChart = new DrawChart(this);
     }
 
     #endregion
@@ -61,39 +61,7 @@ namespace WeatherMonitor.ViewModels
 
     internal void MainLoaded()
     {
-      //GetTotalSunshineAsync();
-      //MainView.ResultStackPanel.Children.Add(GetTemperaturesNumbers());
-      //MainView.ResultStackPanel.Children.Add(GetTemperaturesGraphics(DateTime.Now.Date, 14));
-
-      //.Select(x => (X.Date, x.TN, x.TG, x.TX)) resulted as Item1, Item2, ...
-      string json = JsonConvert.SerializeObject(Daily.GetDailyRange(356, DateTime.Now.Date.AddDays(-36), DateTime.Now.Date.AddDays(14))
-        .Select(x => new
-        {
-          Date = x.Date,
-          TN = x.TN,
-          TG = x.TG,
-          TX = x.TX
-        })
-        .ToList(), Formatting.Indented);
-      using (StreamWriter stream = new StreamWriter("%OneDrive%\\Tmp\\Data.json".TranslatePath()))
-      {
-        stream.Write(json);
-      }
-
-      json = JsonConvert.SerializeObject(Daily.GetDailyRange(356, new DateTime(2019, 1, 1), DateTime.Now.Date.AddDays(14))
-        .Select(x => new
-        {
-          Date = x.Date,
-          TN = x.TN,
-          TG = x.TG,
-          TX = x.TX
-        })
-        .ToList(), Formatting.Indented);
-      using (StreamWriter stream = new StreamWriter("%OneDrive%\\Tmp\\Data2019.json".TranslatePath()))
-      {
-        stream.Write(json);
-      }
-
+      MainView.GraphStackPanel.Children.Add(DrawChart.Graph);
     }
 
     private void GetTotalSunshineAsync()

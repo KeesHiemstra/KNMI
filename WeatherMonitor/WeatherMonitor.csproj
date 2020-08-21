@@ -91,6 +91,7 @@
     <Compile Include="ViewModels\DailyKNMI.cs" />
     <Compile Include="ViewModels\DailyKNMIUpdate.cs" />
     <Compile Include="ViewModels\DaylightHours.cs" />
+    <Compile Include="ViewModels\DrawChart.cs" />
     <Compile Include="ViewModels\GeographicLocation.cs" />
     <Compile Include="ViewModels\Log.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
