@@ -30,7 +30,7 @@ namespace WeatherMonitor
 
     private void Window_Loaded(object sender, RoutedEventArgs e)
     {
-      //MainVM.MainLoaded();
+      MainVM.MainLoaded();
     }
   }
 }

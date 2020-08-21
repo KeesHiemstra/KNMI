@@ -1,4 +1,7 @@
-﻿Version 0.0.0.10 (2020-08-18)
+﻿Version 0.0.1.11 (2020-08-21)
+* Added DrawChart.
+
+Version 0.0.0.10 (2020-08-18)
 * Added DaylightHours and VisualTime handled to start the calculation.
 * Added update using VisualTime; The StatusBar is update by NotifyPropertyChanged.
 * Bug fix: The StatusBar was not updated.
