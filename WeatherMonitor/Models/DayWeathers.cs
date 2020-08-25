@@ -4,20 +4,29 @@ using Newtonsoft.Json;
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
-using System.Runtime.Remoting.Messaging;
-using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
+
+using WeatherMonitor.ViewModels;
 
 namespace WeatherMonitor.Models
 {
-	public class DayWeathers
+	public class DayWeathers : INotifyPropertyChanged
 	{
 
 		#region [ Fields ]
+		private MainWindow View;
 
 		private readonly string DayWeatherJsonPath = "%OneDrive%\\Data\\DailyWeather".TranslatePath();
+		private readonly string JsonFile;
+		private AutoResetEvent AutoEvent;
+		private Timer AutoLoad;
+		private int DelayAutoLoad = 10;
+		private bool IsEvaluateDelay = false;
+
+		private DateTime timeLastWrite;
 
 		#endregion
 
@@ -25,11 +34,24 @@ namespace WeatherMonitor.Models
 
 		public List<DayWeather> Weathers { get; set; } = new List<DayWeather>();
 		public DateTime Date { get; set; }
-		public DateTime TimeLastWrite { get; set; }
-		public DateTime TimeMin { get; set; }
-		public DateTime TimeMax { get; set; }
-		public decimal TemperatureMin { get; set; }
-		public decimal TemperatureMax { get; set; }
+		public DateTime TimeLastWrite
+		{ 
+			get => timeLastWrite;
+			set
+			{
+				if (timeLastWrite != value)
+				{
+					timeLastWrite = value;
+					NotifyPropertyChanged("");
+				}
+			}
+		}
+		public DateTime TimeLastCurrent { get; private set; }
+		public DateTime TimeMin { get; private set; }
+		public DateTime TimeMax { get; private set; }
+		public decimal TemperatureCurrent { get; private set; }
+		public decimal TemperatureMin { get; private set; }
+		public decimal TemperatureMax { get; private set; }
 
 		#endregion
 
@@ -38,46 +60,92 @@ namespace WeatherMonitor.Models
 		public DayWeathers()
 		{
 			Date = DateTime.Now.Date;
-			LoadDayWeather($"{DayWeatherJsonPath}\\DayWeather.json");
+			JsonFile = $"{DayWeatherJsonPath}\\DayWeather.json";
+			LoadDayWeather(JsonFile, true);
+			
+			//Start only the timer with current weather
+			StartTimer();
 		}
 
 		public DayWeathers(DateTime date)
 		{
 			Date = date.Date;
-			LoadDayWeather($"{DayWeatherJsonPath}\\DayWeather_{date:yyyy-MM-dd}.json");
+			LoadDayWeather($"{DayWeatherJsonPath}\\DayWeather_{date:yyyy-MM-dd}.json", false);
 		}
 
 		#endregion
 
 		#region [ Public methods ]
 
+		public event PropertyChangedEventHandler PropertyChanged;
+		private void NotifyPropertyChanged(string propertyName = "")
+		{
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+		}
 
 		#endregion
 
-
-		private void LoadDayWeather(string jsonFile)
+		private void LoadDayWeather(string jsonFile, bool isCurrentDay)
 		{
 			if (File.Exists(jsonFile))
 			{
 				FileInfo info = new FileInfo(jsonFile);
 
-				using (StreamReader stream = File.OpenText(jsonFile))
+				if (info.LastWriteTimeUtc > TimeLastWrite)
 				{
-					string json = stream.ReadToEnd();
-					Weathers = JsonConvert.DeserializeObject<List<DayWeather>>(json)
-						.Where(x => x.Time >= Date)
-						.ToList();
+					if (IsEvaluateDelay)
+					{
+						Log.Write($"Passed evaluate delay period, delay: {DelayAutoLoad} seconds");
+						AutoLoad.Change(new TimeSpan(0, 10, 0), new TimeSpan(0, 10, 0));
+						IsEvaluateDelay = false;
+					}
+
+					using (StreamReader stream = File.OpenText(jsonFile))
+					{
+						string json = stream.ReadToEnd();
+						Weathers = JsonConvert.DeserializeObject<List<DayWeather>>(json)
+							.Where(x => x.Time >= Date)
+							.ToList();
+					}
+
+					ProcessInfo(isCurrentDay);
+					TimeLastWrite = info.LastWriteTimeUtc;
+
+					Log.Write("Loaded current Weathers file");
 				}
-
-				TimeLastWrite = info.LastWriteTimeUtc;
+				else
+				{
+					Log.Write($"Evaluate delay: Added 10 second");
+					AutoLoad.Change(new TimeSpan(0, 0, 10), new TimeSpan(0, 0, 10));
+					DelayAutoLoad += 10;
+					IsEvaluateDelay = true;
+				}
 			}
+		}
 
+		private void ProcessInfo(bool isCurrentDay)
+		{
 			TimeMin = Weathers.Min(x => x.Time);
 			TimeMax = Weathers.Max(x => x.Time);
+
 			TemperatureMin = Weathers.Min(x => x.Temperature);
 			TemperatureMax = Weathers.Max(x => x.Temperature);
 		}
 
+		private void StartTimer()
+		{
+			TimeSpan start = TimeLastWrite.AddMinutes(10).AddSeconds(DelayAutoLoad) - 
+				DateTime.Now.ToUniversalTime();
+			TimeSpan time = new TimeSpan(0, 10, 0);
 
+			AutoEvent = new AutoResetEvent(false);
+			AutoLoad = new Timer(CheckFile, AutoEvent, start, time);
+			Log.Write($"CheckFile will be started at {DateTime.Now + start}");
+		}
+
+		private void CheckFile(Object stateInfo)
+		{
+			LoadDayWeather(JsonFile, true);
+		}
 	}
 }
