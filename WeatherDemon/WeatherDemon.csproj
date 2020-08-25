@@ -49,7 +49,7 @@
     <Compile Include="Demon.cs" />
     <Compile Include="Extensions\PathExtensions.cs" />
     <Compile Include="Extensions\WeatherExtensions.cs" />
-    <Compile Include="Logging.cs" />
+    <Compile Include="Log.cs" />
     <Compile Include="Models\DayWeather.cs" />
     <Compile Include="Models\OpenWeather.cs" />
     <Compile Include="Program.cs" />

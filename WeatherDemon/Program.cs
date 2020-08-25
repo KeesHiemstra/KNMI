@@ -6,11 +6,10 @@ namespace WeatherDemon
 {
   public class Program
   {
-    public static Logging Log = new Logging("WeatherDemon.log");
-
     public static void Main()
     {
       Program program = new Program();
+      Log.File(".\\WeatherDemon.log");
       Log.Write($"WeatherDemon-v{Assembly.GetExecutingAssembly().GetName().Version} is started");
 #if DEBUG
       program.StartTimer(2 * 60 * 1000);
@@ -32,7 +31,7 @@ namespace WeatherDemon
 
     private void TimerEvent(object state)
     {
-      Timer timer = (Timer)state;
+      //Timer timer = (Timer)state;
       Log.Write("Start TimeEvent");
       _ = new Demon();
     }

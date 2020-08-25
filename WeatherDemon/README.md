@@ -7,7 +7,8 @@ The json can be used the progress of the weather.
 
 The information uses
 
-- Date [*yyyy-MM-dd HH:mm*]
+- DemonTime [*yyyy-MM-dd HH:mm*]
+- Time [*yyyy-MM-dd HH:mm*]
 - Temperature [*Celsius*]
 - Pressure [*hPa*]
 - Humidity [*%*]
@@ -16,6 +17,14 @@ The information uses
 - WindDirection [*degrees*]
 - Covering [*%*]
 - Condition [*id*]
+
+### Time
+
+The time is received from the OpenWeather object. It contains sometime a cashed information.
+
+### DemonTime
+
+The DemonTime is the time when the Demon runs (System time).
 
 ## Source
 
