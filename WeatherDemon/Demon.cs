@@ -44,7 +44,14 @@ namespace WeatherDemon
       LoadDemonOpenWeatherJson();
       LoadDayWeather();
 
-      await GetDayWeather();
+			try
+			{
+        await GetDayWeather();
+      }
+      catch (Exception ex)
+			{
+        Log.Write($"Error GetDayWeather(): {ex.Message}");
+			}
       BackupDayWeather();
 
     }
@@ -92,6 +99,10 @@ namespace WeatherDemon
       string httpResult = await httpRespond.Content.ReadAsStringAsync();
 
       OpenWeather openWeather = JsonConvert.DeserializeObject<OpenWeather>(httpResult);
+			if (httpRespond.StatusCode != System.Net.HttpStatusCode.OK)
+			{
+        Log.Write($"HttpRespond: {httpRespond}");
+      }
       ConvertDayWeather(openWeather);
 
       SaveDayWeather();
@@ -100,7 +111,7 @@ namespace WeatherDemon
 
     private void ConvertDayWeather(OpenWeather openWeather)
     {
-
+      DayWeather.DemonTime = DateTime.Now;
       DayWeather.Time = openWeather.dt.ConvertUnixTimeToDate();
       DayWeather.Temperature = openWeather.main.temp.ToCelsius();
       DayWeather.Pressure = openWeather.main.pressure;

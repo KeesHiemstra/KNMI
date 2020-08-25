@@ -7,20 +7,20 @@ using System.Threading.Tasks;
 
 namespace WeatherDemon
 {
-  public class Logging
+  public static class Log
   {
 
-    public string LogFile { get; private set; }
-    public bool ToConsole { get; set; } = true;
+    public static string LogFile { get; private set; }
+    public static bool ToConsole { get; set; } = true;
 
-    public Logging(string logFile)
+    public static void File(string logFile)
     {
       LogFile = logFile;
     }
 
-    public void Write(string message)
+    public static void Write(string message)
     {
-      string _message = $"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")} {message}";
+      string _message = $"{DateTime.Now:yyyy-MM-dd HH:mm:ss} {message}";
       if (ToConsole)
       {
         Console.WriteLine(_message);
@@ -31,6 +31,5 @@ namespace WeatherDemon
         stream.WriteLine(_message);
       }
     }
-
   }
 }
