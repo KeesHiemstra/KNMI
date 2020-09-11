@@ -45,7 +45,11 @@ namespace WeatherMonitor.ViewModels
     {
       get
       {
-        return PreviousWeathers.Weathers.LastOrDefault();
+        //DateTime systemTime = Today.DemonTime.AddDays(-1).AddMinutes(5);
+        DateTime systemTime = DateTime.Now.AddDays(-1).AddMinutes(5);
+        return PreviousWeathers.Weathers
+          .Where(x => x.DemonTime <= systemTime)
+          .LastOrDefault();
       }
     }
 
