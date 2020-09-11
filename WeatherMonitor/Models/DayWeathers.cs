@@ -9,6 +9,8 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 
+using WeatherDemon.Models;
+
 using WeatherMonitor.ViewModels;
 
 namespace WeatherMonitor.Models
