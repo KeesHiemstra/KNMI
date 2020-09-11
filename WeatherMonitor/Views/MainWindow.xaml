@@ -39,13 +39,46 @@
     <StackPanel Name="GraphStackPanel"
                 Margin="10"
                 HorizontalAlignment="Left"
-                Grid.Row="2" Grid.Column="1">
+                Width="420"
+                Grid.Row="2" Grid.Column="0">
     </StackPanel>
 
-    <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,0,379" Grid.RowSpan="8">
+    <StackPanel Grid.Row="2"
+                Grid.Column="2">
       <StackPanel Name="ResultStackPanel" 
                   Orientation="Vertical">
-
+        <StackPanel Orientation="Horizontal">
+          <TextBlock Text=""
+                     Width="100"/>
+          <TextBlock Text="Today"
+                     Width="75"/>
+          <TextBlock Text="Yesterday"
+                     Width="75"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+          <TextBlock Text="Temperature"
+                     Width="100"/>
+          <TextBlock Text="{Binding Today.DemonTime, StringFormat=HH:mm}"
+                     Width="75"/>
+          <TextBlock Text="{Binding Yesterday.DemonTime, StringFormat=HH:mm}"
+                     Width="75"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+          <TextBlock Text="Temperature"
+                     Width="100"/>
+          <TextBlock Text="{Binding Today.Time, StringFormat=HH:mm}"
+                     Width="75"/>
+          <TextBlock Text="{Binding Yesterday.Time, StringFormat=HH:mm}"
+                     Width="75"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+          <TextBlock Text="Temperature"
+                     Width="100"/>
+          <TextBlock Text="{Binding Today.Temperature}"
+                     Width="75"/>
+          <TextBlock Text="{Binding Yesterday.Temperature}"
+                     Width="75"/>
+        </StackPanel>
       </StackPanel>
     </StackPanel>
 

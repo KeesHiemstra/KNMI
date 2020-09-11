@@ -6,6 +6,9 @@ using System.IO;
 using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Media;
+
+using WeatherDemon.Models;
+
 using WeatherMonitor.Models;
 
 namespace WeatherMonitor.ViewModels
@@ -29,6 +32,22 @@ namespace WeatherMonitor.ViewModels
     public DayWeathers PreviousWeathers { get; set; } = 
       new DayWeathers(DateTime.Now.Date.AddDays(-1));
     public decimal TotalSunshine { get; set; }
+
+    public DayWeather Today
+    {
+      get
+			{
+        return CurrentWeathers.Weathers.LastOrDefault();
+			}
+    }
+
+    public DayWeather Yesterday
+    {
+      get
+      {
+        return PreviousWeathers.Weathers.LastOrDefault();
+      }
+    }
 
     #endregion
 
