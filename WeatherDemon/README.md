@@ -9,11 +9,11 @@ The information uses
 
 - DemonTime [*yyyy-MM-dd HH:mm*]
 - Time [*yyyy-MM-dd HH:mm*]
-- Temperature [*Celsius*]
+- Temperature [*Celsius* / *°C*]
 - Pressure [*hPa*]
 - Humidity [*%*]
 - Visibility [*m*]
-- WindSpeed [*km/u*]
+- WindSpeed [*km/h*]
 - WindDirection [*degrees*]
 - Covering [*%*]
 - Condition [*id*]

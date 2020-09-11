@@ -39,13 +39,104 @@
     <StackPanel Name="GraphStackPanel"
                 Margin="10"
                 HorizontalAlignment="Left"
-                Grid.Row="2" Grid.Column="1">
+                Width="420"
+                Grid.Row="2" Grid.Column="0">
     </StackPanel>
 
-    <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Margin="0,0,0,379" Grid.RowSpan="8">
+    <StackPanel Grid.Row="2"
+                Grid.Column="2"
+                Margin="10">
       <StackPanel Name="ResultStackPanel" 
                   Orientation="Vertical">
+        <StackPanel Orientation="Horizontal">
+          <TextBlock Text=""
+                     Width="100"/>
+          <TextBlock Text="Today"
+                     Width="75"/>
+          <TextBlock Text="Yesterday"
+                     Width="75"/>
+        </StackPanel>
 
+        <StackPanel Orientation="Horizontal">
+          <TextBlock Text="System time"
+                     Width="100"/>
+          <TextBlock Text="{Binding Today.DemonTime, StringFormat=HH:mm:ss}"
+                     Width="75"/>
+          <TextBlock Text="{Binding Yesterday.DemonTime, StringFormat=HH:mm:ss}"
+                     Width="75"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal">
+          <TextBlock Text="Time"
+                     Width="100"/>
+          <TextBlock Text="{Binding Today.Time, StringFormat=HH:mm}"
+                     Width="75"/>
+          <TextBlock Text="{Binding Yesterday.Time, StringFormat=HH:mm}"
+                     Width="75"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal">
+          <TextBlock Text="Temperature"
+                     Width="100"/>
+          <TextBlock Text="{Binding Today.Temperature}"
+                     Width="75"/>
+          <TextBlock Text="{Binding Yesterday.Temperature}"
+                     Width="75"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal">
+          <TextBlock Text="Pressure"
+                     Width="100"/>
+          <TextBlock Text="{Binding Today.Pressure}"
+                     Width="75"/>
+          <TextBlock Text="{Binding Yesterday.Pressure}"
+                     Width="75"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal">
+          <TextBlock Text="Visibility"
+                     Width="100"/>
+          <TextBlock Text="{Binding Today.Visibility}"
+                     Width="75"/>
+          <TextBlock Text="{Binding Yesterday.Visibility}"
+                     Width="75"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal">
+          <TextBlock Text="WindSpeed"
+                     Width="100"/>
+          <TextBlock Text="{Binding Today.WindSpeed}"
+                     Width="75"/>
+          <TextBlock Text="{Binding Yesterday.WindSpeed}"
+                     Width="75"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal">
+          <TextBlock Text="WindDirection"
+                     Width="100"/>
+          <TextBlock Text="{Binding Today.WindDirection}"
+                     Width="75"/>
+          <TextBlock Text="{Binding Yesterday.WindDirection}"
+                     Width="75"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal">
+          <TextBlock Text="Covering"
+                     Width="100"/>
+          <TextBlock Text="{Binding Today.Covering}"
+                     Width="75"/>
+          <TextBlock Text="{Binding Yesterday.Covering}"
+                     Width="75"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal">
+          <TextBlock Text="Condition"
+                     Width="100"/>
+          <TextBlock Text="{Binding Today.Condition}"
+                     Width="75"/>
+          <TextBlock Text="{Binding Yesterday.Condition}"
+                     Width="75"/>
+        </StackPanel>
       </StackPanel>
     </StackPanel>
 
