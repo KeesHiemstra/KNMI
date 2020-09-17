@@ -78,63 +78,63 @@
         <StackPanel Orientation="Horizontal">
           <TextBlock Text="Temperature"
                      Width="100"/>
-          <TextBlock Text="{Binding Today.Temperature}"
+          <TextBlock Text="{Binding Today.Temperature, StringFormat=0.0 °C}"
                      Width="75"/>
-          <TextBlock Text="{Binding Yesterday.Temperature}"
+          <TextBlock Text="{Binding Yesterday.Temperature, StringFormat=0.0 °C}"
                      Width="75"/>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal">
           <TextBlock Text="Pressure"
                      Width="100"/>
-          <TextBlock Text="{Binding Today.Pressure}"
+          <TextBlock Text="{Binding Today.Pressure, StringFormat=0 hPa}"
                      Width="75"/>
-          <TextBlock Text="{Binding Yesterday.Pressure}"
+          <TextBlock Text="{Binding Yesterday.Pressure, StringFormat=0 hPa}"
                      Width="75"/>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal">
           <TextBlock Text="Visibility"
                      Width="100"/>
-          <TextBlock Text="{Binding Today.Visibility}"
+          <TextBlock Text="{Binding Today.Visibility, StringFormat=0 km}"
                      Width="75"/>
-          <TextBlock Text="{Binding Yesterday.Visibility}"
+          <TextBlock Text="{Binding Yesterday.Visibility, StringFormat=0 km}"
                      Width="75"/>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal">
           <TextBlock Text="WindSpeed"
                      Width="100"/>
-          <TextBlock Text="{Binding Today.WindSpeed}"
+          <TextBlock Text="{Binding Today.WindSpeed, StringFormat=0 km/u}"
                      Width="75"/>
-          <TextBlock Text="{Binding Yesterday.WindSpeed}"
+          <TextBlock Text="{Binding Yesterday.WindSpeed, StringFormat=0 km/u}"
                      Width="75"/>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal">
           <TextBlock Text="WindDirection"
                      Width="100"/>
-          <TextBlock Text="{Binding Today.WindDirection}"
+          <TextBlock Text="{Binding Today.DisplayWindDirection}"
                      Width="75"/>
-          <TextBlock Text="{Binding Yesterday.WindDirection}"
+          <TextBlock Text="{Binding Yesterday.DisplayWindDirection}"
                      Width="75"/>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal">
           <TextBlock Text="Covering"
                      Width="100"/>
-          <TextBlock Text="{Binding Today.Covering}"
+          <TextBlock Text="{Binding Today.DisplayCovering, StringFormat=0 %}"
                      Width="75"/>
-          <TextBlock Text="{Binding Yesterday.Covering}"
+          <TextBlock Text="{Binding Yesterday.DisplayCovering, StringFormat=0 %}"
                      Width="75"/>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal">
           <TextBlock Text="Condition"
                      Width="100"/>
-          <TextBlock Text="{Binding Today.Condition}"
+          <TextBlock Text="{Binding Today.DisplayCondition}"
                      Width="75"/>
-          <TextBlock Text="{Binding Yesterday.Condition}"
+          <TextBlock Text="{Binding Yesterday.DisplayCondition}"
                      Width="75"/>
         </StackPanel>
       </StackPanel>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -232,7 +233,7 @@ namespace WeatherMonitor.ViewModels
 		{
 			for (int day = 0; day < 2; day++)
 			{
-				List<DayWeather> weathers;
+				ObservableCollection<DayWeather> weathers;
 				if (day == 0)
 				{
 					weathers = VM.CurrentWeathers.Weathers;

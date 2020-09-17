@@ -1,9 +1,12 @@
 ﻿using CHi.Extensions;
 
+using KNMI.Models;
+
 using Newtonsoft.Json;
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -17,7 +20,7 @@ namespace WeatherMonitor.Models
 	{
 
 		#region [ Fields ]
-		private MainWindow View;
+		//private MainWindow View;
 
 		private readonly string DayWeatherJsonPath = "%OneDrive%\\Data\\DailyWeather".TranslatePath();
 		private readonly string JsonFile;
@@ -32,7 +35,8 @@ namespace WeatherMonitor.Models
 
 		#region [ Properties ]
 
-		public List<DayWeather> Weathers { get; set; } = new List<DayWeather>();
+		public ObservableCollection<DayWeather> Weathers { get; set; } = 
+			new ObservableCollection<DayWeather>();
 		public DateTime Date { get; set; }
 		public DateTime TimeLastWrite
 		{ 
@@ -87,6 +91,7 @@ namespace WeatherMonitor.Models
 
 		private void LoadDayWeather(string jsonFile, bool isCurrentDay)
 		{
+			List<DayWeather> weathers = new List<DayWeather>();
 			if (File.Exists(jsonFile))
 			{
 				FileInfo info = new FileInfo(jsonFile);
@@ -103,9 +108,10 @@ namespace WeatherMonitor.Models
 					using (StreamReader stream = File.OpenText(jsonFile))
 					{
 						string json = stream.ReadToEnd();
-						Weathers = JsonConvert.DeserializeObject<List<DayWeather>>(json)
+						weathers = JsonConvert.DeserializeObject<List<DayWeather>>(json)
 							.Where(x => x.Time >= Date)
 							.ToList();
+						Weathers = new ObservableCollection<DayWeather>(weathers);
 					}
 
 					ProcessInfo(isCurrentDay);
