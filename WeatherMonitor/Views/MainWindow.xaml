@@ -133,8 +133,10 @@
           <TextBlock Text="Condition"
                      Width="100"/>
           <TextBlock Text="{Binding Today.DisplayCondition}"
+                     TextWrapping="Wrap"
                      Width="75"/>
           <TextBlock Text="{Binding Yesterday.DisplayCondition}"
+                     TextWrapping="Wrap"
                      Width="75"/>
         </StackPanel>
       </StackPanel>
