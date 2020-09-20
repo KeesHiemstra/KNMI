@@ -16,6 +16,11 @@ namespace WeatherDemon.Models
 		public int Covering { get; set; }
 		public int Condition { get; set; }
 
+		public int WindSpeedBft 
+		{
+			get => CalculateWindSpeedInBeaufort();
+		}
+
 		public string DisplayWindDirection
 		{
 			get => CompileWindDirection();
@@ -44,6 +49,23 @@ namespace WeatherDemon.Models
 			if (direction == 16) { direction = 0; }
 
 			return $"{WindDirection} ({DirectionName[direction]})";
+		}
+
+		private int CalculateWindSpeedInBeaufort()
+		{
+			if (WindSpeed < 1) { return 0; }
+			if (WindSpeed < 5) { return 1; }
+			if (WindSpeed < 11) { return 2; }
+			if (WindSpeed < 19) { return 3; }
+			if (WindSpeed < 28) { return 4; }
+			if (WindSpeed < 38) { return 5; }
+			if (WindSpeed < 49) { return 6; }
+			if (WindSpeed < 61) { return 7; }
+			if (WindSpeed < 74) { return 8; }
+			if (WindSpeed < 88) { return 9; }
+			if (WindSpeed < 102) { return 10; }
+			if (WindSpeed < 117) { return 11; }
+			return 12;
 		}
 
 		private string CompileCondition()

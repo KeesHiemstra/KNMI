@@ -1,4 +1,7 @@
-﻿Version 1.0.2.5 (2020-08-25)
+﻿Version 1.0.2.6 (2020-09-20)
+* Added Wind speed in Beaufort.
+
+Version 1.0.2.5 (2020-08-25)
 * Adding more logging.
 * Refactoring class Logging => static class Log.
 * Extended DayWeather class with DemonTime (System time).

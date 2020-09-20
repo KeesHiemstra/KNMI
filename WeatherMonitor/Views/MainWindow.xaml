@@ -103,11 +103,20 @@
         </StackPanel>
 
         <StackPanel Orientation="Horizontal">
-          <TextBlock Text="WindSpeed"
+          <TextBlock Text="Wind speed"
                      Width="100"/>
           <TextBlock Text="{Binding Today.WindSpeed, StringFormat=0 km/u}"
                      Width="75"/>
           <TextBlock Text="{Binding Yesterday.WindSpeed, StringFormat=0 km/u}"
+                     Width="75"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal">
+          <TextBlock Text=""
+                     Width="100"/>
+          <TextBlock Text="{Binding Today.WindSpeedBft, StringFormat=0 Bft}"
+                     Width="75"/>
+          <TextBlock Text="{Binding Yesterday.WindSpeedBft, StringFormat=0 Bft}"
                      Width="75"/>
         </StackPanel>
 
