@@ -52,17 +52,12 @@
           <TextBlock Text=""
                      Width="100"/>
           <TextBlock Text="Today"
+                     Foreground="DarkGray"
+                     FontWeight="Black"
                      Width="75"/>
           <TextBlock Text="Yesterday"
-                     Width="75"/>
-        </StackPanel>
-
-        <StackPanel Orientation="Horizontal">
-          <TextBlock Text="System time"
-                     Width="100"/>
-          <TextBlock Text="{Binding Today.DemonTime, StringFormat=HH:mm:ss}"
-                     Width="75"/>
-          <TextBlock Text="{Binding Yesterday.DemonTime, StringFormat=HH:mm:ss}"
+                     Foreground="DarkGray"
+                     FontWeight="Black"
                      Width="75"/>
         </StackPanel>
 
@@ -70,8 +65,12 @@
           <TextBlock Text="Time"
                      Width="100"/>
           <TextBlock Text="{Binding Today.Time, StringFormat=HH:mm}"
+                     ToolTip="{Binding Today.DemonTime, StringFormat=yyyy-MM-dd HH:mm:ss}"
+                     FontSize="14"
                      Width="75"/>
           <TextBlock Text="{Binding Yesterday.Time, StringFormat=HH:mm}"
+                     ToolTip="{Binding Yesterday.DemonTime, StringFormat=yyyy-MM-dd HH:mm:ss}"
+                     FontSize="14"
                      Width="75"/>
         </StackPanel>
 
@@ -79,8 +78,10 @@
           <TextBlock Text="Temperature"
                      Width="100"/>
           <TextBlock Text="{Binding Today.Temperature, StringFormat=0.0 °C}"
+                     FontSize="14"
                      Width="75"/>
           <TextBlock Text="{Binding Yesterday.Temperature, StringFormat=0.0 °C}"
+                     FontSize="14"
                      Width="75"/>
         </StackPanel>
 
@@ -88,8 +89,10 @@
           <TextBlock Text="Pressure"
                      Width="100"/>
           <TextBlock Text="{Binding Today.Pressure, StringFormat=0 hPa}"
+                     FontSize="14"
                      Width="75"/>
           <TextBlock Text="{Binding Yesterday.Pressure, StringFormat=0 hPa}"
+                     FontSize="14"
                      Width="75"/>
         </StackPanel>
 
@@ -97,8 +100,10 @@
           <TextBlock Text="Visibility"
                      Width="100"/>
           <TextBlock Text="{Binding Today.Visibility, StringFormat=0 km}"
+                     FontSize="14"
                      Width="75"/>
           <TextBlock Text="{Binding Yesterday.Visibility, StringFormat=0 km}"
+                     FontSize="14"
                      Width="75"/>
         </StackPanel>
 
@@ -106,8 +111,10 @@
           <TextBlock Text="Wind speed"
                      Width="100"/>
           <TextBlock Text="{Binding Today.WindSpeed, StringFormat=0 km/u}"
+                     FontSize="14"
                      Width="75"/>
           <TextBlock Text="{Binding Yesterday.WindSpeed, StringFormat=0 km/u}"
+                     FontSize="14"
                      Width="75"/>
         </StackPanel>
 
@@ -121,11 +128,13 @@
         </StackPanel>
 
         <StackPanel Orientation="Horizontal">
-          <TextBlock Text="WindDirection"
+          <TextBlock Text="Wind direction"
                      Width="100"/>
           <TextBlock Text="{Binding Today.DisplayWindDirection}"
+                     FontSize="14"
                      Width="75"/>
           <TextBlock Text="{Binding Yesterday.DisplayWindDirection}"
+                     FontSize="14"
                      Width="75"/>
         </StackPanel>
 
@@ -133,8 +142,10 @@
           <TextBlock Text="Covering"
                      Width="100"/>
           <TextBlock Text="{Binding Today.DisplayCovering, StringFormat=0 %}"
+                     FontSize="14"
                      Width="75"/>
           <TextBlock Text="{Binding Yesterday.DisplayCovering, StringFormat=0 %}"
+                     FontSize="14"
                      Width="75"/>
         </StackPanel>
 

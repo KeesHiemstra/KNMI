@@ -1,4 +1,7 @@
-﻿Version 0.0.2.12 (2020-08-22)
+﻿Version 0.0.1.13 (2020-09-21)
+* Update the layout of the table of weather data.
+
+Version 0.0.2.12 (2020-08-22)
 * Added AutoLoad in Models\DayWeathers.
 
 Version 0.0.1.11 (2020-08-21)
