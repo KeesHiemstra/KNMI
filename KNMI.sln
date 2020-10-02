@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherMonitor", "WeatherMo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherDemon", "WeatherDemon\WeatherDemon.csproj", "{6185C74D-F85F-43BD-A878-D4BF88320C60}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProcessDailyWeathers", "ProcessDailyWeathers\ProcessDailyWeathers.csproj", "{30947F76-8C85-497A-812C-E0C3BE712B01}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{6185C74D-F85F-43BD-A878-D4BF88320C60}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6185C74D-F85F-43BD-A878-D4BF88320C60}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6185C74D-F85F-43BD-A878-D4BF88320C60}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30947F76-8C85-497A-812C-E0C3BE712B01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30947F76-8C85-497A-812C-E0C3BE712B01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30947F76-8C85-497A-812C-E0C3BE712B01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30947F76-8C85-497A-812C-E0C3BE712B01}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
