@@ -1,17 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
 using WeatherDemon.Models;
-
-using WeatherMonitor.Models;
 
 namespace WeatherMonitor.ViewModels
 {
@@ -20,7 +15,7 @@ namespace WeatherMonitor.ViewModels
 
 		#region [ Fields ]
 
-		MainViewModel VM;
+		readonly MainViewModel VM;
 
 		//Temperature graph area
 		double MarginLeft;

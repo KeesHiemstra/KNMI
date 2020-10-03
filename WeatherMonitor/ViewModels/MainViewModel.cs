@@ -82,7 +82,6 @@ namespace WeatherMonitor.ViewModels
 
     #endregion
 
-
     internal void MainLoaded()
     {
       MainView.GraphStackPanel.Children.Add(DrawChart.Graph);
