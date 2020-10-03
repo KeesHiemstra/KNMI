@@ -59,6 +59,10 @@
                      Foreground="DarkGray"
                      FontWeight="Black"
                      Width="75"/>
+          <TextBlock Text="Difference"
+                     Foreground="DarkGray"
+                     FontWeight="Black"
+                     Width="75"/>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal">
@@ -83,6 +87,9 @@
           <TextBlock Text="{Binding Yesterday.Temperature, StringFormat=0.0 °C}"
                      FontSize="14"
                      Width="75"/>
+          <TextBlock Text="{Binding Diff.Temperature, StringFormat=0.0 °C}"
+                     FontSize="14"
+                     Width="75"/>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal">
@@ -92,6 +99,9 @@
                      FontSize="14"
                      Width="75"/>
           <TextBlock Text="{Binding Yesterday.Pressure, StringFormat=0 hPa}"
+                     FontSize="14"
+                     Width="75"/>
+          <TextBlock Text="{Binding Diff.Pressure, StringFormat=0 hPa}"
                      FontSize="14"
                      Width="75"/>
         </StackPanel>
@@ -114,6 +124,9 @@
                      FontSize="14"
                      Width="75"/>
           <TextBlock Text="{Binding Yesterday.WindSpeed, StringFormat=0 km/u}"
+                     FontSize="14"
+                     Width="75"/>
+          <TextBlock Text="{Binding Diff.WindSpeed, StringFormat=0 km/u}"
                      FontSize="14"
                      Width="75"/>
         </StackPanel>
@@ -154,9 +167,11 @@
                      Width="100"/>
           <TextBlock Text="{Binding Today.DisplayCondition}"
                      TextWrapping="Wrap"
+                     Padding="0,0,3,0"
                      Width="75"/>
           <TextBlock Text="{Binding Yesterday.DisplayCondition}"
                      TextWrapping="Wrap"
+                     Padding="0,0,3,0"
                      Width="75"/>
         </StackPanel>
       </StackPanel>

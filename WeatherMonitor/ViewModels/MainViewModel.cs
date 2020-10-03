@@ -31,7 +31,8 @@ namespace WeatherMonitor.ViewModels
     public DayWeathers CurrentWeathers { get; set; } = new DayWeathers();
     public DayWeathers PreviousWeathers { get; set; } = 
       new DayWeathers(DateTime.Now.Date.AddDays(-1));
-    public decimal TotalSunshine { get; set; }
+    public DayWeather Diff { get; set; } = new DayWeather();
+		public decimal TotalSunshine { get; set; }
 
     public DayWeather Today
     {
@@ -45,7 +46,6 @@ namespace WeatherMonitor.ViewModels
     {
       get
       {
-        //DateTime systemTime = Today.DemonTime.AddDays(-1).AddMinutes(5);
         DateTime systemTime = DateTime.Now.AddDays(-1).AddMinutes(5);
         return PreviousWeathers.Weathers
           .Where(x => x.DemonTime <= systemTime)
@@ -62,6 +62,7 @@ namespace WeatherMonitor.ViewModels
       MainView = mainView;
       Daily = new DailyKNMI();
       DrawChart = new DrawChart(this);
+      CalculateDiffs();
     }
 
     #endregion
@@ -87,6 +88,15 @@ namespace WeatherMonitor.ViewModels
       MainView.GraphStackPanel.Children.Add(DrawChart.Graph);
     }
 
+    private void CalculateDiffs()
+		{
+      Diff.Temperature = Today.Temperature - Yesterday.Temperature;
+      Diff.Pressure = Today.Pressure - Yesterday.Pressure;
+      Diff.WindSpeed = Today.WindSpeed - Yesterday.WindSpeed;
+		}
+
+    #region Not used methods
+
     private void GetTotalSunshineAsync()
     {
       var range = Daily.GetDailyRange(348, new DateTime(2019, 01, 01), new DateTime(2019, 12, 31));
@@ -99,7 +109,6 @@ namespace WeatherMonitor.ViewModels
 
     private Border GetTemperaturesNumbers()
     {
-
       DateTime startDate = DateTime.Now.Date.AddDays(-8);
       DateTime endDate = DateTime.Now.Date.AddDays(7);
 
@@ -119,7 +128,7 @@ namespace WeatherMonitor.ViewModels
       };
       TextBlock Title = new TextBlock()
       {
-        Text = $"Date: {DateTime.Now.Date.ToString("yyyy-MM-dd")}"
+        Text = $"Date: {DateTime.Now.Date:yyyy-MM-dd}"
       };
       TemperatureStackPanel.Children.Add(Title);
 
@@ -133,8 +142,8 @@ namespace WeatherMonitor.ViewModels
         {
           Orientation = Orientation.Vertical
         };
-        DateStackPanel.Children.Add(new TextBlock() { Text = $"D: {date.Date.Day.ToString("00")} " });
-        DateStackPanel.Children.Add(new TextBlock() { Text = $"N: {date.TN.ToString()} " });
+        DateStackPanel.Children.Add(new TextBlock() { Text = $"D: {date.Date.Day:00} " });
+        DateStackPanel.Children.Add(new TextBlock() { Text = $"N: {date.TN} " });
         DateStackPanel.Children.Add(new TextBlock() { Text = $"G: {date.TG} " });
         DateStackPanel.Children.Add(new TextBlock() { Text = $"X: {date.TX} " });
 
@@ -143,12 +152,10 @@ namespace WeatherMonitor.ViewModels
       TemperatureStackPanel.Children.Add(DatesStackPanel);
 
       return TemperatureBorder;
-
     }
 
     private Border GetTemperaturesGraphics(DateTime startDate, int days)
     {
-
       DateTime endDate = startDate.AddDays(days);
 
       Border TemperatureBorder = new Border()
@@ -159,9 +166,9 @@ namespace WeatherMonitor.ViewModels
         BorderBrush = new SolidColorBrush(Color.FromArgb(128, 0, 0, 0))
       };
 
-
       return TemperatureBorder;
-
     }
+
+    #endregion
   }
 }
