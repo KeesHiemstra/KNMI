@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherDemon", "WeatherDemo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProcessDailyWeathers", "ProcessDailyWeathers\ProcessDailyWeathers.csproj", "{30947F76-8C85-497A-812C-E0C3BE712B01}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SendChart", "SendChart\SendChart.csproj", "{12DC8363-6589-4B79-B2FE-C40267AA7D14}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{30947F76-8C85-497A-812C-E0C3BE712B01}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{30947F76-8C85-497A-812C-E0C3BE712B01}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{30947F76-8C85-497A-812C-E0C3BE712B01}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12DC8363-6589-4B79-B2FE-C40267AA7D14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12DC8363-6589-4B79-B2FE-C40267AA7D14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12DC8363-6589-4B79-B2FE-C40267AA7D14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12DC8363-6589-4B79-B2FE-C40267AA7D14}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

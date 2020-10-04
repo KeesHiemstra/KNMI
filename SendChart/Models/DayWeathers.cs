@@ -8,18 +8,20 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+#if WEATHERMONITOR
 using System.Threading;
-
+#endif
 using WeatherDemon.Models;
-
+#if WEATHERMONITOR
 using WeatherMonitor.ViewModels;
+#endif
 
 namespace WeatherMonitor.Models
 {
 	public class DayWeathers : INotifyPropertyChanged
 	{
 
-		#region [ Fields ]
+#region [ Fields ]
 		//private MainWindow View;
 
 		private readonly string DayWeatherJsonPath = "%OneDrive%\\Data\\DailyWeather".TranslatePath();
