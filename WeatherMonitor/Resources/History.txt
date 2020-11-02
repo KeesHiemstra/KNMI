@@ -1,10 +1,13 @@
-﻿Version 0.0.1.15 (2020-01-02)
+﻿Version 0.0.2.16 (2020-01-02)
+* Corrected the ongoing version.
+
+Version 0.0.2.15 (2020-01-02)
 * Update the layout of the table of weather data, added displaying the Humidity.
 
-Version 0.0.1.14 (2020-10-03)
+Version 0.0.2.14 (2020-10-03)
 * Small improvement in the layout of the table of weather data.
 
-Version 0.0.1.13 (2020-09-21)
+Version 0.0.2.13 (2020-09-21)
 * Update the layout of the table of weather data.
 
 Version 0.0.2.12 (2020-08-22)
