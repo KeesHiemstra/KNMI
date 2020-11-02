@@ -91,6 +91,7 @@ namespace WeatherMonitor.ViewModels
 		{
       Diff.Temperature = Today.Temperature - Yesterday.Temperature;
       Diff.Pressure = Today.Pressure - Yesterday.Pressure;
+      Diff.Humidity = Today.Humidity - Yesterday.Humidity;
       Diff.WindSpeed = Today.WindSpeed - Yesterday.WindSpeed;
 		}
 

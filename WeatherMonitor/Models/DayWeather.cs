@@ -21,6 +21,11 @@ namespace WeatherDemon.Models
 			get => CalculateWindSpeedInBeaufort();
 		}
 
+		public decimal DisplayHumidity
+		{
+			get => (decimal)Humidity / 100;
+		}
+
 		public string DisplayWindDirection
 		{
 			get => CompileWindDirection();
