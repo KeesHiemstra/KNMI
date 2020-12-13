@@ -1,7 +1,10 @@
-﻿Version 0.0.2.16 (2020-01-02)
+﻿Version 0.0.2.17 (2020-12-13)
+* Added more logging to tackle an exception. OneDrive prevent to open a json file.
+
+Version 0.0.2.16 (2020-12-02)
 * Corrected the ongoing version.
 
-Version 0.0.2.15 (2020-01-02)
+Version 0.0.2.15 (2020-12-02)
 * Update the layout of the table of weather data, added displaying the Humidity.
 
 Version 0.0.2.14 (2020-10-03)

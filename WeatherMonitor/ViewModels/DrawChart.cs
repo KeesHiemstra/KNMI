@@ -58,6 +58,7 @@ namespace WeatherMonitor.ViewModels
 		{
 			VM = mainVM;
 
+			Log.Write("DrawChart: Starting");
 			CalculateConstants();
 			AddDaylight();
 			AddAxis();

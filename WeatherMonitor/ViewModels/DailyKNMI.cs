@@ -76,13 +76,13 @@ namespace WeatherMonitor.ViewModels
         ExecuteUpdateDate();
         if (UpdateDate < DateTime.Now.Date.AddDays(-1))
         {
-          Log.Write("Start download");
+          Log.Write("DailyKNMI: Start download");
 
           DailyKNMIUpdate daily = new DailyKNMIUpdate(this, Db);
           DownloadedKNMIStations = daily.GetDownloadedKNMIStations();
           await daily.UpdateKNMIData(DownloadedKNMIStations, UpdateDate.AddDays(1));
 
-          Log.Write("Finished download");
+          Log.Write("DailyKNMI: Finished download");
         }
       }
 
@@ -92,7 +92,7 @@ namespace WeatherMonitor.ViewModels
     {
 
       UpdateDate = GetUpdateDate();
-      Log.Write($"UpdateDate: {UpdateDate.ToString("yyyy-MM-dd")}");
+      Log.Write($"DailyKNMI: UpdateDate: {UpdateDate.ToString("yyyy-MM-dd")}");
 
     }
 
@@ -106,9 +106,9 @@ namespace WeatherMonitor.ViewModels
 
       if (Db.IsDisposed())
       {
-        Log.Write("Db was disposed");
+        Log.Write("DailyKNMI: Db was disposed");
         Db = new WeatherDbContext(dbConnection);
-        Log.Write("Restarted Db");
+        Log.Write("DailyKNMI: Restarted Db");
       }
 
       try
@@ -122,7 +122,7 @@ namespace WeatherMonitor.ViewModels
       }
       catch (Exception ex)
       {
-        Log.Write($"Exception GetUpdateDate: {ex.Message}");
+        Log.Write($"DailyKNMI: Exception GetUpdateDate: {ex.Message}");
         return DateTime.MinValue;
       }
 
@@ -136,9 +136,9 @@ namespace WeatherMonitor.ViewModels
 
       if (Db.IsDisposed())
       {
-        Log.Write("Db was disposed");
+        Log.Write("DailyKNMI: Db was disposed");
         Db = new WeatherDbContext(dbConnection);
-        Log.Write("Restarted Db");
+        Log.Write("DailyKNMI: Restarted Db");
       }
 
       List<DailyReport> range = new List<DailyReport>();
@@ -152,7 +152,7 @@ namespace WeatherMonitor.ViewModels
       }
       catch (Exception ex)
       {
-        Log.Write($"Exception GetDailyRange::record: {ex.Message}");
+        Log.Write($"DailyKNMI: Exception GetDailyRange::record: {ex.Message}");
       }
 
       return range;

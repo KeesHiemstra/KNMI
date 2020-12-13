@@ -1,6 +1,8 @@
 ﻿using CHi.Extensions;
 using System.Windows;
 
+using WeatherMonitor.ViewModels;
+
 namespace WeatherMonitor
 {
   /// <summary>
@@ -12,6 +14,7 @@ namespace WeatherMonitor
     {
       if (!ServiceExtensions.IsStarted("MSSQLServer", true))
       {
+        Log.Write("Microsoft SQL Server is not started");
         Application.Current.Shutdown();
       }
     }

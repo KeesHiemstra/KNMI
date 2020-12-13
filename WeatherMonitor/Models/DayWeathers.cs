@@ -64,6 +64,7 @@ namespace WeatherMonitor.Models
 
 		public DayWeathers()
 		{
+			Log.Write("DayWeather: Load CurrentWeathers");
 			Date = DateTime.Now.Date;
 			JsonFile = $"{DayWeatherJsonPath}\\DayWeather.json";
 			LoadDayWeather(JsonFile, true);
@@ -76,6 +77,7 @@ namespace WeatherMonitor.Models
 
 		public DayWeathers(DateTime date)
 		{
+			Log.Write("DayWeather: Load PreviousWeathers");
 			Date = date.Date;
 			LoadDayWeather($"{DayWeatherJsonPath}\\DayWeather_{date:yyyy-MM-dd}.json", false);
 		}
@@ -92,8 +94,10 @@ namespace WeatherMonitor.Models
 
 #endregion
 
-		private void LoadDayWeather(string jsonFile, bool isCurrentDay)
+		private async void LoadDayWeather(string jsonFile, bool isCurrentDay)
 		{
+			Log.Write("DayWeather: Start loading Weathers");
+
 			List<DayWeather> weathers = new List<DayWeather>();
 			if (File.Exists(jsonFile))
 			{
@@ -104,32 +108,43 @@ namespace WeatherMonitor.Models
 #if WEATHERMONITOR
 					if (IsEvaluateDelay)
 					{
-						Log.Write($"Passed evaluate delay period, delay: {DelayAutoLoad} seconds");
+						Log.Write($"DayWeather: Passed evaluate delay period, delay: {DelayAutoLoad} seconds");
 						AutoLoad.Change(new TimeSpan(0, 10, 0), new TimeSpan(0, 10, 0));
 						IsEvaluateDelay = false;
 					}
 #endif
 
+					Log.Write($"DayWeather: Open Weathers json '{jsonFile}'");
 					using (StreamReader stream = File.OpenText(jsonFile))
 					{
-						string json = stream.ReadToEnd();
+						string json = string.Empty;
+						try
+						{
+							json = stream.ReadToEnd();
+						}
+						catch (Exception ex)
+						{
+							Log.Write($"Exception DayWeather: {ex.Message}");
+						}						
 						weathers = JsonConvert.DeserializeObject<List<DayWeather>>(json)
 							.Where(x => x.Time >= Date)
 							.ToList();
 						Weathers = new ObservableCollection<DayWeather>(weathers);
+						Log.Write($"DayWeather: Loaded {Weathers.Count} records");
 					}
 
 					ProcessInfo(isCurrentDay);
 					TimeLastWrite = info.LastWriteTimeUtc;
+					Log.Write($"DayWeather: TimeLastWrite {TimeLastWrite}");
 
 #if WEATHERMONITOR
-					Log.Write("Loaded current Weathers file");
+					Log.Write("DayWeather: Loaded current Weathers file");
 #endif
 				}
 				else
 				{
 #if WEATHERMONITOR
-					Log.Write($"Evaluate delay: Added 10 second");
+					Log.Write($"DayWeather: Evaluate delay: Added 10 second");
 					AutoLoad.Change(new TimeSpan(0, 0, 10), new TimeSpan(0, 0, 10));
 					DelayAutoLoad += 10;
 					IsEvaluateDelay = true;
@@ -156,7 +171,7 @@ namespace WeatherMonitor.Models
 
 			AutoEvent = new AutoResetEvent(false);
 			AutoLoad = new Timer(CheckFile, AutoEvent, start, time);
-			Log.Write($"CheckFile will be started at {DateTime.Now + start}");
+			Log.Write($"DayWeather: CheckFile will be started at {DateTime.Now + start}");
 		}
 
 		private void CheckFile(Object stateInfo)
