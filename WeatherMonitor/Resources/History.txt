@@ -1,4 +1,7 @@
-﻿Version 0.0.2.17 (2020-12-13)
+﻿Version 0.0.2.18 (2020-12-18)
+* Fixed the OneDrive error.
+
+Version 0.0.2.17 (2020-12-13)
 * Added more logging to tackle an exception. OneDrive prevent to open a json file.
 
 Version 0.0.2.16 (2020-12-02)

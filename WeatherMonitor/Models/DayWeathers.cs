@@ -9,6 +9,8 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
+using System.Windows;
 
 using WeatherDemon.Models;
 
@@ -32,15 +34,15 @@ namespace WeatherMonitor.Models
 #endif
 		private DateTime timeLastWrite;
 
-#endregion
+		#endregion
 
-#region [ Properties ]
+		#region [ Properties ]
 
-		public ObservableCollection<DayWeather> Weathers { get; set; } = 
+		public ObservableCollection<DayWeather> Weathers { get; set; } =
 			new ObservableCollection<DayWeather>();
 		public DateTime Date { get; set; }
 		public DateTime TimeLastWrite
-		{ 
+		{
 			get => timeLastWrite;
 			set
 			{
@@ -58,9 +60,9 @@ namespace WeatherMonitor.Models
 		public decimal TemperatureMin { get; private set; }
 		public decimal TemperatureMax { get; private set; }
 
-#endregion
+		#endregion
 
-#region [ Construction ]
+		#region [ Construction ]
 
 		public DayWeathers()
 		{
@@ -82,9 +84,9 @@ namespace WeatherMonitor.Models
 			LoadDayWeather($"{DayWeatherJsonPath}\\DayWeather_{date:yyyy-MM-dd}.json", false);
 		}
 
-#endregion
+		#endregion
 
-#region [ Public methods ]
+		#region [ Public methods ]
 
 		public event PropertyChangedEventHandler PropertyChanged;
 		private void NotifyPropertyChanged(string propertyName = "")
@@ -92,7 +94,7 @@ namespace WeatherMonitor.Models
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}
 
-#endregion
+		#endregion
 
 		private async void LoadDayWeather(string jsonFile, bool isCurrentDay)
 		{
@@ -124,8 +126,10 @@ namespace WeatherMonitor.Models
 						}
 						catch (Exception ex)
 						{
-							Log.Write($"Exception DayWeather: {ex.Message}");
-						}						
+							json = DayWeatherFileException(jsonFile,
+								"DayWeather",
+								$"DayWeather exception: '{jsonFile}': {ex.Message}");
+						}
 						weathers = JsonConvert.DeserializeObject<List<DayWeather>>(json)
 							.Where(x => x.Time >= Date)
 							.ToList();
@@ -165,7 +169,7 @@ namespace WeatherMonitor.Models
 #if WEATHERMONITOR
 		private void StartTimer()
 		{
-			TimeSpan start = TimeLastWrite.AddMinutes(10).AddSeconds(DelayAutoLoad) - 
+			TimeSpan start = TimeLastWrite.AddMinutes(10).AddSeconds(DelayAutoLoad) -
 				DateTime.Now.ToUniversalTime();
 			TimeSpan time = new TimeSpan(0, 10, 0);
 
@@ -179,5 +183,42 @@ namespace WeatherMonitor.Models
 			LoadDayWeather(JsonFile, true);
 		}
 #endif
+
+		private string DayWeatherFileException(string file, string header, string message)
+		{
+			string result = string.Empty;
+			Log.Write(message);
+
+			if (File.Exists(file))
+			{
+				FileAttributes attr = File.GetAttributes(file);
+				if ((int)attr >= 0x00080000)
+				{
+					//Force download a OneDrive
+					Log.Write($"{header}: Pin {file}");
+					attr += 0x00080000;
+					File.SetAttributes(file, attr);
+					Thread.Sleep(1500);
+					try
+					{
+						using StreamReader stream = File.OpenText(file);
+						result = stream.ReadToEnd();
+					}
+					catch (Exception ex)
+					{
+						MessageBox.Show($"{header}: Error reading '{file}' - {ex.Message}",
+							"Error access file",
+							MessageBoxButton.OK,
+							MessageBoxImage.Error);
+					}
+				}
+			}
+			else
+			{
+				Log.Write($"{header}: '{file}' doesn't exists.");
+			}
+
+			return result;
+		}
 	}
 }

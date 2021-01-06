@@ -99,6 +99,7 @@ namespace WeatherDemon
       string httpResult = await httpRespond.Content.ReadAsStringAsync();
 
       OpenWeather openWeather = JsonConvert.DeserializeObject<OpenWeather>(httpResult);
+      Log.Write($"Longitude: {openWeather.coord.lon}, Latitude: {openWeather.coord.lat}");
 			if (httpRespond.StatusCode != System.Net.HttpStatusCode.OK)
 			{
         Log.Write($"HttpRespond: {httpRespond}");
