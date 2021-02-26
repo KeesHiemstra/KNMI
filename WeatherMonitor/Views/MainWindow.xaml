@@ -63,12 +63,12 @@
             Width="75"
             FontWeight="Black"
             Foreground="DarkGray"
-            Text="Yesterday" />
+            Text="Difference" />
           <TextBlock
             Width="75"
             FontWeight="Black"
             Foreground="DarkGray"
-            Text="Difference" />
+            Text="Yesterday" />
         </StackPanel>
 
         <StackPanel Orientation="Horizontal">
@@ -78,6 +78,8 @@
             FontSize="14"
             Text="{Binding Today.Time, StringFormat=HH:mm}"
             ToolTip="{Binding Today.DemonTime, StringFormat=yyyy-MM-dd HH:mm:ss}" />
+          <TextBlock
+            Width="75"/>
           <TextBlock
             Width="75"
             FontSize="14"
@@ -94,11 +96,11 @@
           <TextBlock
             Width="75"
             FontSize="14"
-            Text="{Binding Yesterday.Temperature, StringFormat=0.0 °C}" />
+            Text="{Binding Diff.Temperature, StringFormat=0.0 °C}" />
           <TextBlock
             Width="75"
             FontSize="14"
-            Text="{Binding Diff.Temperature, StringFormat=0.0 °C}" />
+            Text="{Binding Yesterday.Temperature, StringFormat=0.0 °C}" />
         </StackPanel>
 
         <StackPanel Orientation="Horizontal">
@@ -110,11 +112,11 @@
           <TextBlock
             Width="75"
             FontSize="14"
-            Text="{Binding Yesterday.Pressure, StringFormat=0 hPa}" />
+            Text="{Binding Diff.Pressure, StringFormat=0 hPa}" />
           <TextBlock
             Width="75"
             FontSize="14"
-            Text="{Binding Diff.Pressure, StringFormat=0 hPa}" />
+            Text="{Binding Yesterday.Pressure, StringFormat=0 hPa}" />
         </StackPanel>
 
         <StackPanel Orientation="Horizontal">
@@ -126,11 +128,11 @@
           <TextBlock
             Width="75"
             FontSize="14"
-            Text="{Binding Yesterday.DisplayHumidity, StringFormat=0 %}" />
+            Text="{Binding Diff.DisplayHumidity, StringFormat=0 %}" />
           <TextBlock
             Width="75"
             FontSize="14"
-            Text="{Binding Diff.DisplayHumidity, StringFormat=0 %}" />
+            Text="{Binding Yesterday.DisplayHumidity, StringFormat=0 %}" />
         </StackPanel>
 
         <StackPanel Orientation="Horizontal">
@@ -138,11 +140,13 @@
           <TextBlock
             Width="75"
             FontSize="14"
-            Text="{Binding Today.Visibility, StringFormat=0 km}" />
+            Text="{Binding Today.DisplayVisibility, StringFormat=0 km}" />
+          <TextBlock
+            Width="75"/>
           <TextBlock
             Width="75"
             FontSize="14"
-            Text="{Binding Yesterday.Visibility, StringFormat=0 km}" />
+            Text="{Binding Yesterday.DisplayVisibility, StringFormat=0 km}" />
         </StackPanel>
 
         <StackPanel Orientation="Horizontal">
@@ -154,16 +158,17 @@
           <TextBlock
             Width="75"
             FontSize="14"
-            Text="{Binding Yesterday.WindSpeed, StringFormat=0 km/u}" />
+            Text="{Binding Diff.WindSpeed, StringFormat=0 km/u}" />
           <TextBlock
             Width="75"
             FontSize="14"
-            Text="{Binding Diff.WindSpeed, StringFormat=0 km/u}" />
+            Text="{Binding Yesterday.WindSpeed, StringFormat=0 km/u}" />
         </StackPanel>
 
         <StackPanel Orientation="Horizontal">
           <TextBlock Width="100" Text="" />
           <TextBlock Width="75" Text="{Binding Today.WindSpeedBft, StringFormat=0 Bft}" />
+          <TextBlock Width="75"/>
           <TextBlock Width="75" Text="{Binding Yesterday.WindSpeedBft, StringFormat=0 Bft}" />
         </StackPanel>
 
@@ -173,6 +178,7 @@
             Width="75"
             FontSize="14"
             Text="{Binding Today.DisplayWindDirection}" />
+          <TextBlock Width="75"/>
           <TextBlock
             Width="75"
             FontSize="14"
@@ -185,6 +191,7 @@
             Width="75"
             FontSize="14"
             Text="{Binding Today.DisplayCovering, StringFormat=0 %}" />
+          <TextBlock Width="75"/>
           <TextBlock
             Width="75"
             FontSize="14"
@@ -198,13 +205,27 @@
             Padding="0,0,3,0"
             Text="{Binding Today.DisplayCondition}"
             TextWrapping="Wrap" />
+          <TextBlock Width="75"/>
           <TextBlock
             Width="75"
             Padding="0,0,3,0"
             Text="{Binding Yesterday.DisplayCondition}"
             TextWrapping="Wrap" />
         </StackPanel>
+
+        <StackPanel Orientation="Horizontal">
+          <TextBlock Width="100" Text="Min/Max"/>
+          <TextBlock
+            Width="75"
+            Text="{Binding Today.DisplayMinMax}"/>
+          <TextBlock Width="75"/>
+          <TextBlock
+            Width="75"
+            Text="{Binding Yesterday.DisplayMinMax}"/>
+        </StackPanel>
+
       </StackPanel>
+      
     </StackPanel>
 
     <StatusBar Grid.Row="9" Grid.ColumnSpan="2">

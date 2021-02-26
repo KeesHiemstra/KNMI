@@ -9,7 +9,7 @@ The information uses
 
 - DemonTime [*yyyy-MM-dd HH:mm*]
 - Time [*yyyy-MM-dd HH:mm*]
-- Temperature [*Celsius* / *°C*]
+- Temperature [*Celsius* / *ï¿½C*]
 - Pressure [*hPa*]
 - Humidity [*%*]
 - Visibility [*m*]

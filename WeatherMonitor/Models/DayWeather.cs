@@ -15,6 +15,8 @@ namespace WeatherDemon.Models
 		public int WindDirection { get; set; }
 		public int Covering { get; set; }
 		public int Condition { get; set; }
+		public decimal MinTemperature { get; set; }
+		public decimal MaxTemperature { get; set; }
 
 		public int WindSpeedBft 
 		{
@@ -31,6 +33,11 @@ namespace WeatherDemon.Models
 			get => CompileWindDirection();
 		}
 
+		public decimal DisplayVisibility
+		{
+			get => (decimal)Visibility / 1000;
+		}
+
 		public decimal DisplayCovering
 		{
 			get => (decimal)Covering / 100;
@@ -39,6 +46,11 @@ namespace WeatherDemon.Models
 		public string DisplayCondition
 		{
 			get => CompileCondition();
+		}
+
+		public string DisplayMinMax
+		{
+			get => $"{MinTemperature}/{MaxTemperature}";
 		}
 
 		private string CompileWindDirection()
@@ -134,6 +146,7 @@ namespace WeatherDemon.Models
 
 			return condition[Condition];
 		}
+
 	}
 
 }

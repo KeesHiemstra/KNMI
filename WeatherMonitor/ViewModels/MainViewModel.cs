@@ -89,15 +89,23 @@ namespace WeatherMonitor.ViewModels
 
     private void CalculateDiffs()
 		{
-      Diff.Temperature = Today.Temperature - Yesterday.Temperature;
-      Diff.Pressure = Today.Pressure - Yesterday.Pressure;
-      Diff.Humidity = Today.Humidity - Yesterday.Humidity;
-      Diff.WindSpeed = Today.WindSpeed - Yesterday.WindSpeed;
-		}
+			if (Yesterday != null)
+			{
+				Diff.Temperature = Today.Temperature - Yesterday.Temperature;
+				Diff.Pressure = Today.Pressure - Yesterday.Pressure;
+				Diff.Humidity = Today.Humidity - Yesterday.Humidity;
+				Diff.WindSpeed = Today.WindSpeed - Yesterday.WindSpeed;
 
-    #region Not used methods
+        Today.MinTemperature = CurrentWeathers.Weathers.Min(x => x.Temperature);
+        Today.MaxTemperature = CurrentWeathers.Weathers.Max(x => x.Temperature);
+        Yesterday.MinTemperature = PreviousWeathers.Weathers.Min(x => x.Temperature);
+        Yesterday.MaxTemperature = PreviousWeathers.Weathers.Max(x => x.Temperature);
+      }
+    }
 
-    private void GetTotalSunshineAsync()
+		#region Not used methods
+
+		private void GetTotalSunshineAsync()
     {
       var range = Daily.GetDailyRange(348, new DateTime(2019, 01, 01), new DateTime(2019, 12, 31));
 

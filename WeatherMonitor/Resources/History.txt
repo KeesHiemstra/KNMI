@@ -1,4 +1,8 @@
-﻿Version 0.0.2.18 (2020-12-18)
+﻿Version 0.0.3.19 (2021-02-26)
+* Add the minimum and maximal temperature to the overview of today and yesterday.
+* Bug fix: The data from KNMI was failed.
+
+Version 0.0.2.18 (2020-12-18)
 * Fixed the OneDrive error.
 
 Version 0.0.2.17 (2020-12-13)

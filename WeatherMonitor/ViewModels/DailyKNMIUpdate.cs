@@ -19,7 +19,6 @@ namespace WeatherMonitor.ViewModels
       Db = db;
     }
 
-
     /// <summary>
     /// Get the downloaded KNMI stations.
     /// Use these stations to update the data.
@@ -59,6 +58,11 @@ namespace WeatherMonitor.ViewModels
       Log.Write("Start UpdateKNMIData");
       string data = await DownloadKNMIData(downloadedKNMIStations, updateDate);
       string[] header = GetDownloadHeader(data);
+			if (header == null) 
+			{
+        Log.Write("Downloaded data was incorrect");
+        return;
+			}
 
       using (Db)
       {
@@ -98,7 +102,11 @@ namespace WeatherMonitor.ViewModels
     /// <returns></returns>
     private static string[] GetDownloadHeader(string data)
     {
-
+			if (data.StartsWith("<!DOCTYPE html>"))
+			{
+        //The downloaded data was incorrect
+        return null;
+			}
       Log.Write($"GetDownloadHeader from {data.Length} downloaded bytes");
       //Split the downloaded data in line and skip empty lines.
       string[] lines = data.Split(new char[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
@@ -424,8 +432,6 @@ namespace WeatherMonitor.ViewModels
       return data;
 
     }
-
-
 
   }
 }
