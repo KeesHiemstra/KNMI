@@ -1,6 +1,7 @@
 ﻿using CHi.Extensions;
 
 using System.Windows;
+using System.Windows.Input;
 
 using WeatherMonitor.Models;
 using WeatherMonitor.ViewModels;
@@ -32,5 +33,23 @@ namespace WeatherMonitor
     {
       MainVM.MainLoaded();
     }
+
+    #region Menu MainCommands
+
+    #region Exit command
+    private void ExitCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+    {
+      e.CanExecute = true;
+    }
+
+    private void ExitCommand_Execute(object sender, ExecutedRoutedEventArgs e)
+    {
+      Application.Current.Shutdown();
+    }
+    #endregion
+
+    #endregion
+
+
   }
 }

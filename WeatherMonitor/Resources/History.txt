@@ -1,4 +1,7 @@
-﻿Version 0.0.3.19 (2021-02-26)
+﻿Version 0.0.3.20 (2021-02-27)
+* Implemented Menu|File|Exit.
+
+Version 0.0.3.19 (2021-02-26)
 * Add the minimum and maximal temperature to the overview of today and yesterday.
 * Bug fix: The data from KNMI was failed.
 

@@ -5,11 +5,20 @@
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:local="clr-namespace:WeatherMonitor"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:cmd="clr-namespace:WeatherMonitor.Commands"
   Title="Weather"
   Width="800"
   Height="450"
   Loaded="Window_Loaded"
   mc:Ignorable="d">
+
+  <Window.CommandBindings>
+    <CommandBinding
+      CanExecute="ExitCommand_CanExecute"
+      Command="cmd:MainCommands.Exit"
+      Executed="ExitCommand_Execute" />
+  </Window.CommandBindings>
+  
   <Grid>
     <Grid.ColumnDefinitions>
       <ColumnDefinition Width="Auto" />
@@ -35,7 +44,7 @@
       Grid.Row="0"
       Grid.ColumnSpan="2">
       <MenuItem Header="_File">
-        <MenuItem Header="E_xit" />
+        <MenuItem Command="cmd:MainCommands.Exit" />
       </MenuItem>
     </Menu>
 
