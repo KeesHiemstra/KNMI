@@ -1,4 +1,7 @@
-﻿Version 0.0.3.20 (2021-02-27)
+﻿Version 0.0.4.21 (2021-03-26)
+* Add forecast data.
+
+Version 0.0.3.20 (2021-02-27)
 * Implemented Menu|File|Exit.
 
 Version 0.0.3.19 (2021-02-26)

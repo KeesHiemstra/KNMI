@@ -16,9 +16,9 @@ namespace WeatherMonitor.ViewModels
   public class MainViewModel : INotifyPropertyChanged
   {
 
-    #region [ Fields ]
+		#region [ Fields ]
 
-    MainWindow MainView;
+		private MainWindow View;
 
     #endregion
 
@@ -27,6 +27,7 @@ namespace WeatherMonitor.ViewModels
     public DailyKNMI Daily { get; set; }
     public VisualTime Now { get; } = new VisualTime();
     public DrawChart DrawChart { get; }
+    public VisualForecasts Forecasts { get; set; }
 
     public DayWeathers CurrentWeathers { get; set; } = new DayWeathers();
     public DayWeathers PreviousWeathers { get; set; } = 
@@ -59,18 +60,18 @@ namespace WeatherMonitor.ViewModels
 
     public MainViewModel(MainWindow mainView)
     {
-      MainView = mainView;
+      View = mainView;
       Daily = new DailyKNMI();
       DrawChart = new DrawChart(this);
       CalculateDiffs();
     }
 
-    #endregion
+		#endregion
 
-    #region [ Methods ]
+		#region [ Methods ]
 
-    #region INotifyPropertyChanged
-    public event PropertyChangedEventHandler PropertyChanged;
+		#region INotifyPropertyChanged
+		public event PropertyChangedEventHandler PropertyChanged;
     private void NotifyPropertyChanged(string propertyName = "")
     {
       if (PropertyChanged != null)
@@ -78,16 +79,17 @@ namespace WeatherMonitor.ViewModels
         PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
       }
     }
-    #endregion
+		#endregion
 
-    #endregion
+		#endregion
 
-    internal void MainLoaded()
+		internal void MainLoaded()
     {
-      MainView.GraphStackPanel.Children.Add(DrawChart.Graph);
-    }
+			View.GraphStackPanel.Children.Add(DrawChart.Graph);
+			Forecasts = new VisualForecasts(View);
+		}
 
-    private void CalculateDiffs()
+		private void CalculateDiffs()
 		{
 			if (Yesterday != null)
 			{

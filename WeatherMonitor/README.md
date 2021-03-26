@@ -4,6 +4,7 @@ The WeatherMonitor uses 2 different sources:
 
   - WeatherDemon tool.
   - Royal Netherlands Meteorological Institute (KNMI)
+  - Forecast weather tool of Windows.
 
 ## WeatherDemon
 
@@ -77,7 +78,11 @@ UXH      | Hourly division in which UX was measured;
 UN       | Minimum relative atmospheric humidity (in percents); 
 UNH      | Hourly division in which UN was measured; 
 
-### Wish list
+## Forecast
+
+The data is provided by Foreca and manually entered is a separate tool. 
+
+#### Wish list
 
 - [ ] Update the graph automatically.
 - [X] Graph for the todays temperature and compare with the temperature with yesterday.

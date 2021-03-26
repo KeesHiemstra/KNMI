@@ -86,6 +86,7 @@
     <Compile Include="Models\DailyReport.cs" />
     <Compile Include="Models\DayWeather.cs" />
     <Compile Include="Models\DayWeathers.cs" />
+    <Compile Include="Models\Forecast.cs" />
     <Compile Include="Models\Station.cs" />
     <Compile Include="Models\VisualTime.cs" />
     <Compile Include="Models\WeatherDbContext.cs" />
@@ -96,6 +97,7 @@
     <Compile Include="ViewModels\GeographicLocation.cs" />
     <Compile Include="ViewModels\Log.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\VisualForecasts.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

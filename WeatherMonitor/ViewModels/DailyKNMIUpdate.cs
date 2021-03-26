@@ -87,6 +87,7 @@ namespace WeatherMonitor.ViewModels
       HttpClient http = new HttpClient();
       HttpResponseMessage httpRespond =
         await http.GetAsync($"{url}?stns={stations}&start={date.ToString("yyyyMMdd")}");
+      Log.Write($"Url: {url}?stns={stations}&start={date.ToString("yyyyMMdd")}");
       Log.Write($"Respond statusCode: {httpRespond.StatusCode}");
       string httpResult = await httpRespond.Content.ReadAsStringAsync();
       Log.Write($"Downloaded {httpResult.Length} bytes");

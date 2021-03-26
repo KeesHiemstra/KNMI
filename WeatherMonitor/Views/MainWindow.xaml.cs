@@ -1,5 +1,6 @@
 ﻿using CHi.Extensions;
 
+using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
 
@@ -19,7 +20,7 @@ namespace WeatherMonitor
     public MainWindow()
     {
 
-      Log.Write($"Application {System.Reflection.Assembly.GetExecutingAssembly().GetName().Name} started");
+      Log.Write($"Application {Assembly.GetExecutingAssembly().GetName().Name} started");
 
       MainVM = new MainViewModel(this);
 
