@@ -3,19 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29519.87
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KNMI-Common", "KNMI-Common\KNMI-Common.csproj", "{527D8C72-4186-4FC9-B428-4E362ECD5B22}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Import-DailyReports", "Import-DailyReports\Import-DailyReports.csproj", "{653AF9CA-908A-4E19-80BF-B8C6836C3700}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Import-Stations", "Import-Stations\Import-Stations.csproj", "{41550715-6EA0-4C53-B123-1782706ED298}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherMonitor", "WeatherMonitor\WeatherMonitor.csproj", "{0B62BDF7-3BD2-449F-801F-DB00FEDB0D73}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherDemon", "WeatherDemon\WeatherDemon.csproj", "{6185C74D-F85F-43BD-A878-D4BF88320C60}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProcessDailyWeathers", "ProcessDailyWeathers\ProcessDailyWeathers.csproj", "{30947F76-8C85-497A-812C-E0C3BE712B01}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SendChart", "SendChart\SendChart.csproj", "{12DC8363-6589-4B79-B2FE-C40267AA7D14}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,18 +15,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{527D8C72-4186-4FC9-B428-4E362ECD5B22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{527D8C72-4186-4FC9-B428-4E362ECD5B22}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{527D8C72-4186-4FC9-B428-4E362ECD5B22}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{527D8C72-4186-4FC9-B428-4E362ECD5B22}.Release|Any CPU.Build.0 = Release|Any CPU
-		{653AF9CA-908A-4E19-80BF-B8C6836C3700}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{653AF9CA-908A-4E19-80BF-B8C6836C3700}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{653AF9CA-908A-4E19-80BF-B8C6836C3700}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{653AF9CA-908A-4E19-80BF-B8C6836C3700}.Release|Any CPU.Build.0 = Release|Any CPU
-		{41550715-6EA0-4C53-B123-1782706ED298}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{41550715-6EA0-4C53-B123-1782706ED298}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{41550715-6EA0-4C53-B123-1782706ED298}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{41550715-6EA0-4C53-B123-1782706ED298}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0B62BDF7-3BD2-449F-801F-DB00FEDB0D73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0B62BDF7-3BD2-449F-801F-DB00FEDB0D73}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B62BDF7-3BD2-449F-801F-DB00FEDB0D73}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -47,10 +27,6 @@ Global
 		{30947F76-8C85-497A-812C-E0C3BE712B01}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{30947F76-8C85-497A-812C-E0C3BE712B01}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{30947F76-8C85-497A-812C-E0C3BE712B01}.Release|Any CPU.Build.0 = Release|Any CPU
-		{12DC8363-6589-4B79-B2FE-C40267AA7D14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{12DC8363-6589-4B79-B2FE-C40267AA7D14}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{12DC8363-6589-4B79-B2FE-C40267AA7D14}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{12DC8363-6589-4B79-B2FE-C40267AA7D14}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
