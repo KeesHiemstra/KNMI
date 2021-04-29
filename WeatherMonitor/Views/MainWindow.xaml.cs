@@ -47,10 +47,10 @@ namespace WeatherMonitor
     {
       Application.Current.Shutdown();
     }
-    #endregion
 
-    #endregion
+		#endregion
 
+		#endregion
 
-  }
+	}
 }

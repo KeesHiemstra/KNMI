@@ -85,4 +85,5 @@ The data is provided by Foreca and manually entered is a separate tool.
 #### Wish list
 
 - [ ] Update the graph automatically.
+- [ ] Window to add and edit the forecast.
 - [X] Graph for the todays temperature and compare with the temperature with yesterday.
