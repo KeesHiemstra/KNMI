@@ -1,4 +1,7 @@
-﻿Version 0.0.4.21 (2021-03-26)
+﻿Version 0.0.4.22 (2021-06-03)
+* The KNMI repaired the weather collection, the URL was changed and an end date was required.
+
+Version 0.0.4.21 (2021-03-26)
 * Add forecast data.
 
 Version 0.0.3.20 (2021-02-27)

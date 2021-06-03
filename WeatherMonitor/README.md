@@ -31,7 +31,7 @@ The `CurrentWeathers` is updated every 10 minutes.
 KNMI collect the data continually and in the morning the data collated to the site. 
 The WeatherMontor download the site data and convert it my database table.
 
-[More information about the scrip to collect the KNMI data](https://www.knmi.nl/kennis-en-datacentrum/achtergrond/data-ophalen-vanuit-een-script)
+[More information about the script to collect the KNMI data](https://www.knmi.nl/kennis-en-datacentrum/achtergrond/data-ophalen-vanuit-een-script)
 
 The site data has the follows fields:
 
