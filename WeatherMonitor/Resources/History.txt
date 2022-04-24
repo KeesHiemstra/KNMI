@@ -1,4 +1,7 @@
-﻿Version 0.0.4.22 (2021-06-03)
+﻿Version 0.0.4.23 (2022-04-24)
+* Add a discription of the pressure as tool tip.
+
+Version 0.0.4.22 (2021-06-03)
 * The KNMI repaired the weather collection, the URL was changed and an end date was required.
 
 Version 0.0.4.21 (2021-03-26)

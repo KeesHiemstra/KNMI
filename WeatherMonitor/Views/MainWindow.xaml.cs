@@ -1,10 +1,8 @@
-﻿using CHi.Extensions;
-
+﻿
 using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
 
-using WeatherMonitor.Models;
 using WeatherMonitor.ViewModels;
 
 namespace WeatherMonitor
@@ -13,40 +11,53 @@ namespace WeatherMonitor
 	/// Interaction logic for MainWindow.xaml
 	/// </summary>
 	public partial class MainWindow : Window
-  {
+	{
 
-    public MainViewModel MainVM { get; set; }
+		public MainViewModel MainVM { get; set; }
 
-    public MainWindow()
-    {
+		public MainWindow()
+		{
 
-      Log.Write($"Application {Assembly.GetExecutingAssembly().GetName().Name} started");
+			Log.Write($"Application {Assembly.GetExecutingAssembly().GetName().Name} started");
 
-      MainVM = new MainViewModel(this);
+			MainVM = new MainViewModel(this);
 
-      InitializeComponent();
+			InitializeComponent();
 
-      DataContext = MainVM;
+			DataContext = MainVM;
 
-    }
+		}
 
-    private void Window_Loaded(object sender, RoutedEventArgs e)
-    {
-      MainVM.MainLoaded();
-    }
+		private void Window_Loaded(object sender, RoutedEventArgs e)
+		{
+			MainVM.MainLoaded();
+		}
 
-    #region Menu MainCommands
+		#region Menu MainCommands
 
-    #region Exit command
-    private void ExitCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
-    {
-      e.CanExecute = true;
-    }
+		#region Exit command
+		private void ExitCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+		{
+			e.CanExecute = true;
+		}
 
-    private void ExitCommand_Execute(object sender, ExecutedRoutedEventArgs e)
-    {
-      Application.Current.Shutdown();
-    }
+		private void ExitCommand_Execute(object sender, ExecutedRoutedEventArgs e)
+		{
+			Application.Current.Shutdown();
+		}
+
+		#endregion
+
+		#region Restart command
+		private void RestartCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+		{
+			e.CanExecute = false;
+		}
+
+		private void RestartCommand_Execute(object sender, ExecutedRoutedEventArgs e)
+		{
+			//Application.Restart();
+		}
 
 		#endregion
 

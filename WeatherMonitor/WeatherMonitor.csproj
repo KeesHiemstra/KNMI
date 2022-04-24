@@ -88,6 +88,7 @@
     <Compile Include="ViewModels\Log.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\VisualForecasts.cs" />
+    <Compile Include="ViewModels\VisualHistory.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

@@ -5,10 +5,10 @@
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:local="clr-namespace:WeatherMonitor"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-  xmlns:cmd="clr-namespace:WeatherMonitor.Commands"
+  xmlns:cmd="clr-namespace:WeatherMonitor.Commands" xmlns:viewmodels="clr-namespace:WeatherMonitor.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel}"
   Title="Weather"
-  Width="880"
-  Height="500"
+  Width="980"
+  Height="550"
   Loaded="Window_Loaded"
   mc:Ignorable="d">
 
@@ -17,6 +17,10 @@
       CanExecute="ExitCommand_CanExecute"
       Command="cmd:MainCommands.Exit"
       Executed="ExitCommand_Execute" />
+    <CommandBinding
+      CanExecute="RestartCommand_CanExecute"
+      Command="cmd:MainCommands.Restart"
+      Executed="RestartCommand_Execute" />
   </Window.CommandBindings>
   
   <Grid>
@@ -117,7 +121,8 @@
           <TextBlock
             Width="75"
             FontSize="14"
-            Text="{Binding Today.Pressure, StringFormat=0 hPa}" />
+            Text="{Binding Today.Pressure, StringFormat=0 hPa}" 
+            ToolTip="{Binding Today.DisplayPessure}" />
           <TextBlock
             Width="75"
             FontSize="14"
@@ -125,7 +130,8 @@
           <TextBlock
             Width="75"
             FontSize="14"
-            Text="{Binding Yesterday.Pressure, StringFormat=0 hPa}" />
+            Text="{Binding Yesterday.Pressure, StringFormat=0 hPa}" 
+            ToolTip="{Binding Yesterday.DisplayPessure}" />
         </StackPanel>
 
         <StackPanel Orientation="Horizontal">
@@ -249,8 +255,19 @@
                 Margin="5,0,5,0"
                 Grid.ColumnSpan="2"
                 Grid.Row="4"/>
-
-
+    
+    <!-- History -->
+    <TextBlock Text="History"
+               FontSize="16"
+               FontWeight="Black"
+               Foreground="DarkGray"
+               Margin="5,5,5,0"
+               Grid.Row="5"/>
+    <StackPanel x:Name="HistoryStackPanel"
+                Orientation="Horizontal"
+                Margin="5,0,5,0"
+                Grid.ColumnSpan="2"
+                Grid.Row="6"/>
 
     <StatusBar Grid.Row="9" Grid.ColumnSpan="2">
       <StatusBarItem Content="{Binding Now.DisplayDate}" ToolTip="ISO date" />

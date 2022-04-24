@@ -28,10 +28,10 @@ namespace WeatherMonitor.ViewModels
 		public VisualForecasts(MainWindow view)
 		{
 			MainView = view;
-			StartCollecting();
+			_ = StartCollecting();
 		}
 
-	private async Task StartCollecting()
+		private async Task StartCollecting()
 		{
 			await CollectForecasts();
 			foreach (Forecast item in Forecasts)
@@ -79,7 +79,7 @@ namespace WeatherMonitor.ViewModels
 		private async Task<Border> BlockForecast(Forecast forecast)
 		{
 			StackPanel panel = new StackPanel()
-			{ 
+			{
 				Orientation = Orientation.Vertical,
 			};
 
@@ -89,13 +89,13 @@ namespace WeatherMonitor.ViewModels
 				BorderThickness = new Thickness(0.5),
 				Child = panel,
 				Padding = new Thickness(1),
-				ToolTip = new ToolTip() 
+				ToolTip = new ToolTip()
 				{
 					StaysOpen = true,
 					Content = await ToolTipForecast(forecast),
 				},
 			};
-			
+
 			TextBlock output = new TextBlock()
 			{
 				Text = forecast.ForecastDate.ToString("ddd d"),
@@ -155,21 +155,21 @@ namespace WeatherMonitor.ViewModels
 				Orientation = Orientation.Horizontal,
 			};
 
-			panel.Children.Add(new TextBlock() 
+			_ = panel.Children.Add(new TextBlock()
 			{
 				Text = forecast.WeatherType,
 				Width = 75,
 				TextWrapping = TextWrapping.WrapWithOverflow,
 			});
 
-			panel.Children.Add(new TextBlock()
+			_ = panel.Children.Add(new TextBlock()
 			{
 				Text = forecast.MaxTemperature.ToString(),
 				Padding = new Thickness(0, 0, 3, 0),
 				Width = 20,
 			});
 
-			panel.Children.Add(new TextBlock()
+			_ = panel.Children.Add(new TextBlock()
 			{
 				Text = forecast.MinTemperature.ToString(),
 				Width = 20,

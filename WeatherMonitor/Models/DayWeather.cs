@@ -147,6 +147,23 @@ namespace WeatherDemon.Models
 			return condition[Condition];
 		}
 
+		public string DisplayPessure
+		{
+			get
+			{
+				if (Pressure < 950) return "Veel te laag";
+				if (Pressure < 967) return "Zware storm";
+				if (Pressure < 980) return "Storm";
+				if (Pressure < 993) return "Veel regen";
+				if (Pressure < 1007) return "Regen of wind";
+				if (Pressure < 1020) return "Veranderlijk weer";
+				if (Pressure < 1033) return "Goed weer";
+				if (Pressure < 1047) return "Mooi weer";
+				if (Pressure < 1050 ) return "Zeer mooi weer";
+				return "Veel te hoog";
+			}
+		}
+
 	}
 
 }

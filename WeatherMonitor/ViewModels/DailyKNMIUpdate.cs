@@ -28,14 +28,14 @@ namespace WeatherMonitor.ViewModels
 		public string GetDownloadedKNMIStations()
 		{
 
-			var record = Db.Reports
+			int[] record = Db.Reports
 				.AsNoTracking()
 				.Select(x => x.Stn)
 				.Distinct()
 				.ToArray();
 
 			string stations = string.Empty;
-			foreach (var item in record)
+			foreach (int item in record)
 			{
 				if (!string.IsNullOrEmpty(stations))
 				{

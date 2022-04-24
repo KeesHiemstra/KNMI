@@ -16,5 +16,16 @@ namespace WeatherMonitor.Commands
 				}
 			);
 
+		public static readonly RoutedUICommand Restart = new RoutedUICommand
+			(
+				"_Restart",
+				"Restart",
+				typeof(MainCommands),
+				new InputGestureCollection()
+				{
+					new KeyGesture(Key.R, ModifierKeys.Control),
+				}
+			);
+
 	}
 }
