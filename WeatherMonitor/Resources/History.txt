@@ -1,4 +1,7 @@
-﻿Version 0.0.4.23 (2022-04-24)
+﻿Version 0.0.5.24 (2023-06-03)
+* Add historycal temperatures.
+
+Version 0.0.4.23 (2022-04-24)
 * Add a discription of the pressure as tool tip.
 
 Version 0.0.4.22 (2021-06-03)

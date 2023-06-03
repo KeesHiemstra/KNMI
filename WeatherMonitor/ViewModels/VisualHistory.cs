@@ -33,7 +33,7 @@ namespace WeatherMonitor.ViewModels
 			//History from yesterday till and include to 10 days later
 			for (int i = 0; i < 11; i++)
 			{
-				//await CollectHistory(Date.AddDays(i));
+				await CollectHistory(Date.AddDays(i));
 			}
 		}
 
@@ -87,6 +87,17 @@ namespace WeatherMonitor.ViewModels
 				avgMaxT30);
 		}
 
+
+		/// <summary>
+		/// Fill the BlockHistory to display the data.
+		/// </summary>
+		/// <param name="maxTemp"></param>
+		/// <param name="minTemp"></param>
+		/// <param name="avgMinT10"></param>
+		/// <param name="avgMaxT10"></param>
+		/// <param name="avgMinT30"></param>
+		/// <param name="avgMaxT30"></param>
+
 		private void BlockHistory(
 			DailyReport maxTemp, 
 			DailyReport minTemp, 
@@ -110,20 +121,6 @@ namespace WeatherMonitor.ViewModels
 
 			panel.Children.Add(new TextBlock()
 			{
-				Text = $"{maxTemp.TN} ({maxTemp.Date.Year})",
-				FontSize = 10,
-				Width = 75,
-			});
-
-			panel.Children.Add(new TextBlock()
-			{
-				Text = $"{minTemp.TN} ({minTemp.Date.Year})",
-				FontSize = 10,
-				Width = 75,
-			});
-
-			panel.Children.Add(new TextBlock()
-			{
 				Text = $"{avgMinT10:0.0} / {avgMaxT10:0.0}",
 				FontSize = 10,
 				Width = 75,
@@ -132,6 +129,27 @@ namespace WeatherMonitor.ViewModels
 			panel.Children.Add(new TextBlock()
 			{
 				Text = $"{avgMinT30:0.0} / {avgMaxT30:0.0}",
+				FontSize = 10,
+				Width = 75,
+			});
+
+			panel.Children.Add(new TextBlock()
+			{
+				Text = " ",
+				FontSize = 3,
+				Width = 75,
+			});
+
+			panel.Children.Add(new TextBlock()
+			{
+				Text = $"{maxTemp.TX} ({maxTemp.Date.Year})",
+				FontSize = 10,
+				Width = 75,
+			});
+
+			panel.Children.Add(new TextBlock()
+			{
+				Text = $"{minTemp.TN} ({minTemp.Date.Year})",
 				FontSize = 10,
 				Width = 75,
 			});
