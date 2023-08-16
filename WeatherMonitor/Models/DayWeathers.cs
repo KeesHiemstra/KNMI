@@ -59,6 +59,8 @@ namespace WeatherMonitor.Models
 		public decimal TemperatureCurrent { get; private set; }
 		public decimal TemperatureMin { get; private set; }
 		public decimal TemperatureMax { get; private set; }
+		public int PressureMin { get; private set; }
+		public int PressureMax { get; private set; }
 
 		#endregion
 
@@ -164,6 +166,9 @@ namespace WeatherMonitor.Models
 
 			TemperatureMin = Weathers.Min(x => x.Temperature);
 			TemperatureMax = Weathers.Max(x => x.Temperature);
+
+			PressureMin = Weathers.Min(x => x.Pressure);
+			PressureMax = Weathers.Max( x => x.Pressure);
 		}
 
 #if WEATHERMONITOR

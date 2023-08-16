@@ -1,4 +1,8 @@
-﻿Version 0.0.5.24 (2023-06-03)
+﻿Version 0.0.6.25
+* Add air pressure in the graph.
+* Typo correction GetDisplayPessure() to GetDisplayPressure().
+
+Version 0.0.5.24 (2023-06-03)
 * Add historycal temperatures.
 
 Version 0.0.4.23 (2022-04-24)

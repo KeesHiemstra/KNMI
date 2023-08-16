@@ -32,12 +32,19 @@ namespace WeatherMonitor.ViewModels
 		double TempLineFin;
 		double TempLineScale;
 
+		//PressureLine (Y axis)
+		double PressLineStr;
+		double PressLineFin;
+		double PressLineScale;
+
 		//TimeLine time points
 		DateTime DateStr;
 		DateTime DateFin;
 
 		decimal TempMin;
 		decimal TempMax;
+		int PressMin;
+		int PressMax;
 
 		#endregion
 
@@ -64,6 +71,7 @@ namespace WeatherMonitor.ViewModels
 			AddAxis();
 			AddGraphTitle();
 			AddTemperatures();
+			AddPressure();
 			AddTemperaturesMilestones();
 		}
 
@@ -89,6 +97,9 @@ namespace WeatherMonitor.ViewModels
 			TempLineStr = Graph.Height - MarginBottom;
 			TempLineFin = MarginTop;
 
+			PressLineStr = Graph.Height - MarginBottom;
+			PressLineFin = MarginTop;
+
 			DateStr = VM.CurrentWeathers.Date;
 			DateFin = DateStr.AddDays(1).AddSeconds(-1);
 
@@ -105,6 +116,21 @@ namespace WeatherMonitor.ViewModels
 				TempMax = Math.Ceiling(VM.CurrentWeathers.TemperatureMax + (decimal)0.25);
 			}
 			TempLineScale = (TempLineStr - TempLineFin) / (double)(TempMax - TempMin);
+
+			PressMin = VM.PreviousWeathers.PressureMin;
+			if (VM.CurrentWeathers.PressureMin < VM.PreviousWeathers.PressureMin)
+			{
+				PressMin = VM.CurrentWeathers.PressureMin;
+			}
+			PressMin -= 1;
+			PressMax = VM.PreviousWeathers.PressureMax;
+			if (VM.CurrentWeathers.PressureMax > VM.PreviousWeathers.PressureMax)
+			{
+				PressMax = VM.CurrentWeathers.PressureMax;
+			}
+			PressMax += 1;
+			PressLineScale = (PressLineStr - PressLineFin) / (double)(PressMax - PressMin);
+
 		}
 
 		private void AddDaylight()
@@ -133,6 +159,13 @@ namespace WeatherMonitor.ViewModels
 		}
 
 		private void AddAxis()
+		{
+			AddAxisTime();
+			AddAxisTemperature();
+			AddAxisPressure();
+		}
+
+		private void AddAxisTime()
 		{
 			//Time axis (X axis)
 			Graph.Children.Add(new Line()
@@ -174,6 +207,10 @@ namespace WeatherMonitor.ViewModels
 				time = time.AddHours(1);
 			}
 
+		}
+
+		private void AddAxisTemperature()
+		{
 			//Temperature axis (Y axis)
 			Graph.Children.Add(new Line()
 			{
@@ -210,6 +247,48 @@ namespace WeatherMonitor.ViewModels
 					Canvas.SetTop(text, TempLineStr - ((i - (int)TempMin) * TempLineScale) - 7);
 				}
 			}
+
+		}
+
+		private void AddAxisPressure()
+		{
+			//Pressure axis (Y axis)
+			Graph.Children.Add(new Line()
+			{
+				X1 = Graph.Width,
+				Y1 = MarginTop,
+				X2 = Graph.Width,
+				Y2 = Graph.Height - MarginBottom,
+				StrokeThickness = 1,
+				Stroke = Brushes.Red,
+			});
+
+			//Pressure scale
+			for (int i = (int)PressMin; i < (int)PressMax; i++)
+			{
+				Graph.Children.Add(new Line()
+				{
+					X1 = Graph.Width - 3,
+					Y1 = PressLineStr - ((i - (int)PressMin) * PressLineScale),
+					X2 = Graph.Width,
+					Y2 = PressLineStr - ((i - (int)PressMin) * PressLineScale),
+					StrokeThickness = 1,
+					Stroke = Brushes.Red,
+				});
+
+				if ((i % 5) == 6)
+				{
+					TextBlock text = new TextBlock()
+					{
+						Text = i.ToString(),
+						FontSize = 9,
+					};
+					Graph.Children.Add(text);
+					Canvas.SetLeft(text, TimeLineStr - 7 - 10);
+					Canvas.SetTop(text, TempLineStr - ((i - (int)TempMin) * TempLineScale) - 7);
+				}
+			}
+
 		}
 
 		private void AddGraphTitle()
@@ -279,6 +358,66 @@ namespace WeatherMonitor.ViewModels
 					Canvas.SetTop(area, TempLineStr - (double)(tempStr - TempMin) * TempLineScale - 2);
 
 					tempStr = tempFin;
+					timeStr = timeFin;
+				}
+			}
+		}
+
+		private void AddPressure()
+		{
+			for (int day = 0; day < 2; day++)
+			{
+				ObservableCollection<DayWeather> weathers;
+				if (day == 0)
+				{
+					weathers = VM.CurrentWeathers.Weathers;
+					DateStr = VM.CurrentWeathers.Date;
+				}
+				else
+				{
+					weathers = VM.PreviousWeathers.Weathers;
+					DateStr = VM.PreviousWeathers.Date;
+					DateFin = DateStr.AddDays(1).AddSeconds(-1);
+				}
+
+				decimal pressStr = weathers[0].Pressure;
+				decimal pressFin;
+				TimeSpan timeStr = weathers[0].Time - DateStr;
+				TimeSpan timeFin;
+				for (int i = 0; i < weathers.Count; i++)
+				{
+					pressFin = weathers[i].Pressure;
+					timeFin = weathers[i].Time - DateStr;
+
+					Line line = new Line()
+					{
+						X1 = TimeLineStr + timeStr.TotalMinutes * TimeLineScale,
+						Y1 = PressLineStr - (double)(pressStr - PressMin) * PressLineScale,
+						X2 = TimeLineStr + timeFin.TotalMinutes * TimeLineScale,
+						Y2 = PressLineStr - (double)(pressFin - PressMin) * PressLineScale,
+						StrokeThickness = 2,
+						Stroke = Brushes.Red
+					};
+
+					if (day == 1)
+					{
+						line.StrokeThickness = 1;
+						line.Stroke = Brushes.DarkRed;
+					}
+					Graph.Children.Add(line);
+
+					Rectangle area = new Rectangle()
+					{
+						Width = 4,
+						Height = 4,
+						Fill = Brushes.Transparent,
+						ToolTip = $"time: {weathers[i].Time:dd HH:mm}\npress: {weathers[i].Pressure} hPa",
+					};
+					Graph.Children.Add(area);
+					Canvas.SetLeft(area, TimeLineStr + timeStr.TotalMinutes * TimeLineScale - 2);
+					Canvas.SetTop(area, PressLineStr - (double)(pressStr - PressMin) * PressLineScale - 2);
+
+					pressStr = pressFin;
 					timeStr = timeFin;
 				}
 			}
