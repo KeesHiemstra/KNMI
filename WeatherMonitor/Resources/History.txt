@@ -1,4 +1,8 @@
-﻿Version 0.0.6.25
+﻿Version 0.0.6.26 (2023-08-17)
+* Adjust the thickniss of the pressure line.
+* Bug fix: Tooltip of Pressures was not shown.
+
+Version 0.0.6.25 (2023-08-16)
 * Add air pressure in the graph.
 * Typo correction GetDisplayPessure() to GetDisplayPressure().
 

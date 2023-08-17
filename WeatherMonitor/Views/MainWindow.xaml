@@ -122,7 +122,7 @@
             Width="75"
             FontSize="14"
             Text="{Binding Today.Pressure, StringFormat=0 hPa}" 
-            ToolTip="{Binding Today.DisplayPessure}" />
+            ToolTip="{Binding Today.DisplayPressure}" />
           <TextBlock
             Width="75"
             FontSize="14"
@@ -131,7 +131,7 @@
             Width="75"
             FontSize="14"
             Text="{Binding Yesterday.Pressure, StringFormat=0 hPa}" 
-            ToolTip="{Binding Yesterday.DisplayPessure}" />
+            ToolTip="{Binding Yesterday.DisplayPressure}" />
         </StackPanel>
 
         <StackPanel Orientation="Horizontal">

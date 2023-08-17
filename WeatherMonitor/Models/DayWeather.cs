@@ -53,6 +53,11 @@ namespace WeatherDemon.Models
 			get => $"{MinTemperature}/{MaxTemperature}";
 		}
 
+		public string DisplayPressure
+		{
+			get => GetDisplayPressure();
+		}
+
 		private string CompileWindDirection()
 		{
 			string[] DirectionName = new string[16]

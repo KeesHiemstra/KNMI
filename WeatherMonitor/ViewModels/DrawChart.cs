@@ -395,13 +395,13 @@ namespace WeatherMonitor.ViewModels
 						Y1 = PressLineStr - (double)(pressStr - PressMin) * PressLineScale,
 						X2 = TimeLineStr + timeFin.TotalMinutes * TimeLineScale,
 						Y2 = PressLineStr - (double)(pressFin - PressMin) * PressLineScale,
-						StrokeThickness = 2,
+						StrokeThickness = 0.75,
 						Stroke = Brushes.Red
 					};
 
 					if (day == 1)
 					{
-						line.StrokeThickness = 1;
+						line.StrokeThickness = 0.75;
 						line.Stroke = Brushes.DarkRed;
 					}
 					Graph.Children.Add(line);
