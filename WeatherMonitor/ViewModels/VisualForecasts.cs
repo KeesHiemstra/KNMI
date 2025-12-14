@@ -29,6 +29,7 @@ namespace WeatherMonitor.ViewModels
 		{
 			MainView = view;
 			_ = StartCollecting();
+			view.Forecasts = this.Forecasts;
 		}
 
 		private async Task StartCollecting()

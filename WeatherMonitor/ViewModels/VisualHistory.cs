@@ -15,6 +15,7 @@ namespace WeatherMonitor.ViewModels
 	{
 		public const string dbConnection = @"Database=Weather;Data Source=(Local);Trusted_Connection=True;MultipleActiveResultSets=true";
 		private readonly MainWindow MainView;
+		static string[] Arrows = new string[3] { "", "↑ ", "↓ " };
 
 		public static WeatherDbContext Db { get; set; }
 
@@ -33,16 +34,16 @@ namespace WeatherMonitor.ViewModels
 			//History from yesterday till and include to 10 days later
 			for (int i = 0; i < 11; i++)
 			{
-				await CollectHistory(Date.AddDays(i));
+				await CollectHistory(Date.AddDays(i), i);
 			}
 		}
 
-		private async Task CollectHistory(DateTime dateTime)
+		private async Task CollectHistory(DateTime dateTime, int count)
 		{
 			//All data for this day
 			List<DailyReport> History = Db.Reports
 				.Where(x => x.Stn == 260 &&
-					x.Date.Month == dateTime.Month && 
+					x.Date.Month == dateTime.Month &&
 					x.Date.Day == dateTime.Day &&
 					x.Date.Year >= dateTime.Year - 31 &&
 					x.TX != null &&
@@ -63,30 +64,41 @@ namespace WeatherMonitor.ViewModels
 				.Average(x => x.TN)
 				.Value;
 
+			string arwMinT10 = ArrowDirection(true, count, avgMinT10);
+
 			decimal avgMaxT10 = History
 				.Where(x => x.Date.Year >= (dateTime.Year - 11))
 				.Average(x => x.TX)
 				.Value;
 
-			decimal avgMinT30 = History
+			string arwMaxT10 = ArrowDirection(false, count, avgMaxT10);
+
+      decimal avgMinT30 = History
 				.Where(x => x.Date.Year >= (dateTime.Year - 31))
 				.Average(x => x.TN)
 				.Value;
 
-			decimal avgMaxT30 = History
+			string arwMinT30 = ArrowDirection(true, count, avgMinT30);
+
+      decimal avgMaxT30 = History
 				.Where(x => x.Date.Year >= (dateTime.Year - 31))
 				.Average(x => x.TX)
 				.Value;
 
-			BlockHistory(
-				maxTemp, 
-				minTemp, 
-				avgMinT10, 
-				avgMaxT10,
-				avgMinT30,
-				avgMaxT30);
-		}
+			string arwMaxT30 = ArrowDirection(false, count, avgMaxT30);
 
+      BlockHistory(
+				maxTemp,
+				minTemp,
+				avgMinT10,
+				arwMinT10,
+				avgMaxT10,
+				arwMaxT10,
+				avgMinT30,
+				arwMinT30,
+				avgMaxT30,
+				arwMaxT30);
+		}
 
 		/// <summary>
 		/// Fill the BlockHistory to display the data.
@@ -99,12 +111,16 @@ namespace WeatherMonitor.ViewModels
 		/// <param name="avgMaxT30"></param>
 
 		private void BlockHistory(
-			DailyReport maxTemp, 
-			DailyReport minTemp, 
-			decimal avgMinT10, 
+			DailyReport maxTemp,
+			DailyReport minTemp,
+			decimal avgMinT10,
+			string arwMinT10,
 			decimal avgMaxT10,
+			string arwMaxT10,
 			decimal avgMinT30,
-			decimal avgMaxT30)
+			string arwMinT30,
+			decimal avgMaxT30,
+			string arwMaxT30)
 		{
 			StackPanel panel = new StackPanel()
 			{
@@ -121,14 +137,14 @@ namespace WeatherMonitor.ViewModels
 
 			panel.Children.Add(new TextBlock()
 			{
-				Text = $"{avgMinT10:0.0} / {avgMaxT10:0.0}",
+				Text = $"{arwMinT10}{avgMinT10:0.0} / {arwMaxT10}{avgMaxT10:0.0}",
 				FontSize = 10,
 				Width = 75,
 			});
 
 			panel.Children.Add(new TextBlock()
 			{
-				Text = $"{avgMinT30:0.0} / {avgMaxT30:0.0}",
+				Text = $"{arwMinT30}{avgMinT30:0.0} / {arwMaxT30}{avgMaxT30:0.0}",
 				FontSize = 10,
 				Width = 75,
 			});
@@ -156,5 +172,25 @@ namespace WeatherMonitor.ViewModels
 
 			MainView.HistoryStackPanel.Children.Add(border);
 		}
-	}
+
+    private string ArrowDirection(bool MinTemperatuur, int count, decimal temp)
+    {
+			if (MainView.Forecasts == null || count > MainView.Forecasts.Count )
+      return Arrows[0];
+
+			decimal forecast;
+			if (MinTemperatuur)
+				forecast = MainView.Forecasts[count].MinTemperature;
+			else
+				forecast = MainView.Forecasts[count].MaxTemperature;
+
+      if (temp < forecast)
+				return Arrows[1];
+
+			if (temp > forecast)
+        return Arrows[2];
+
+       return Arrows[0];
+    }
+  }
 }
