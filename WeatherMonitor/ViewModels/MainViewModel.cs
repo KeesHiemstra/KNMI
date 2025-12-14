@@ -94,9 +94,14 @@ namespace WeatherMonitor.ViewModels
 				Diff.WindSpeed = Today.WindSpeed - Yesterday.WindSpeed;
 
 				Today.MinTemperature = CurrentWeathers.Weathers.Min(x => x.Temperature);
-				Today.MaxTemperature = CurrentWeathers.Weathers.Max(x => x.Temperature);
+				Today.MinTemperatureTime = CurrentWeathers.Weathers.First(x => x.Temperature == Today.MinTemperature).Time;
+				Today.MaxTemperature = CurrentWeathers.Weathers
+					.Where(x => x.Time >= Today.MinTemperatureTime)
+					.Max(x => x.Temperature);
+
 				Yesterday.MinTemperature = PreviousWeathers.Weathers.Min(x => x.Temperature);
-				Yesterday.MaxTemperature = PreviousWeathers.Weathers.Max(x => x.Temperature);
+				Yesterday.MaxTemperature = PreviousWeathers.Weathers
+					.Max(x => x.Temperature);
 			}
 		}
 

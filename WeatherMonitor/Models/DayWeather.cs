@@ -16,6 +16,7 @@ namespace WeatherDemon.Models
 		public int Covering { get; set; }
 		public int Condition { get; set; }
 		public decimal MinTemperature { get; set; }
+		public DateTime MinTemperatureTime { get; set; }
 		public decimal MaxTemperature { get; set; }
 
 		public int WindSpeedBft 
