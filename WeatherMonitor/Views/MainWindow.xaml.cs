@@ -1,8 +1,10 @@
 ﻿
+using System.Collections.Generic;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
 
+using WeatherMonitor.Models;
 using WeatherMonitor.ViewModels;
 
 namespace WeatherMonitor
@@ -14,8 +16,9 @@ namespace WeatherMonitor
 	{
 
 		public MainViewModel MainVM { get; set; }
+		public List<Forecast> Forecasts = new List<Forecast>();
 
-		public MainWindow()
+    public MainWindow()
 		{
 
 			Log.Write($"Application {Assembly.GetExecutingAssembly().GetName().Name} started");
