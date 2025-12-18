@@ -14,16 +14,28 @@ namespace WeatherMonitor
 	/// </summary>
 	public partial class MainWindow : Window
 	{
+    #region [ Properties ]
 
-		public MainViewModel MainVM { get; set; }
+    public MainViewModel MainVM { get; set; }
 		public List<Forecast> Forecasts = new List<Forecast>();
+
+    #endregion	
+
+    #region [ Constructor ]
 
     public MainWindow()
 		{
 
-			Log.Write($"Application {Assembly.GetExecutingAssembly().GetName().Name} started");
+      string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+			Log.Write($"Application Weather monitor {version} started");
+			
+#if DEBUG
+      Title = $"Weather [{version}]";
+#else
+			Title = $"Weather ({version})";
+#endif
 
-			MainVM = new MainViewModel(this);
+      MainVM = new MainViewModel(this);
 
 			InitializeComponent();
 
@@ -31,14 +43,16 @@ namespace WeatherMonitor
 
 		}
 
-		private void Window_Loaded(object sender, RoutedEventArgs e)
+    #endregion
+
+    private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
 			MainVM.MainLoaded();
 		}
 
-		#region Menu MainCommands
+    #region Menu MainCommands
 
-		#region Exit command
+    #region Exit command
 		private void ExitCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
 		{
 			e.CanExecute = true;
@@ -49,9 +63,9 @@ namespace WeatherMonitor
 			Application.Current.Shutdown();
 		}
 
-		#endregion
+    #endregion
 
-		#region Restart command
+    #region Restart command
 		private void RestartCommand_CanExecute(object sender, CanExecuteRoutedEventArgs e)
 		{
 			e.CanExecute = false;
@@ -62,9 +76,9 @@ namespace WeatherMonitor
 			//Application.Restart();
 		}
 
-		#endregion
+    #endregion
 
-		#endregion
+    #endregion
 
 	}
 }

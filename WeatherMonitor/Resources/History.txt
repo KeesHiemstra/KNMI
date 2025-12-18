@@ -1,4 +1,8 @@
-﻿Version 0.0.7.27 (2025-12-14)
+﻿Version 0.0.7.28 (2025-12-18)
+* Add version in the title bar.
+* Changed the title bar [] to () if it a debug version.
+
+Version 0.0.7.27 (2025-12-14)
 * Show the differce between the current temperature and the historical average temperature as an arrow.
 
 Version 0.0.6.26 (2023-08-17)
