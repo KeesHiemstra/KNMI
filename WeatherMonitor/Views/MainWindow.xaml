@@ -6,7 +6,6 @@
   xmlns:local="clr-namespace:WeatherMonitor"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:cmd="clr-namespace:WeatherMonitor.Commands" xmlns:viewmodels="clr-namespace:WeatherMonitor.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel}"
-  Title="Weather"
   Width="980"
   Height="550"
   Loaded="Window_Loaded"
