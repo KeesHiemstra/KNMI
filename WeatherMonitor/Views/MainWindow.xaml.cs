@@ -26,7 +26,9 @@ namespace WeatherMonitor
     public MainWindow()
 		{
 
-      string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+      #region Window name and version
+      
+			string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 			Log.Write($"Application Weather monitor {version} started");
 			
 #if DEBUG
@@ -34,6 +36,8 @@ namespace WeatherMonitor
 #else
 			Title = $"Weather ({version})";
 #endif
+
+      #endregion
 
       MainVM = new MainViewModel(this);
 
