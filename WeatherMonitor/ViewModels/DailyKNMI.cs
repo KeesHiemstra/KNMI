@@ -1,5 +1,7 @@
 ﻿using CHi.Extensions;
+
 using KNMI.Models;
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -43,7 +45,9 @@ namespace WeatherMonitor.ViewModels
 
 			Log.Write("Initialize DailyKNMI");
 			Db = new WeatherDbContext(dbConnection);
-			InitialData();
+			// It can't async.
+			// using var _ = InitialData();
+			InitialDataAsync();
 
 		}
 
@@ -64,6 +68,11 @@ namespace WeatherMonitor.ViewModels
 		#endregion
 
 		#endregion
+
+		internal void InitialDataAsync()
+		{
+			Task.Run(() => InitialData());
+		}
 
 		private async Task InitialData()
 		{
@@ -96,6 +105,7 @@ namespace WeatherMonitor.ViewModels
 		}
 
 		#region GetUpdateDate()
+
 		/// <summary>
 		/// Get the latest downloaded KNMI data.
 		/// </summary>
@@ -126,6 +136,7 @@ namespace WeatherMonitor.ViewModels
 			}
 
 		}
+
 		#endregion
 
 		#region GetDailyRange

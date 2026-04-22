@@ -1,4 +1,9 @@
-﻿Version 0.0.7.28 (2025-12-18)
+﻿Version history of WeatherMonitor.
+-----------------------------------
+Version 0.0.7.29 (2026-04-22)
+* Update framework to version number 4.8.1.
+
+Version 0.0.7.28 (2025-12-18)
 * Add version in the title bar.
 * Changed the title bar [] to () if it a debug version.
 

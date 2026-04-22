@@ -177,5 +177,6 @@ namespace WeatherMonitor.ViewModels
 		}
 
 		#endregion
+
 	}
 }

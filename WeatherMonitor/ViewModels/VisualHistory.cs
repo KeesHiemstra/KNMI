@@ -192,5 +192,6 @@ namespace WeatherMonitor.ViewModels
 
        return Arrows[0];
     }
+
   }
 }

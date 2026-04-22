@@ -41,5 +41,6 @@ namespace WeatherMonitor.ViewModels
 				stream.WriteLine(Message);
 			}
 		}
+
 	}
 }

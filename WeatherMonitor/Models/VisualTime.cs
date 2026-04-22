@@ -178,5 +178,6 @@ namespace WeatherMonitor.Models
 			SunriseTime = daylight.SunriseUtc.Value.LocalDateTime.ToLocalTime();
 			SunsetTime = daylight.SunsetUtc.Value.LocalDateTime.ToLocalTime();
 		}
+
 	}
 }

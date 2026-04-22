@@ -309,4 +309,5 @@ namespace Trinet.Core
 			return CalculateCore(date, location);
 		}
 	}
+
 }
