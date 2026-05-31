@@ -1,5 +1,8 @@
 ﻿Version history of WeatherMonitor.
 -----------------------------------
+Version 0.0.7.30 (2026-05-24)
+* Update EntityFramework to version 6.5.2.
+
 Version 0.0.7.29 (2026-04-22)
 * Update framework to version number 4.8.1.
 
