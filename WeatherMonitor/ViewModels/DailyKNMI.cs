@@ -12,7 +12,8 @@ namespace WeatherMonitor.ViewModels
 {
 	public class DailyKNMI : INotifyPropertyChanged
 	{
-		public const string dbConnection = @"Database=Weather;Data Source=(Local);Trusted_Connection=True;MultipleActiveResultSets=true";
+		public const string dbConnection = 
+			@"Database=Weather;Data Source=(Local);Trusted_Connection=True;MultipleActiveResultSets=true";
 
 		#region [ Fields ]
 

@@ -5,53 +5,55 @@
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:local="clr-namespace:WeatherMonitor"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-  xmlns:cmd="clr-namespace:WeatherMonitor.Commands" xmlns:viewmodels="clr-namespace:WeatherMonitor.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel}"
+  xmlns:cmd="clr-namespace:WeatherMonitor.Commands" 
+	xmlns:viewmodels="clr-namespace:WeatherMonitor.ViewModels" 
+	d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel}"
   Width="868"
   Height="550"
   Loaded="Window_Loaded"
   mc:Ignorable="d">
 
-  <Window.CommandBindings>
-    <CommandBinding
+	<Window.CommandBindings>
+		<CommandBinding
       CanExecute="ExitCommand_CanExecute"
       Command="cmd:MainCommands.Exit"
       Executed="ExitCommand_Execute" />
-    <CommandBinding
+		<CommandBinding
       CanExecute="RestartCommand_CanExecute"
       Command="cmd:MainCommands.Restart"
       Executed="RestartCommand_Execute" />
-  </Window.CommandBindings>
-  
-  <Grid>
-    <Grid.ColumnDefinitions>
-      <ColumnDefinition Width="Auto" />
-      <ColumnDefinition Width="*" />
-    </Grid.ColumnDefinitions>
-    <Grid.RowDefinitions>
-      <!--  Menu  -->
-      <RowDefinition Height="Auto" />
-      <RowDefinition Height="Auto" />
-      <RowDefinition Height="Auto" />
-      <RowDefinition Height="Auto" />
-      <RowDefinition Height="Auto" />
-      <RowDefinition Height="Auto" />
-      <RowDefinition Height="Auto" />
-      <RowDefinition Height="Auto" />
-      <RowDefinition Height="*" />
-      <!--  Status bar  -->
-      <RowDefinition Height="Auto" />
-    </Grid.RowDefinitions>
+	</Window.CommandBindings>
 
-    <Menu
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="Auto" />
+			<ColumnDefinition Width="*" />
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<!--  Menu  -->
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*" />
+			<!--  Status bar  -->
+			<RowDefinition Height="Auto" />
+		</Grid.RowDefinitions>
+
+		<Menu
       Name="MainMenu"
       Grid.Row="0"
       Grid.ColumnSpan="2">
-      <MenuItem Header="_File">
-        <MenuItem Command="cmd:MainCommands.Exit" />
-      </MenuItem>
-    </Menu>
+			<MenuItem Header="_File">
+				<MenuItem Command="cmd:MainCommands.Exit" />
+			</MenuItem>
+		</Menu>
 
-    <StackPanel
+		<StackPanel
       Name="GraphStackPanel"
       Grid.Row="2"
       Grid.Column="0"
@@ -59,240 +61,254 @@
       Margin="10"
       HorizontalAlignment="Left" />
 
-    <StackPanel
+		<StackPanel
       Grid.Row="2"
       Grid.Column="2"
       Margin="10">
-      <StackPanel Name="ResultStackPanel" Orientation="Vertical">
-        <StackPanel Orientation="Horizontal">
-          <TextBlock Width="100" Text="" />
-          <TextBlock
+			<StackPanel Name="ResultStackPanel" Orientation="Vertical">
+				<StackPanel Orientation="Horizontal">
+					<TextBlock Width="100" Text="" />
+					<TextBlock
             Width="75"
             FontWeight="Black"
             Foreground="DarkGray"
             Text="Today" />
-          <TextBlock
+					<TextBlock
             Width="75"
             FontWeight="Black"
             Foreground="DarkGray"
             Text="Difference" />
-          <TextBlock
+					<TextBlock
             Width="75"
             FontWeight="Black"
             Foreground="DarkGray"
             Text="Yesterday" />
-        </StackPanel>
+				</StackPanel>
 
-        <StackPanel Orientation="Horizontal">
-          <TextBlock Width="100" Text="Time" />
-          <TextBlock
+				<StackPanel Orientation="Horizontal">
+					<TextBlock Width="100" Text="Time" />
+					<TextBlock
             Width="75"
             FontSize="14"
             Text="{Binding Today.Time, StringFormat=HH:mm}"
             ToolTip="{Binding Today.DemonTime, StringFormat=yyyy-MM-dd HH:mm:ss}" />
-          <TextBlock
+					<TextBlock
             Width="75"/>
-          <TextBlock
+					<TextBlock
             Width="75"
             FontSize="14"
             Text="{Binding Yesterday.Time, StringFormat=HH:mm}"
             ToolTip="{Binding Yesterday.DemonTime, StringFormat=yyyy-MM-dd HH:mm:ss}" />
-        </StackPanel>
+				</StackPanel>
 
-        <StackPanel Orientation="Horizontal">
-          <TextBlock Width="100" Text="Temperature" />
-          <TextBlock
+				<StackPanel Orientation="Horizontal">
+					<TextBlock Width="100" Text="Temperature" />
+					<TextBlock
             Width="75"
             FontSize="14"
             Text="{Binding Today.Temperature, StringFormat=0.0 °C}" />
-          <TextBlock
+					<TextBlock
             Width="75"
             FontSize="14"
             Text="{Binding Diff.Temperature, StringFormat=0.0 °C}" />
-          <TextBlock
+					<TextBlock
             Width="75"
             FontSize="14"
             Text="{Binding Yesterday.Temperature, StringFormat=0.0 °C}" />
-        </StackPanel>
+				</StackPanel>
 
-        <StackPanel Orientation="Horizontal">
-          <TextBlock Width="100" Text="Pressure" />
-          <TextBlock
+				<StackPanel Orientation="Horizontal">
+					<TextBlock Width="100" Text="Pressure" />
+					<TextBlock
             Width="75"
             FontSize="14"
             Text="{Binding Today.Pressure, StringFormat=0 hPa}" 
             ToolTip="{Binding Today.DisplayPressure}" />
-          <TextBlock
+					<TextBlock
             Width="75"
             FontSize="14"
             Text="{Binding Diff.Pressure, StringFormat=0 hPa}" />
-          <TextBlock
+					<TextBlock
             Width="75"
             FontSize="14"
             Text="{Binding Yesterday.Pressure, StringFormat=0 hPa}" 
             ToolTip="{Binding Yesterday.DisplayPressure}" />
-        </StackPanel>
+				</StackPanel>
 
-        <StackPanel Orientation="Horizontal">
-          <TextBlock Width="100" Text="Humidity" />
-          <TextBlock
+				<StackPanel Orientation="Horizontal">
+					<TextBlock Width="100" Text="Humidity" />
+					<TextBlock
             Width="75"
             FontSize="14"
             Text="{Binding Today.DisplayHumidity, StringFormat=0 %}" />
-          <TextBlock
+					<TextBlock
             Width="75"
             FontSize="14"
             Text="{Binding Diff.DisplayHumidity, StringFormat=0 %}" />
-          <TextBlock
+					<TextBlock
             Width="75"
             FontSize="14"
             Text="{Binding Yesterday.DisplayHumidity, StringFormat=0 %}" />
-        </StackPanel>
+				</StackPanel>
 
-        <StackPanel Orientation="Horizontal">
-          <TextBlock Width="100" Text="Visibility" />
-          <TextBlock
+				<StackPanel Orientation="Horizontal">
+					<TextBlock Width="100" Text="Visibility" />
+					<TextBlock
             Width="75"
             FontSize="14"
             Text="{Binding Today.DisplayVisibility, StringFormat=0 km}" />
-          <TextBlock
+					<TextBlock
             Width="75"/>
-          <TextBlock
+					<TextBlock
             Width="75"
             FontSize="14"
             Text="{Binding Yesterday.DisplayVisibility, StringFormat=0 km}" />
-        </StackPanel>
+				</StackPanel>
 
-        <StackPanel Orientation="Horizontal">
-          <TextBlock Width="100" Text="Wind speed" />
-          <TextBlock
+				<StackPanel Orientation="Horizontal">
+					<TextBlock Width="100" Text="Wind speed" />
+					<TextBlock
             Width="75"
             FontSize="14"
             Text="{Binding Today.WindSpeed, StringFormat=0 km/u}" />
-          <TextBlock
+					<TextBlock
             Width="75"
             FontSize="14"
             Text="{Binding Diff.WindSpeed, StringFormat=0 km/u}" />
-          <TextBlock
+					<TextBlock
             Width="75"
             FontSize="14"
             Text="{Binding Yesterday.WindSpeed, StringFormat=0 km/u}" />
-        </StackPanel>
+				</StackPanel>
 
-        <StackPanel Orientation="Horizontal">
-          <TextBlock Width="100" Text="" />
-          <TextBlock Width="75" Text="{Binding Today.WindSpeedBft, StringFormat=0 Bft}" />
-          <TextBlock Width="75"/>
-          <TextBlock Width="75" Text="{Binding Yesterday.WindSpeedBft, StringFormat=0 Bft}" />
-        </StackPanel>
+				<StackPanel Orientation="Horizontal">
+					<TextBlock Width="100" Text="" />
+					<TextBlock Width="75" Text="{Binding Today.WindSpeedBft, StringFormat=0 Bft}" />
+					<TextBlock Width="75"/>
+					<TextBlock Width="75" Text="{Binding Yesterday.WindSpeedBft, StringFormat=0 Bft}" />
+				</StackPanel>
 
-        <StackPanel Orientation="Horizontal">
-          <TextBlock Width="100" Text="Wind direction" />
-          <TextBlock
+				<StackPanel Orientation="Horizontal">
+					<TextBlock Width="100" Text="Wind direction" />
+					<TextBlock
             Width="75"
             FontSize="14"
             Text="{Binding Today.DisplayWindDirection}" />
-          <TextBlock Width="75"/>
-          <TextBlock
+					<TextBlock Width="75"/>
+					<TextBlock
             Width="75"
             FontSize="14"
             Text="{Binding Yesterday.DisplayWindDirection}" />
-        </StackPanel>
+				</StackPanel>
 
-        <StackPanel Orientation="Horizontal">
-          <TextBlock Width="100" Text="Covering" />
-          <TextBlock
+				<StackPanel Orientation="Horizontal">
+					<TextBlock Width="100" Text="Covering" />
+					<TextBlock
             Width="75"
             FontSize="14"
             Text="{Binding Today.DisplayCovering, StringFormat=0 %}" />
-          <TextBlock Width="75"/>
-          <TextBlock
+					<TextBlock Width="75"/>
+					<TextBlock
             Width="75"
             FontSize="14"
             Text="{Binding Yesterday.DisplayCovering, StringFormat=0 %}" />
-        </StackPanel>
+				</StackPanel>
 
-        <StackPanel Orientation="Horizontal">
-          <TextBlock Width="100" Text="Condition" />
-          <TextBlock
+				<StackPanel Orientation="Horizontal">
+					<TextBlock Width="100" Text="Condition" />
+					<TextBlock
             Width="75"
             Padding="0,0,3,0"
             Text="{Binding Today.DisplayCondition}"
             TextWrapping="Wrap" />
-          <TextBlock Width="75"/>
-          <TextBlock
+					<TextBlock Width="75"/>
+					<TextBlock
             Width="75"
             Padding="0,0,3,0"
             Text="{Binding Yesterday.DisplayCondition}"
             TextWrapping="Wrap" />
-        </StackPanel>
+				</StackPanel>
 
-        <StackPanel Orientation="Horizontal">
-          <TextBlock Width="100" Text="Min/Max"/>
-          <TextBlock
+				<StackPanel Orientation="Horizontal">
+					<TextBlock Width="100" Text="Min/Max"/>
+					<TextBlock
             Width="75"
             Text="{Binding Today.DisplayMinMax}"/>
-          <TextBlock Width="75"/>
-          <TextBlock
+					<TextBlock Width="75"/>
+					<TextBlock
             Width="75"
             Text="{Binding Yesterday.DisplayMinMax}"/>
-        </StackPanel>
+				</StackPanel>
 
-      </StackPanel>
-      
-    </StackPanel>
+			</StackPanel>
 
-    <!-- Forecast -->
-    <TextBlock Text="Forecasts"
+		</StackPanel>
+
+		<!-- Forecast -->
+		<TextBlock Text="Forecasts"
                FontSize="16"
                FontWeight="Black"
                Foreground="DarkGray"
                Margin="5,5,5,0"
                Grid.Row="3"/>
-    <StackPanel x:Name="ForecastsStackPanel"
+		<StackPanel x:Name="ForecastsStackPanel"
                 Orientation="Horizontal"
                 Margin="5,0,5,0"
                 Grid.ColumnSpan="2"
                 Grid.Row="4"/>
-    
-    <!-- History -->
-    <TextBlock Text="History"
+
+		<!-- History -->
+		<TextBlock Text="History"
                FontSize="16"
                FontWeight="Black"
                Foreground="DarkGray"
                Margin="5,5,5,0"
                Grid.Row="5"/>
-    <StackPanel x:Name="HistoryStackPanel"
+		<StackPanel x:Name="HistoryStackPanel"
                 Orientation="Horizontal"
                 Margin="5,0,5,0"
                 Grid.ColumnSpan="2"
                 Grid.Row="6"/>
 
-    <StatusBar Grid.Row="9" Grid.ColumnSpan="2">
-      <StatusBarItem Content="{Binding Now.DisplayDate}" ToolTip="ISO date" />
-      <Separator />
+		<StatusBar Grid.Row="9" Grid.ColumnSpan="2">
+			<StatusBarItem Content="{Binding Now.DisplayDate}" ToolTip="ISO date" />
+			<Separator />
 
-      <StatusBarItem Name="DailyReportUpdateDateStatusBarItem">
-        <StackPanel Orientation="Horizontal">
-          <TextBlock Text="Last daily date: " />
-          <TextBlock Text="{Binding Daily.UpdateDate, StringFormat=yyyy-MM-dd}" />
-        </StackPanel>
-      </StatusBarItem>
+			<StatusBarItem Name="DailyReportUpdateDateStatusBarItem">
+				<StackPanel Orientation="Horizontal">
+					<TextBlock Text="Last daily date: " />
+					<TextBlock Text="{Binding Daily.UpdateDate, StringFormat=yyyy-MM-dd}" />
+				</StackPanel>
+			</StatusBarItem>
 
-      <Separator />
+			<Separator />
 
-      <StatusBarItem>
-        <StackPanel Orientation="Horizontal">
-          <TextBlock Text="Sun up: " />
-          <TextBlock Text="{Binding Now.SunriseTime, StringFormat=HH:mm}" />
-          <TextBlock Text=" / down: " />
-          <TextBlock Text="{Binding Now.SunsetTime, StringFormat=HH:mm}" />
-        </StackPanel>
-      </StatusBarItem>
+			<StatusBarItem>
+				<StackPanel Orientation="Horizontal">
+					<TextBlock Text="Sun up: " />
+					<TextBlock Text="{Binding Now.SunriseTime, StringFormat=HH:mm}" />
+					<TextBlock Text=" / down: " />
+					<TextBlock Text="{Binding Now.SunsetTime, StringFormat=HH:mm}" />
+				</StackPanel>
+			</StatusBarItem>
 
-      <StatusBarItem HorizontalAlignment="Right">
-        <TextBlock Text="{Binding Now.CurrentTime, StringFormat=HH:mm:ss}" />
-      </StatusBarItem>
-    </StatusBar>
-  </Grid>
+			<Separator />
+
+			<StatusBarItem>
+				<StackPanel Orientation="Horizontal">
+					<TextBlock Text="Moon up: " />
+					<TextBlock Text="{Binding Now.MoonRiseTime, StringFormat=HH:mm}" />
+					<TextBlock Text=" / down: " />
+					<TextBlock Text="{Binding Now.MoonSetTime, StringFormat=HH:mm}" />
+					<TextBlock Text=" / phase: " />
+					<TextBlock Text="{Binding Now.Moonphase}" ToolTip="{Binding Now.MoonphaseTooltip}"  />	
+				</StackPanel>
+			</StatusBarItem>
+
+			<StatusBarItem HorizontalAlignment="Right">
+				<TextBlock Text="{Binding Now.CurrentTime, StringFormat=HH:mm:ss}" />
+			</StatusBarItem>
+			
+		</StatusBar>
+	</Grid>
 </Window>

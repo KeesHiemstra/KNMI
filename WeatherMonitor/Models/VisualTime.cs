@@ -9,6 +9,8 @@ using System.Timers;
 
 using Trinet.Core;
 
+using Timer = System.Timers.Timer;
+
 namespace WeatherMonitor.Models
 {
 	/// <summary>
@@ -27,6 +29,10 @@ namespace WeatherMonitor.Models
 		private DateTime today;
 		private DateTime sunriseTime;
 		private DateTime sunsetTime;
+		private DateTime moonRiseTime;
+		private DateTime moonSetTime;
+		private string moonPhase;
+		private string moonPhaseTooltip;
 
 		#endregion
 
@@ -63,14 +69,17 @@ namespace WeatherMonitor.Models
 					today = value.Date;
 					NotifyPropertyChanged("Today");
 					CalculateDayLight();
+					CalculateMoonTime();
+					MoonPhase();
 				}
 			}
 		}
 
-		public DateTime SunriseTime 
-		{ 
+		internal GeographicLocation location;
+		public DateTime SunriseTime
+		{
 			get => sunriseTime;
-			private set 
+			private set
 			{
 				if (sunriseTime != value)
 				{
@@ -79,8 +88,8 @@ namespace WeatherMonitor.Models
 				}
 			}
 		}
-		public DateTime SunsetTime 
-		{ 
+		public DateTime SunsetTime
+		{
 			get => sunsetTime;
 			private set
 			{
@@ -88,6 +97,54 @@ namespace WeatherMonitor.Models
 				{
 					sunsetTime = value;
 					NotifyPropertyChanged("SunsetTime");
+				}
+			}
+		}
+		public DateTime MoonRiseTime
+		{
+			get => moonRiseTime;
+			private set
+			{
+				if (MoonRiseTime != value)
+				{
+					moonRiseTime = value;
+					NotifyPropertyChanged("MoonRiseTime");
+				}
+			}
+		}
+		public DateTime MoonSetTime
+		{
+			get => moonSetTime;
+			private set
+			{
+				if (MoonSetTime != value)
+				{
+					moonSetTime = value;
+					NotifyPropertyChanged("MoonSetTime");
+				}
+			}
+		}
+		public string Moonphase 
+		{ 
+			get => moonPhase;
+			private set
+			{
+				if (Moonphase != value)
+				{
+					moonPhase = value;
+					NotifyPropertyChanged("Moonphase");
+				}
+			}
+		}
+		public string MoonphaseTooltip
+		{
+			get => moonPhaseTooltip;
+			private set
+			{
+				if (MoonphaseTooltip != value)
+				{
+					moonPhaseTooltip = value;
+					NotifyPropertyChanged("MoonphaseTooltip");
 				}
 			}
 		}
@@ -163,7 +220,6 @@ namespace WeatherMonitor.Models
 		private void CalculateDayLight()
 		{
 			//Read the stored Open Weather location json
-			GeographicLocation location;
 			string jsonPath = "%OneDrive%\\Etc\\DemonOpenWeather.json".TranslatePath();
 			using (StreamReader stream = File.OpenText(jsonPath))
 			{
@@ -179,5 +235,25 @@ namespace WeatherMonitor.Models
 			SunsetTime = daylight.SunsetUtc.Value.LocalDateTime.ToLocalTime();
 		}
 
+		/// <summary>
+		/// Calculate the Moon rise and Moon set times.
+		/// </summary>
+		private void CalculateMoonTime()
+		{
+			MoonRise moonRise = new MoonRise();
+			moonRise.Calculate(location.Latitude, location.Longitude, DateTime.Now);
+			MoonRiseTime = moonRise.RiseTime;
+			MoonSetTime = moonRise.SetTime;
+		}
+
+		private void MoonPhase()
+		{
+			MoonPhase moonPhase = new MoonPhase(DateTime.UtcNow);
+			Moonphase = moonPhase.Visibility.ToString("0.0 % ") + moonPhase.Emoji;
+			MoonphaseTooltip = $"Moon phase: {moonPhase.Name}\n" +
+				$"Visibility: {moonPhase.Visibility:0.000 %}\n" +
+				$"Emoji: {moonPhase.Emoji}";
+		}
+	
 	}
 }

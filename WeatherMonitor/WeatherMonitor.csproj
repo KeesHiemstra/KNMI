@@ -14,6 +14,7 @@
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <LangVersion>preview</LangVersion>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <TargetFrameworkProfile />
@@ -78,6 +79,8 @@
     <Compile Include="Models\DayWeather.cs" />
     <Compile Include="Models\DayWeathers.cs" />
     <Compile Include="Models\Forecast.cs" />
+    <Compile Include="Models\MoonPhase.cs" />
+    <Compile Include="Models\MoonRise.cs" />
     <Compile Include="Models\Station.cs" />
     <Compile Include="Models\VisualTime.cs" />
     <Compile Include="Models\WeatherDbContext.cs" />

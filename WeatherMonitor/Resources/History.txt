@@ -1,5 +1,9 @@
 ﻿Version history of WeatherMonitor.
 -----------------------------------
+Version 0.0.8.31 (2026-06-14)
+* Added Moon rise and Moon set.
+* Added Moon phase and Moon visibility.
+
 Version 0.0.7.30 (2026-05-24)
 * Update EntityFramework to version 6.5.2.
 
