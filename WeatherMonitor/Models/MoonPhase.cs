@@ -64,13 +64,15 @@ namespace WeatherMonitor.Models
 		private void InitPhases()
 		{
 			// Initialize the phases of the moon
-			double period = TotalLengthOfCycle / Names.Count;
-			for (int i = 0; i < Names.Count; i++)
-			{
-				double start = period * i;
-				double end = period * (i + 1);
-				allPhases.Add(new Phase(Names[i], start, end));
-			}
+			double period = TotalLengthOfCycle / 28;
+			allPhases.Add(new Phase(Names[0], 0, period)); // New Moon
+			allPhases.Add(new Phase(Names[1], period, period * 7)); // Waxing Crescent
+			allPhases.Add(new Phase(Names[2], period * 7, period * 8)); // First Quarter
+			allPhases.Add(new Phase(Names[3], period * 8, period * 14)); // Waxing Gibbous
+			allPhases.Add(new Phase(Names[4], period * 14, period * 15)); // Full Moon
+			allPhases.Add(new Phase(Names[5], period * 15, period * 21)); // Waning Gibbous
+			allPhases.Add(new Phase(Names[6], period * 21, period * 22)); // Third Quarter
+			allPhases.Add(new Phase(Names[7], period * 22, TotalLengthOfCycle)); // Waning Crescent
 		}
 
 		private void CalculatePhase()
