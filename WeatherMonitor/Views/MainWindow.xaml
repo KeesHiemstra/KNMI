@@ -183,9 +183,13 @@
 
 				<StackPanel Orientation="Horizontal">
 					<TextBlock Width="100" Text="" />
-					<TextBlock Width="75" Text="{Binding Today.WindSpeedBft, StringFormat=0 Bft}" />
+					<TextBlock Width="75" 
+										 Text="{Binding Today.WindSpeedBft, StringFormat=0 Bft}" 
+										 ToolTip="{Binding Today.WindBft}" />
 					<TextBlock Width="75"/>
-					<TextBlock Width="75" Text="{Binding Yesterday.WindSpeedBft, StringFormat=0 Bft}" />
+					<TextBlock Width="75" 
+										 Text="{Binding Yesterday.WindSpeedBft, StringFormat=0 Bft}" 
+										 ToolTip="{Binding Yesterday.WindBft}" />
 				</StackPanel>
 
 				<StackPanel Orientation="Horizontal">

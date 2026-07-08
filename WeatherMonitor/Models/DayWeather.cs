@@ -24,6 +24,11 @@ namespace WeatherDemon.Models
 			get => CalculateWindSpeedInBeaufort();
 		}
 
+		public string WindBft
+		{
+			get => BeafortToStringNed(WindSpeedBft);
+		}
+
 		public decimal DisplayHumidity
 		{
 			get => (decimal)Humidity / 100;
@@ -89,6 +94,42 @@ namespace WeatherDemon.Models
 			if (WindSpeed < 102) { return 10; }
 			if (WindSpeed < 117) { return 11; }
 			return 12;
+		}
+
+		private string BeafortToStringEng(int bft)
+		{
+			if (bft < 0 || bft > 12) { return "Unknown"; }
+			if (bft == 0) { return "Calm"; }
+			if (bft == 1) { return "Light air"; }
+			if (bft == 2) { return "Light breeze"; }
+			if (bft == 3) { return "Gentle breeze"; }
+			if (bft == 4) { return "Moderate breeze"; }
+			if (bft == 5) { return "Fresh breeze"; }
+			if (bft == 6) { return "Strong breeze"; }
+			if (bft == 7) { return "Near gale"; }
+			if (bft == 8) { return "Gale"; }
+			if (bft == 9) { return "Severe gale"; }
+			if (bft == 10) { return "Storm"; }
+			if (bft == 11) { return "Violent storm"; }
+			return "Hurricane";
+		}
+
+		private string BeafortToStringNed(int bft)
+		{
+			if (bft < 0 || bft > 12) { return "Onbekend"; }
+			if (bft == 0) { return "Stil"; }
+			if (bft == 1) { return "Vrij zwak"; }
+			if (bft == 2) { return "Zwak"; }
+			if (bft == 3) { return "Vrij matig"; }
+			if (bft == 4) { return "Matig"; }
+			if (bft == 5) { return "Vrij krachtig"; }
+			if (bft == 6) { return "Krachtig"; }
+			if (bft == 7) { return "Hard"; }
+			if (bft == 8) { return "Stormachtig"; }
+			if (bft == 9) { return "Storm"; }
+			if (bft == 10) { return "Zware storm"; }
+			if (bft == 11) { return "Zeer zware storm"; }
+			return "Orkaan";
 		}
 
 		private string CompileCondition()
