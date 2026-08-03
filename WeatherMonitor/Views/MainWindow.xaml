@@ -274,8 +274,11 @@
                 Grid.ColumnSpan="2"
                 Grid.Row="6"/>
 
-		<StatusBar Grid.Row="9" Grid.ColumnSpan="2">
-			<StatusBarItem Content="{Binding Now.DisplayDate}" ToolTip="ISO date" />
+		<StatusBar Grid.Row="9" 
+							 Grid.ColumnSpan="2"
+							 Background="Gray">
+			<StatusBarItem Content="{Binding Now.DisplayDate}" 
+										 ToolTip="ISO date" />
 			<Separator />
 
 			<StatusBarItem Name="DailyReportUpdateDateStatusBarItem">
